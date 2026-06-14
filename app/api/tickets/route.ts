@@ -3,14 +3,16 @@ import { getTickets, createTicket } from '@/lib/store'
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
-  const app = searchParams.get('app') || undefined
-  const status = searchParams.get('status') || undefined
-  return NextResponse.json(getTickets(app, status))
+  const tickets = await getTickets(
+    searchParams.get('app') || undefined,
+    searchParams.get('status') || undefined
+  )
+  return NextResponse.json(tickets)
 }
 
 export async function POST(request: Request) {
   const body = await request.json()
-  const ticket = createTicket({
+  const ticket = await createTicket({
     subject: body.subject || '',
     description: body.description || '',
     status: body.status || 'open',
