@@ -2,5 +2,6 @@ import { NextResponse } from 'next/server'
 import { getContacts } from '@/lib/store'
 
 export async function GET() {
-  return NextResponse.json(getContacts())
+  const contacts = await getContacts()
+  return NextResponse.json(contacts)
 }
