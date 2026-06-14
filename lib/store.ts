@@ -185,5 +185,30 @@ function buildSeedTickets(): Ticket[] {
       createdAt: new Date(now - 2 * 86400000).toISOString(),
       updatedAt: new Date(now - 2 * 86400000).toISOString(),
     },
-  ]
+    export async function getContacts() {
+  const tickets = await getTickets()
+  const map = new Map<string, {
+    id: string; name: string; email: string; app: string;
+    ticketCount: number; lastTicketDate: string; createdAt: string
+  }>()
+  for (const t of tickets) {
+    const existing = map.get(t.customerEmail)
+    if (existing) {
+      existing.ticketCount++
+      if (new Date(t.createdAt) > new Date(existing.lastTicketDate)) {
+        existing.lastTicketDate = t.createdAt
+      }
+    } else {
+      map.set(t.customerEmail, {
+        id: t.id, name: t.customerName, email: t.customerEmail,
+        app: t.app, ticketCount: 1,
+        lastTicketDate: t.createdAt, createdAt: t.createdAt,
+      }
+             )
+    }
+  }
+  return Array.from(map.values()).sort(
+    (a, b) => new Date(b.lastTicketDate).getTime() - new Date(a.lastTicketDate).getTime()
+  )
+}  ]
 }
