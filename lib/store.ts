@@ -1,4 +1,4 @@
-import { neon } from '@neondatabase/serverless'
+   import { neon } from '@neondatabase/serverless'
 import { Ticket, TicketNote } from '@/types'
 
 export const agents = [
@@ -16,22 +16,9 @@ function db() {
 async function ensureTables() {
   if (ready) return
   const sql = db()
-  await sql`
-    CREATE TABLE IF NOT EXISTS hd_tickets (
-      id TEXT PRIMARY KEY,
-      ticket_data JSONB NOT NULL,
-      created_at TIMESTAMPTZ DEFAULT NOW()
-    )
-  `
-  await sql`
-    CREATE TABLE IF NOT EXISTS hd_counter (
-      id INTEGER PRIMARY KEY,
-      value INTEGER NOT NULL DEFAULT 7
-    )
-  `
-  await sql`
-    INSERT INTO hd_counter (id, value) VALUES (1, 7) ON CONFLICT (id) DO NOTHING
-  `
+  await sql`CREATE TABLE IF NOT EXISTS hd_tickets (id TEXT PRIMARY KEY, ticket_data JSONB NOT NULL, created_at TIMESTAMPTZ DEFAULT NOW())`
+  await sql`CREATE TABLE IF NOT EXISTS hd_counter (id INTEGER PRIMARY KEY, value INTEGER NOT NULL DEFAULT 7)`
+  await sql`INSERT INTO hd_counter (id, value) VALUES (1, 7) ON CONFLICT (id) DO NOTHING`
   const rows = await sql`SELECT COUNT(*) as count FROM hd_tickets`
   if (parseInt(rows[0].count) === 0) {
     const seed = buildSeedTickets()
@@ -120,6 +107,32 @@ export async function getStats() {
   }
 }
 
+export async function getContacts() {
+  const tickets = await getTickets()
+  const map = new Map<string, {
+    id: string; name: string; email: string; app: string;
+    ticketCount: number; lastTicketDate: string; createdAt: string
+  }>()
+  for (const t of tickets) {
+    const existing = map.get(t.customerEmail)
+    if (existing) {
+      existing.ticketCount++
+      if (new Date(t.createdAt) > new Date(existing.lastTicketDate)) {
+        existing.lastTicketDate = t.createdAt
+      }
+    } else {
+      map.set(t.customerEmail, {
+        id: t.id, name: t.customerName, email: t.customerEmail,
+        app: t.app, ticketCount: 1,
+        lastTicketDate: t.createdAt, createdAt: t.createdAt,
+      })
+    }
+  }
+  return Array.from(map.values()).sort(
+    (a, b) => new Date(b.lastTicketDate).getTime() - new Date(a.lastTicketDate).getTime()
+  )
+}
+
 function buildSeedTickets(): Ticket[] {
   const now = Date.now()
   return [
@@ -185,30 +198,5 @@ function buildSeedTickets(): Ticket[] {
       createdAt: new Date(now - 2 * 86400000).toISOString(),
       updatedAt: new Date(now - 2 * 86400000).toISOString(),
     },
-    export async function getContacts() {
-  const tickets = await getTickets()
-  const map = new Map<string, {
-    id: string; name: string; email: string; app: string;
-    ticketCount: number; lastTicketDate: string; createdAt: string
-  }>()
-  for (const t of tickets) {
-    const existing = map.get(t.customerEmail)
-    if (existing) {
-      existing.ticketCount++
-      if (new Date(t.createdAt) > new Date(existing.lastTicketDate)) {
-        existing.lastTicketDate = t.createdAt
-      }
-    } else {
-      map.set(t.customerEmail, {
-        id: t.id, name: t.customerName, email: t.customerEmail,
-        app: t.app, ticketCount: 1,
-        lastTicketDate: t.createdAt, createdAt: t.createdAt,
-      }
-             )
-    }
-  }
-  return Array.from(map.values()).sort(
-    (a, b) => new Date(b.lastTicketDate).getTime() - new Date(a.lastTicketDate).getTime()
-  )
-}  ]
+  ]
 }
