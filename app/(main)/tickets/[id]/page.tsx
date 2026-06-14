@@ -1,4 +1,4 @@
-'use client'
+ 'use client'
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
@@ -135,9 +135,9 @@ export default function TicketDetailPage() {
               </div>
               <p className="text-sm text-slate-700 whitespace-pre-wrap bg-slate-50 rounded-lg p-4 border">{ticket.description}</p>
             </CardContent>
-          </Card>*
+          </Card>
 
-*{/* Notes / conversation */}
+          {/* Notes / conversation */}
           {ticket.notes.length > 0 && (
             <div className="space-y-3">
               {ticket.notes.map(note => (
@@ -160,9 +160,9 @@ export default function TicketDetailPage() {
                 </Card>
               ))}
             </div>
-          )}*
+          )}
 
-*{/* Add note */}
+          {/* Add note */}
           <Card>
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-semibold text-slate-700 flex items-center gap-2">
@@ -235,4 +235,44 @@ export default function TicketDetailPage() {
               <div className="space-y-1.5">
                 <label className="text-xs font-medium text-slate-500">Assigned To</label>
                 <Select value={ticket.assignedTo || 'unassigned'} onValueChange={v => updateField('assignedTo', v === 'unassigned' ? '' : v)}>
-                  <SelectTrigger className="h-8 text-sm"><SelectValue placeholder="Unassigned" /></SelectTrig
+                  <SelectTrigger className="h-8 text-sm"><SelectValue placeholder="Unassigned" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="unassigned">Unassigned</SelectItem>
+                    {AGENTS.map(a => <SelectItem key={a.id} value={a.id}>{a.name}</SelectItem>)}
+                  </SelectContent>
+                </Select>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Customer info */}
+          <Card>
+            <CardHeader className="pb-3"><CardTitle className="text-sm font-semibold text-slate-600 uppercase tracking-wide">Customer</CardTitle></CardHeader>
+            <CardContent className="space-y-3">
+              <div className="flex items-center gap-2.5">
+                <div className="h-9 w-9 rounded-full bg-slate-100 flex items-center justify-center text-sm font-bold text-slate-500 shrink-0">
+                  {ticket.customerName.split(' ').map(n => n[0]).join('')}
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-slate-800">{ticket.customerName}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-slate-500">
+                <Mail className="h-3.5 w-3.5 shrink-0" />
+                <span className="break-all">{ticket.customerEmail}</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-slate-500">
+                <Clock className="h-3.5 w-3.5 shrink-0" />
+                <span>Updated {formatDistanceToNow(new Date(ticket.updatedAt), { addSuffix: true })}</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-slate-500">
+                <User className="h-3.5 w-3.5 shrink-0" />
+                <span className="capitalize">{ticket.category.replace('_', ' ')}</span>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+  )
+}
