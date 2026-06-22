@@ -8,7 +8,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { CheckCircle, Fish, Music, AlertCircle } from 'lucide-react'
+import { CheckCircle, Fish, Music, Search, AlertCircle } from 'lucide-react'
 
 export default function PortalPage() {
   const [form, setForm] = useState({
@@ -76,9 +76,10 @@ export default function PortalPage() {
         <div className="flex items-center justify-center gap-3 mb-3">
           <Fish className="h-7 w-7 text-[#00B4D8]" />
           <Music className="h-6 w-6 text-[#00B4D8]" />
+          <Search className="h-6 w-6 text-[#00B4D8]" />
         </div>
         <h1 className="text-3xl font-bold text-white mb-2">Support Center</h1>
-        <p className="text-slate-400">FishingPalPro &amp; PlayListAI — How can we help you?</p>
+        <p className="text-slate-400">FishingPalPro · PlayListAI · SleuthPro — How can we help you?</p>
       </div>
 
       {/* Form */}
@@ -108,6 +109,7 @@ export default function PortalPage() {
                     <SelectContent>
                       <SelectItem value="FishingPalPro">🎣 FishingPalPro</SelectItem>
                       <SelectItem value="PlayListAI">🎵 PlayListAI</SelectItem>
+                      <SelectItem value="SleuthPro">🔍 SleuthPro</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -140,7 +142,7 @@ export default function PortalPage() {
             </form>
           </CardContent>
         </Card>
-        <p className="text-center text-slate-500 text-xs mt-6">Powered by Bruce Wynn Apps • Average response time: 24 hours</p>
+        <p className="text-center text-slate-500 text-xs mt-6">Powered by DreamTeamApps · Average response time: 24 hours</p>
       </div>
     </div>
   )

@@ -1,4 +1,4 @@
-   import { neon } from '@neondatabase/serverless'
+import { neon } from '@neondatabase/serverless'
 import { Ticket, TicketNote } from '@/types'
 
 export const agents = [
@@ -10,7 +10,7 @@ export const agents = [
 let ready = false
 
 function db() {
-  return neon(process.env.DATABASE_URL!)
+  return neon(process.env.NEON_DATABASE_URL!)
 }
 
 async function ensureTables() {
@@ -104,6 +104,7 @@ export async function getStats() {
     total: tickets.length,
     fishingPalPro: tickets.filter(t => t.app === 'FishingPalPro' && !['resolved', 'closed'].includes(t.status)).length,
     playListAI: tickets.filter(t => t.app === 'PlayListAI' && !['resolved', 'closed'].includes(t.status)).length,
+    sleuthPro: tickets.filter(t => t.app === 'SleuthPro' && !['resolved', 'closed'].includes(t.status)).length,
   }
 }
 
@@ -197,6 +198,16 @@ function buildSeedTickets(): Ticket[] {
       assignedTo: null, notes: [],
       createdAt: new Date(now - 2 * 86400000).toISOString(),
       updatedAt: new Date(now - 2 * 86400000).toISOString(),
+    },
+    {
+      id: 't7', ticketNumber: 7,
+      subject: 'Deep Dive Report not generating after purchase',
+      description: 'I purchased the Deep Dive Report for $7.99 but the report never loaded. Just shows a spinner.',
+      status: 'open', priority: 'high', app: 'SleuthPro', category: 'purchase_issue',
+      customerName: 'Thomas Baker', customerEmail: 'tbaker@gmail.com',
+      assignedTo: 'a1', notes: [],
+      createdAt: new Date(now - 4 * 3600000).toISOString(),
+      updatedAt: new Date(now - 4 * 3600000).toISOString(),
     },
   ]
 }
