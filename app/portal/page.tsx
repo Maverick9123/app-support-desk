@@ -1,5 +1,7 @@
 'use client'
 
+import { ChatWidget } from '@/components/chat-widget'
+
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -142,6 +144,7 @@ export default function PortalPage() {
             </form>
           </CardContent>
         </Card>
+        <ChatWidget />
         <p className="text-center text-slate-500 text-xs mt-6">Powered by DreamTeamApps · Average response time: 24 hours</p>
       </div>
     </div>

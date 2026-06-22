@@ -1,7 +1,5 @@
-
-
 {
-  "name":   "nextjs-app",
+  "name": "nextjs-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -35,7 +33,8 @@
     "framer-motion": "^12.6.0",
     "lucide-react": "^0.475.0",
     "recharts": "^2.15.1",
-    "tailwind-merge": "^3.0.2"
+    "tailwind-merge": "^3.0.2",
+    "openai": "latest"
   },
   "devDependencies": {
     "@types/node": "^22",
