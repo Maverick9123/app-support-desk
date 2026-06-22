@@ -10,7 +10,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { CheckCircle, Fish, Music, Search, AlertCircle } from 'lucide-react'
+import { CheckCircle, Fish, Music, Search, AlertCircle, BookOpen } from 'lucide-react'
 
 export default function PortalPage() {
   const [form, setForm] = useState({
@@ -81,7 +81,25 @@ export default function PortalPage() {
           <Search className="h-6 w-6 text-[#00B4D8]" />
         </div>
         <h1 className="text-3xl font-bold text-white mb-2">Support Center</h1>
-        <p className="text-slate-400">FishingPalPro · PlayListAI · SleuthPro — How can we help you?</p>
+        <p className="text-slate-400 mb-4">FishingPalPro · PlayListAI · SleuthPro — How can we help you?</p>
+
+        {/* FAQ Quick-Access */}
+        <a
+          href="/portal/faq"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 text-white text-sm font-medium hover:bg-white/15 transition-colors border border-white/20"
+        >
+          <BookOpen className="h-4 w-4 text-[#00B4D8]" />
+          Browse FAQ — Find instant answers
+        </a>
+      </div>
+
+      {/* Divider */}
+      <div className="max-w-xl mx-auto px-4 mb-6">
+        <div className="flex items-center gap-3">
+          <div className="flex-1 h-px bg-white/10" />
+          <span className="text-slate-500 text-xs">or submit a support request below</span>
+          <div className="flex-1 h-px bg-white/10" />
+        </div>
       </div>
 
       {/* Form */}
