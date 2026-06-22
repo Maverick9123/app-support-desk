@@ -1,7 +1,7 @@
 import OpenAI from 'openai'
 import { NextRequest } from 'next/server'
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+export const dynamic = 'force-dynamic'
 
 const SYSTEM_PROMPT = `You are a friendly and helpful support assistant for DreamTeamApps, a mobile app company. You assist users of three iOS apps:
 
@@ -19,14 +19,14 @@ SUBSCRIPTION MODEL (applies to all three apps):
 COMMON ISSUES AND SOLUTIONS:
 
 Restore Purchases / Lost Subscription:
-- Open the app → go to Settings or Account tab → tap "Restore Purchases"
+- Open the app, go to Settings or Account tab, tap Restore Purchases
 - Make sure you are signed in with the SAME Apple ID used for the original purchase
-- You can also check active subscriptions at: iPhone Settings → [Your Name] → Subscriptions
+- You can also check active subscriptions at: iPhone Settings > [Your Name] > Subscriptions
 - If restore still fails, ask the user to submit a ticket for manual review
 
 Subscription Management / Cancellation:
 - All subscriptions are managed through Apple, not through the app directly
-- Go to: iPhone Settings → [Your Name] → Subscriptions → select the app → Cancel
+- Go to: iPhone Settings > [Your Name] > Subscriptions > select the app > Cancel
 - Cancellation takes effect at the end of the current billing period
 
 Billing and Refund Requests:
@@ -41,12 +41,12 @@ App Crashing or Not Loading:
 - Make sure iOS is updated to the latest version
 
 Features Not Working After Subscribing:
-- Tap "Restore Purchases" in the app settings to activate your subscription
+- Tap Restore Purchases in the app settings to activate your subscription
 - Sign out and back in to your Apple ID if the issue persists
 - If still not working, submit a support ticket
 
 Siri Voice Commands Not Working (FishingPalPro / PlayListAI):
-- Go to iPhone Settings → Siri & Search → make sure the app is enabled
+- Go to iPhone Settings > Siri & Search > make sure the app is enabled
 - Re-add Siri shortcuts within the app
 
 ESCALATION RULE:
@@ -57,6 +57,7 @@ Keep all responses short, warm, and helpful. Never make up features or pricing d
 
 export async function POST(req: NextRequest) {
   try {
+    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
     const { messages } = await req.json()
 
     const stream = await openai.chat.completions.create({
