@@ -3,11 +3,9 @@ import { getTickets, createTicket } from '@/lib/store'
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
-  const tickets = await getTickets(
-    searchParams.get('app') || undefined,
-    searchParams.get('status') || undefined
-  )
-  return NextResponse.json(tickets)
+  const app = searchParams.get('app') || undefined
+  const status = searchParams.get('status') || undefined
+  return NextResponse.json(await getTickets(app, status))
 }
 
 export async function POST(request: Request) {

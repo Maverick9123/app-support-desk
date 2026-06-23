@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { getTicketById, updateTicket } from '@/lib/store'
 
 export async function GET(
-  _request: Request,
+  _req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params

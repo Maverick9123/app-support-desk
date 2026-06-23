@@ -8,10 +8,10 @@ export async function POST(
   const { id } = await params
   const body = await request.json()
   const note = await addNote(id, {
-    content: body.content,
+    content: body.content || '',
     author: body.author || 'Team',
-    isInternal: body.isInternal || false,
+    isInternal: body.isInternal ?? false,
   })
   if (!note) return NextResponse.json({ error: 'Ticket not found' }, { status: 404 })
-  return NextResponse.json({ note })
+  return NextResponse.json({ note }, { status: 201 })
 }

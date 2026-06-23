@@ -1,213 +1,141 @@
-import { neon } from '@neondatabase/serverless'
-import { Ticket, TicketNote } from '@/types'
+import { sql } from './neon'
+import { Ticket, Contact, Agent, TicketNote } from '@/types'
 
-export const agents = [
+export const agents: Agent[] = [
   { id: 'a1', name: 'Bruce Wynn', email: 'btwynn@bellsouth.net', role: 'admin', initials: 'BW' },
   { id: 'a2', name: 'Sarah Johnson', email: 'sarah@support.com', role: 'agent', initials: 'SJ' },
   { id: 'a3', name: 'Mike Davis', email: 'mike@support.com', role: 'agent', initials: 'MD' },
 ]
 
-let ready = false
-
-function db() {
-  return neon(process.env.NEON_DATABASE_URL!)
+function rowToTicket(row: any): Ticket {
+  return {
+    id: row.id,
+    ticketNumber: row.ticket_number,
+    subject: row.subject,
+    description: row.description,
+    status: row.status,
+    priority: row.priority,
+    app: row.app,
+    category: row.category,
+    customerName: row.customer_name,
+    customerEmail: row.customer_email,
+    assignedTo: row.assigned_to,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+    notes: Array.isArray(row.notes)
+      ? row.notes.map((n: any) => ({
+          id: n.id,
+          ticketId: row.id,
+          content: n.content,
+          author: n.author,
+          isInternal: n.is_internal,
+          createdAt: n.created_at,
+        }))
+      : [],
+  }
 }
 
-async function ensureTables() {
-  if (ready) return
-  const sql = db()
-  await sql`CREATE TABLE IF NOT EXISTS hd_tickets (id TEXT PRIMARY KEY, ticket_data JSONB NOT NULL, created_at TIMESTAMPTZ DEFAULT NOW())`
-  await sql`CREATE TABLE IF NOT EXISTS hd_counter (id INTEGER PRIMARY KEY, value INTEGER NOT NULL DEFAULT 7)`
-  await sql`INSERT INTO hd_counter (id, value) VALUES (1, 7) ON CONFLICT (id) DO NOTHING`
-  const rows = await sql`SELECT COUNT(*) as count FROM hd_tickets`
-  if (parseInt(rows[0].count) === 0) {
-    const seed = buildSeedTickets()
-    for (const t of seed) {
-      await sql`INSERT INTO hd_tickets (id, ticket_data) VALUES (${t.id}, ${JSON.stringify(t)}::jsonb)`
-    }
+function rowToContact(row: any): Contact {
+  return {
+    id: row.id,
+    name: row.name,
+    email: row.email,
+    app: row.app,
+    ticketCount: row.ticket_count,
+    lastTicketDate: row.last_ticket_date,
+    createdAt: row.created_at,
   }
-  ready = true
 }
 
 export async function getTickets(app?: string, status?: string): Promise<Ticket[]> {
-  await ensureTables()
-  const sql = db()
-  const rows = await sql`SELECT ticket_data FROM hd_tickets ORDER BY (ticket_data->>'createdAt') DESC`
-  let tickets = rows.map(r => r.ticket_data as Ticket)
-  if (app && app !== 'all') tickets = tickets.filter(t => t.app === app)
-  if (status && status !== 'all') tickets = tickets.filter(t => t.status === status)
-  return tickets
-}
-
-export async function getTicketById(id: string): Promise<Ticket | undefined> {
-  await ensureTables()
-  const sql = db()
-  const rows = await sql`SELECT ticket_data FROM hd_tickets WHERE id = ${id}`
-  return rows.length > 0 ? (rows[0].ticket_data as Ticket) : undefined
-}
-
-export async function createTicket(
-  data: Omit<Ticket, 'id' | 'ticketNumber' | 'notes' | 'createdAt' | 'updatedAt'>
-): Promise<Ticket> {
-  await ensureTables()
-  const sql = db()
-  const counter = await sql`UPDATE hd_counter SET value = value + 1 WHERE id = 1 RETURNING value`
-  const ticket: Ticket = {
-    ...data,
-    id: crypto.randomUUID(),
-    ticketNumber: counter[0].value,
-    notes: [],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
+  let rows: any[]
+  if (app && status) {
+    rows = await sql`
+      SELECT t.*, COALESCE(json_agg(tn ORDER BY tn.created_at) FILTER (WHERE tn.id IS NOT NULL), '[]') as notes
+      FROM tickets t LEFT JOIN ticket_notes tn ON t.id = tn.ticket_id
+      WHERE t.app = ${app} AND t.status = ${status}
+      GROUP BY t.id ORDER BY t.created_at DESC
+    `
+  } else if (app) {
+    rows = await sql`
+      SELECT t.*, COALESCE(json_agg(tn ORDER BY tn.created_at) FILTER (WHERE tn.id IS NOT NULL), '[]') as notes
+      FROM tickets t LEFT JOIN ticket_notes tn ON t.id = tn.ticket_id
+      WHERE t.app = ${app}
+      GROUP BY t.id ORDER BY t.created_at DESC
+    `
+  } else if (status) {
+    rows = await sql`
+      SELECT t.*, COALESCE(json_agg(tn ORDER BY tn.created_at) FILTER (WHERE tn.id IS NOT NULL), '[]') as notes
+      FROM tickets t LEFT JOIN ticket_notes tn ON t.id = tn.ticket_id
+      WHERE t.status = ${status}
+      GROUP BY t.id ORDER BY t.created_at DESC
+    `
+  } else {
+    rows = await sql`
+      SELECT t.*, COALESCE(json_agg(tn ORDER BY tn.created_at) FILTER (WHERE tn.id IS NOT NULL), '[]') as notes
+      FROM tickets t LEFT JOIN ticket_notes tn ON t.id = tn.ticket_id
+      GROUP BY t.id ORDER BY t.created_at DESC
+    `
   }
-  await sql`INSERT INTO hd_tickets (id, ticket_data) VALUES (${ticket.id}, ${JSON.stringify(ticket)}::jsonb)`
-  return ticket
+  return rows.map(rowToTicket)
+}
+
+export async function getTicketById(id: string): Promise<Ticket | null> {
+  const rows = await sql`
+    SELECT t.*, COALESCE(json_agg(tn ORDER BY tn.created_at) FILTER (WHERE tn.id IS NOT NULL), '[]') as notes
+    FROM tickets t LEFT JOIN ticket_notes tn ON t.id = tn.ticket_id
+    WHERE t.id = ${id}
+    GROUP BY t.id
+  `
+  if (rows.length === 0) return null
+  return rowToTicket(rows[0])
+}
+
+export async function createTicket(data: {
+  subject: string
+  description: string
+  status: string
+  priority: string
+  app?: string
+  category: string
+  customerName: string
+  customerEmail: string
+  assignedTo?: string | null
+}): Promise<Ticket> {
+  const id = `ticket-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+  const rows = await sql`
+    INSERT INTO tickets (id, subject, description, status, priority, app, category, customer_name, customer_email, assigned_to)
+    VALUES (${id}, ${data.subject}, ${data.description}, ${data.status}, ${data.priority}, ${data.app ?? null}, ${data.category}, ${data.customerName}, ${data.customerEmail}, ${data.assignedTo ?? null})
+    RETURNING *
+  `
+  if (data.customerEmail) {
+    await sql`
+      INSERT INTO contacts (id, name, email, app, ticket_count, last_ticket_date)
+      VALUES (${`contact-${Date.now()}`}, ${data.customerName}, ${data.customerEmail}, ${data.app ?? null}, 1, NOW())
+      ON CONFLICT (email) DO UPDATE SET
+        ticket_count = contacts.ticket_count + 1,
+        last_ticket_date = NOW(),
+        name = EXCLUDED.name
+    `
+  }
+  return rowToTicket({ ...rows[0], notes: [] })
 }
 
 export async function updateTicket(
   id: string,
-  updates: Partial<Omit<Ticket, 'id' | 'ticketNumber' | 'notes' | 'createdAt'>>
+  data: Partial<{
+    subject: string
+    description: string
+    status: string
+    priority: string
+    app: string
+    category: string
+    customerName: string
+    customerEmail: string
+    assignedTo: string | null
+  }>
 ): Promise<Ticket | null> {
-  await ensureTables()
-  const sql = db()
-  const rows = await sql`SELECT ticket_data FROM hd_tickets WHERE id = ${id}`
-  if (rows.length === 0) return null
-  const ticket = rows[0].ticket_data as Ticket
-  const updated = { ...ticket, ...updates, updatedAt: new Date().toISOString() }
-  await sql`UPDATE hd_tickets SET ticket_data = ${JSON.stringify(updated)}::jsonb WHERE id = ${id}`
-  return updated
-}
-
-export async function addNote(
-  ticketId: string,
-  note: Omit<TicketNote, 'id' | 'createdAt'>
-): Promise<TicketNote | null> {
-  await ensureTables()
-  const sql = db()
-  const rows = await sql`SELECT ticket_data FROM hd_tickets WHERE id = ${ticketId}`
-  if (rows.length === 0) return null
-  const ticket = rows[0].ticket_data as Ticket
-  const newNote: TicketNote = { ...note, id: crypto.randomUUID(), createdAt: new Date().toISOString() }
-  ticket.notes.push(newNote)
-  ticket.updatedAt = new Date().toISOString()
-  await sql`UPDATE hd_tickets SET ticket_data = ${JSON.stringify(ticket)}::jsonb WHERE id = ${ticketId}`
-  return newNote
-}
-
-export async function getStats() {
-  const tickets = await getTickets()
-  return {
-    open: tickets.filter(t => t.status === 'open').length,
-    inProgress: tickets.filter(t => t.status === 'in_progress').length,
-    pending: tickets.filter(t => t.status === 'pending').length,
-    resolved: tickets.filter(t => t.status === 'resolved' || t.status === 'closed').length,
-    total: tickets.length,
-    fishingPalPro: tickets.filter(t => t.app === 'FishingPalPro' && !['resolved', 'closed'].includes(t.status)).length,
-    playListAI: tickets.filter(t => t.app === 'PlayListAI' && !['resolved', 'closed'].includes(t.status)).length,
-    sleuthPro: tickets.filter(t => t.app === 'SleuthPro' && !['resolved', 'closed'].includes(t.status)).length,
-  }
-}
-
-export async function getContacts() {
-  const tickets = await getTickets()
-  const map = new Map<string, {
-    id: string; name: string; email: string; app: string;
-    ticketCount: number; lastTicketDate: string; createdAt: string
-  }>()
-  for (const t of tickets) {
-    const existing = map.get(t.customerEmail)
-    if (existing) {
-      existing.ticketCount++
-      if (new Date(t.createdAt) > new Date(existing.lastTicketDate)) {
-        existing.lastTicketDate = t.createdAt
-      }
-    } else {
-      map.set(t.customerEmail, {
-        id: t.id, name: t.customerName, email: t.customerEmail,
-        app: t.app, ticketCount: 1,
-        lastTicketDate: t.createdAt, createdAt: t.createdAt,
-      })
-    }
-  }
-  return Array.from(map.values()).sort(
-    (a, b) => new Date(b.lastTicketDate).getTime() - new Date(a.lastTicketDate).getTime()
-  )
-}
-
-function buildSeedTickets(): Ticket[] {
-  const now = Date.now()
-  return [
-    {
-      id: 't1', ticketNumber: 1,
-      subject: 'App crashes when logging a catch with GPS',
-      description: 'Every time I tap Save on the catch log screen with GPS enabled, the app crashes immediately. Running iPhone 15 Pro Max iOS 26.',
-      status: 'open', priority: 'urgent', app: 'FishingPalPro', category: 'crash',
-      customerName: 'John Martinez', customerEmail: 'john.martinez@gmail.com',
-      assignedTo: 'a2', notes: [],
-      createdAt: new Date(now - 2 * 3600000).toISOString(),
-      updatedAt: new Date(now - 2 * 3600000).toISOString(),
-    },
-    {
-      id: 't2', ticketNumber: 2,
-      subject: 'Annual subscription not unlocking premium features',
-      description: 'I purchased the Annual plan but the app still shows the paywall. I have a receipt from Apple.',
-      status: 'in_progress', priority: 'high', app: 'FishingPalPro', category: 'purchase_issue',
-      customerName: 'Linda Chen', customerEmail: 'lchen@outlook.com',
-      assignedTo: 'a1',
-      notes: [{ id: 'n1', content: 'Asked customer to go to Settings → Restore Purchases.', author: 'Bruce Wynn', isInternal: false, createdAt: new Date(now - 3600000).toISOString() }],
-      createdAt: new Date(now - 5 * 3600000).toISOString(),
-      updatedAt: new Date(now - 3600000).toISOString(),
-    },
-    {
-      id: 't3', ticketNumber: 3,
-      subject: 'Weather section shows infinite loading spinner',
-      description: 'The weather tab never loads data. I have a great internet connection.',
-      status: 'pending', priority: 'medium', app: 'FishingPalPro', category: 'bug',
-      customerName: 'Robert Taylor', customerEmail: 'rtaylor@yahoo.com',
-      assignedTo: 'a3', notes: [],
-      createdAt: new Date(now - 86400000).toISOString(),
-      updatedAt: new Date(now - 86400000).toISOString(),
-    },
-    {
-      id: 't4', ticketNumber: 4,
-      subject: 'Siri voice command not recognized',
-      description: 'When I say "Log a catch in FishingPalPro" Siri says it doesn\'t know that app.',
-      status: 'resolved', priority: 'low', app: 'FishingPalPro', category: 'bug',
-      customerName: 'Patricia Williams', customerEmail: 'pwilliams@gmail.com',
-      assignedTo: 'a1',
-      notes: [{ id: 'n2', content: 'Resolved — customer needed to re-enable Siri in Settings → Privacy & Security.', author: 'Bruce Wynn', isInternal: false, createdAt: new Date(now - 2 * 86400000).toISOString() }],
-      createdAt: new Date(now - 3 * 86400000).toISOString(),
-      updatedAt: new Date(now - 2 * 86400000).toISOString(),
-    },
-    {
-      id: 't5', ticketNumber: 5,
-      subject: 'Genre search returns no results',
-      description: 'Selecting Jazz, Rock, or any genre shows "No results found" immediately.',
-      status: 'open', priority: 'high', app: 'PlayListAI', category: 'bug',
-      customerName: 'David Kim', customerEmail: 'dkim@icloud.com',
-      assignedTo: 'a2', notes: [],
-      createdAt: new Date(now - 3 * 3600000).toISOString(),
-      updatedAt: new Date(now - 3 * 3600000).toISOString(),
-    },
-    {
-      id: 't6', ticketNumber: 6,
-      subject: 'Feature request: Import existing Spotify playlists',
-      description: 'Would love to pull in my Spotify playlists and use PlayListAI to enhance them.',
-      status: 'open', priority: 'low', app: 'PlayListAI', category: 'feature_request',
-      customerName: 'Amanda Foster', customerEmail: 'amanda.f@gmail.com',
-      assignedTo: null, notes: [],
-      createdAt: new Date(now - 2 * 86400000).toISOString(),
-      updatedAt: new Date(now - 2 * 86400000).toISOString(),
-    },
-    {
-      id: 't7', ticketNumber: 7,
-      subject: 'Deep Dive Report not generating after purchase',
-      description: 'I purchased the Deep Dive Report for $7.99 but the report never loaded. Just shows a spinner.',
-      status: 'open', priority: 'high', app: 'SleuthPro', category: 'purchase_issue',
-      customerName: 'Thomas Baker', customerEmail: 'tbaker@gmail.com',
-      assignedTo: 'a1', notes: [],
-      createdAt: new Date(now - 4 * 3600000).toISOString(),
-      updatedAt: new Date(now - 4 * 3600000).toISOString(),
-    },
-  ]
-}
+  const existing = await getTicketById(id)
+  if (!existing) return null
+  await sql`
+    UPDATE tickets SET
