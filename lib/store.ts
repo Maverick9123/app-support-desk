@@ -7,6 +7,18 @@ export const agents: Agent[] = [
   { id: 'a3', name: 'Mike Davis', email: 'mike@support.com', role: 'agent', initials: 'MD' },
 ]
 
+type UpdateTicketData = {
+  subject?: string
+  description?: string
+  status?: string
+  priority?: string
+  app?: string | null
+  category?: string
+  customerName?: string
+  customerEmail?: string
+  assignedTo?: string | null
+}
+
 function rowToTicket(row: any): Ticket {
   return {
     id: row.id,
@@ -121,21 +133,84 @@ export async function createTicket(data: {
   return rowToTicket({ ...rows[0], notes: [] })
 }
 
-export async function updateTicket(
-  id: string,
-  data: Partial<{
-    subject: string
-    description: string
-    status: string
-    priority: string
-    app: string
-    category: string
-    customerName: string
-    customerEmail: string
-    assignedTo: string | null
-  }>
-): Promise<Ticket | null> {
+export async function updateTicket(id: string, data: UpdateTicketData): Promise<Ticket | null> {
   const existing = await getTicketById(id)
   if (!existing) return null
+  const subject = data.subject !== undefined ? data.subject : existing.subject
+  const description = data.description !== undefined ? data.description : existing.description
+  const status = data.status !== undefined ? data.status : existing.status
+  const priority = data.priority !== undefined ? data.priority : existing.priority
+  const app = data.app !== undefined ? data.app : existing.app
+  const category = data.category !== undefined ? data.category : existing.category
+  const customerName = data.customerName !== undefined ? data.customerName : existing.customerName
+  const customerEmail = data.customerEmail !== undefined ? data.customerEmail : existing.customerEmail
+  const assignedTo = data.assignedTo !== undefined ? data.assignedTo : existing.assignedTo
   await sql`
     UPDATE tickets SET
+      subject = ${subject},
+      description = ${description},
+      status = ${status},
+      priority = ${priority},
+      app = ${app ?? null},
+      category = ${category},
+      customer_name = ${customerName},
+      customer_email = ${customerEmail},
+      assigned_to = ${assignedTo ?? null},
+      updated_at = NOW()
+    WHERE id = ${id}
+  `
+  return getTicketById(id)
+}
+
+export async function addNote(
+  ticketId: string,
+  data: { content: string; author: string; isInternal: boolean }
+): Promise<TicketNote | null> {
+  const ticket = await getTicketById(ticketId)
+  if (!ticket) return null
+  const id = `note-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+  const rows = await sql`
+    INSERT INTO ticket_notes (id, ticket_id, content, author, is_internal)
+    VALUES (${id}, ${ticketId}, ${data.content}, ${data.author}, ${data.isInternal})
+    RETURNING *
+  `
+  const row = rows[0]
+  return {
+    id: row.id,
+    ticketId: row.ticket_id,
+    content: row.content,
+    author: row.author,
+    isInternal: row.is_internal,
+    createdAt: row.created_at,
+  }
+}
+
+export async function getContacts(): Promise<Contact[]> {
+  const rows = await sql`SELECT * FROM contacts ORDER BY last_ticket_date DESC NULLS LAST`
+  return rows.map(rowToContact)
+}
+
+export async function getStats(): Promise<{
+  total: number
+  open: number
+  inProgress: number
+  resolved: number
+  byApp: Record<string, number>
+}> {
+  const [totals, byApp] = await Promise.all([
+    sql`SELECT status, COUNT(*) as count FROM tickets GROUP BY status`,
+    sql`SELECT app, COUNT(*) as count FROM tickets WHERE app IS NOT NULL GROUP BY app`,
+  ])
+  const stats = { total: 0, open: 0, inProgress: 0, resolved: 0, byApp: {} as Record<string, number> }
+  for (const row of totals) {
+    const count = parseInt(row.count)
+    stats.total += count
+    if (row.status === 'open') stats.open = count
+    else if (row.status === 'in-progress') stats.inProgress = count
+    else if (row.status === 'resolved') stats.resolved = count
+  }
+  for (const row of byApp) {
+    stats.byApp[row.app] = parseInt(row.count)
+  }
+  return stats
+}
