@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, Suspense } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { Card, CardContent } from '@/components/ui/card'
@@ -32,7 +32,7 @@ const PRIORITY_DOT: Record<string, string> = {
   low: 'bg-slate-400',
 }
 
-export default function TicketsPage() {
+function TicketsPageContent() {
   const searchParams = useSearchParams()
   const appParam = searchParams?.get('app') || 'all'
   const [tickets, setTickets] = useState<Ticket[]>([])
@@ -90,6 +90,7 @@ export default function TicketsPage() {
             <SelectItem value="all">All Apps</SelectItem>
             <SelectItem value="FishingPalPro">🎣 FishingPalPro</SelectItem>
             <SelectItem value="PlayListAI">🎵 PlayListAI</SelectItem>
+            <SelectItem value="SleuthPro">🔍 SleuthPro</SelectItem>
           </SelectContent>
         </Select>
         <Select value={statusFilter} onValueChange={setStatusFilter}>
@@ -139,9 +140,17 @@ export default function TicketsPage() {
                     <p className="text-xs text-slate-400 truncate">{ticket.category.replace('_', ' ')}</p>
                   </div>
                   <div className="col-span-2">
-                    <span className={`inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium ${ticket.app === 'FishingPalPro' ? 'bg-[#00B4D8]/15 text-[#00B4D8]' : 'bg-purple-100 text-purple-600'}`}>
-                      {ticket.app === 'FishingPalPro' ? <Fish className="h-3 w-3" /> : <Music className="h-3 w-3" />}
-                      {ticket.app === 'FishingPalPro' ? 'Fishing' : 'Playlist'}
+                    <span className={`inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium ${
+                      ticket.app === 'FishingPalPro' ? 'bg-[#00B4D8]/15 text-[#00B4D8]' :
+                      ticket.app === 'SleuthPro' ? 'bg-green-100 text-green-600' :
+                      'bg-purple-100 text-purple-600'
+                    }`}>
+                      {ticket.app === 'FishingPalPro' ? <Fish className="h-3 w-3" /> :
+                       ticket.app === 'SleuthPro' ? <Search className="h-3 w-3" /> :
+                       <Music className="h-3 w-3" />}
+                      {ticket.app === 'FishingPalPro' ? 'Fishing' :
+                       ticket.app === 'SleuthPro' ? 'Sleuth' :
+                       'Playlist'}
                     </span>
                   </div>
                   <div className="col-span-1">
@@ -169,5 +178,25 @@ export default function TicketsPage() {
         </CardContent>
       </Card>
     </div>
+  )
+}
+
+export default function TicketsPage() {
+  return (
+    <Suspense fallback={
+      <div className="p-6 space-y-5">
+        <div className="flex items-center justify-between">
+          <div>
+            <div className="h-8 w-32 bg-slate-200 rounded animate-pulse" />
+            <div className="h-4 w-24 bg-slate-100 rounded animate-pulse mt-1" />
+          </div>
+        </div>
+        <div className="p-4 space-y-3">
+          {Array(5).fill(0).map((_, i) => <Skeleton key={i} className="h-12 w-full" />)}
+        </div>
+      </div>
+    }>
+      <TicketsPageContent />
+    </Suspense>
   )
 }
