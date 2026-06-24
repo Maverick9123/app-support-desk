@@ -1,10 +1,11 @@
 export type TicketStatus = 'open' | 'in_progress' | 'pending' | 'resolved' | 'closed'
 export type TicketPriority = 'low' | 'medium' | 'high' | 'urgent'
-export type AppType = 'FishingPalPro' | 'PlayListAI'
+export type AppType = 'FishingPalPro' | 'PlayListAI' | 'SleuthPro'
 export type IssueCategory = 'bug' | 'feature_request' | 'purchase_issue' | 'crash' | 'other'
 
 export interface TicketNote {
   id: string
+  ticketId: string
   content: string
   author: string
   isInternal: boolean
@@ -47,11 +48,10 @@ export interface Agent {
 }
 
 export interface Stats {
+  total: number
   open: number
   inProgress: number
   pending: number
-  pending: number resolved: number
-  total: number
-  fishingPalPro: number
-  playListAI: number
+  resolved: number
+  byApp: Record<string, number>
 }
