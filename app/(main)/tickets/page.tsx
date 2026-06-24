@@ -34,7 +34,7 @@ const PRIORITY_DOT: Record<string, string> = {
 
 export default function TicketsPage() {
   const searchParams = useSearchParams()
-  const appParam = searchParams.get('app') || 'all'
+  const appParam = searchParams?.get('app') || 'all'
   const [tickets, setTickets] = useState<Ticket[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
