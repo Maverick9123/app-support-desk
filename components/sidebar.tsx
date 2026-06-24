@@ -34,10 +34,10 @@ export function Sidebar() {
   }
 
   const totalActive = stats ? stats.open + stats.inProgress + stats.pending : null
-
-  const fpCount = stats?.byApp?.['FishingPalPro'] || 0
-  const plCount = stats?.byApp?.['PlayListAI'] || 0
-  const spCount = stats?.byApp?.['SleuthPro'] || 0
+  const byApp = stats ? (stats.byApp || {}) : {}
+  const fpCount = byApp['FishingPalPro'] || 0
+  const plCount = byApp['PlayListAI'] || 0
+  const spCount = byApp['SleuthPro'] || 0
 
   const navItems = [
     { href: '/dashboard', label: 'Dashboard', icon: Home },
@@ -119,3 +119,20 @@ export function Sidebar() {
       {agent && (
         <div className="px-4 py-4 border-t border-white/10">
           <div className="flex items-center gap-3">
+            <div className="h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0"
+              style={{ background: 'linear-gradient(135deg, #00B4D8, #0096b4)' }}>
+              {agent.initials}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-white text-xs font-medium truncate">{agent.name}</p>
+              <p className="text-slate-500 text-xs">{agent.role}</p>
+            </div>
+            <button onClick={handleLogout} className="text-slate-500 hover:text-red-400 transition-colors" title="Sign out">
+              <LogOut className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+      )}
+    </aside>
+  )
+}
