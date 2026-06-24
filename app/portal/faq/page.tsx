@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { ALL_FAQS, getCategories, type FAQ } from '@/lib/faqs-data'
-import { Fish, Music, Search, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react'
+import { Fish, Music, Search, ChevronDown, ChevronUp, ExternalLink, ArrowLeft } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 
 const APP_CONFIG = {
@@ -153,8 +153,20 @@ export default function FAQPage() {
 
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #0D1B2A 0%, #0a2a3a 100%)' }}>
+
+      {/* Back Navigation */}
+      <div className="max-w-4xl mx-auto px-4 pt-5">
+        <a
+          href="/portal"
+          className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm font-medium"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Back to Support
+        </a>
+      </div>
+
       {/* Header */}
-      <div className="text-center pt-10 pb-8 px-4">
+      <div className="text-center pt-6 pb-8 px-4">
         <div className="flex items-center justify-center gap-3 mb-3">
           <Fish className="h-7 w-7 text-[#00B4D8]" />
           <Music className="h-6 w-6 text-[#7C3AED]" />
