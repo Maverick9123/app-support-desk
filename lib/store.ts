@@ -206,7 +206,7 @@ export async function getStats(): Promise<{
     const count = parseInt(row.count)
     stats.total += count
     if (row.status === 'open') stats.open = count
-    else if (row.status === 'in-progress') stats.inProgress = count
+    else if (row.status === 'in_progress') stats.inProgress = count
     else if (row.status === 'resolved') stats.resolved = count
   }
   for (const row of byApp) {
