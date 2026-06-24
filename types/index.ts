@@ -50,7 +50,7 @@ export interface Stats {
   open: number
   inProgress: number
   pending: number
-  resolved: number
+  pending: number resolved: number
   total: number
   fishingPalPro: number
   playListAI: number
