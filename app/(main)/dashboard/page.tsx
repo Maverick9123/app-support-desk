@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
-import { AlertCircle, Clock, CheckCircle, Loader2, TrendingUp, Plus, Fish, Music, ArrowRight } from 'lucide-react'
+import { AlertCircle, Clock, CheckCircle, Loader2, TrendingUp, Plus, Fish, Music, Search, ArrowRight } from 'lucide-react'
 import { Stats, Ticket } from '@/types'
 import { formatDistanceToNow } from 'date-fns'
 
@@ -22,6 +22,13 @@ const PRIORITY_COLORS: Record<string, string> = {
   high: 'bg-orange-100 text-orange-700',
   medium: 'bg-yellow-100 text-yellow-700',
   low: 'bg-slate-100 text-slate-600',
+}
+
+function appBadge(app: string) {
+  if (app === 'FishingPalPro') return <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-[#00B4D8]/15 text-[#00B4D8]">🎣 {app}</span>
+  if (app === 'PlayListAI') return <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-purple-100 text-purple-600">🎵 {app}</span>
+  if (app === 'SleuthPro') return <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-teal-100 text-teal-600">🔍 {app}</span>
+  return <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-slate-100 text-slate-600">{app}</span>
 }
 
 export default function DashboardPage() {
@@ -47,6 +54,12 @@ export default function DashboardPage() {
     { label: 'Pending', value: stats.pending, icon: Clock, color: 'text-yellow-600', bg: 'bg-yellow-50', border: 'border-yellow-200' },
     { label: 'Resolved', value: stats.resolved, icon: CheckCircle, color: 'text-green-600', bg: 'bg-green-50', border: 'border-green-200' },
   ] : []
+
+  const appCards = [
+    { app: 'FishingPalPro', icon: Fish, color: '#00B4D8', emoji: '🎣' },
+    { app: 'PlayListAI', icon: Music, color: '#7C3AED', emoji: '🎵' },
+    { app: 'SleuthPro', icon: Search, color: '#0D9488', emoji: '🔍' },
+  ]
 
   return (
     <div className="p-6 space-y-6">
@@ -82,49 +95,30 @@ export default function DashboardPage() {
 
       {/* App breakdown */}
       {stats && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Link href="/tickets?app=FishingPalPro">
-            <Card className="border border-[#00B4D8]/30 hover:border-[#00B4D8] transition-colors cursor-pointer group">
-              <CardContent className="p-5">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(0,180,216,0.15)' }}>
-                      <Fish className="h-5 w-5 text-[#00B4D8]" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {appCards.map(({ app, icon: Icon, color, emoji }) => (
+            <Link key={app} href={`/tickets?app=${app}`}>
+              <Card className="border hover:border-[#00B4D8] transition-colors cursor-pointer group" style={{ borderColor: `${color}30` }}>
+                <CardContent className="p-5">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-xl flex items-center justify-center" style={{ background: `${color}25` }}>
+                        <Icon className="h-5 w-5" style={{ color }} />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-slate-800">{app}</p>
+                        <p className="text-xs text-slate-500">Active tickets</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="font-semibold text-slate-800">FishingPalPro</p>
-                      <p className="text-xs text-slate-500">Active support tickets</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-2xl font-bold text-slate-800">{stats.fishingPalPro}</span>
-                    <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-[#00B4D8] transition-colors" />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
-          <Link href="/tickets?app=PlayListAI">
-            <Card className="border border-[#00B4D8]/30 hover:border-[#00B4D8] transition-colors cursor-pointer group">
-              <CardContent className="p-5">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(0,180,216,0.15)' }}>
-                      <Music className="h-5 w-5 text-[#00B4D8]" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-slate-800">PlayListAI</p>
-                      <p className="text-xs text-slate-500">Active support tickets</p>
+                    <div className="flex items-center gap-2">
+                      <span className="text-2xl font-bold text-slate-800">{stats.byApp?.[app] || 0}</span>
+                      <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-[#00B4D8] transition-colors" />
                     </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-2xl font-bold text-slate-800">{stats.playListAI}</span>
-                    <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-[#00B4D8] transition-colors" />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
         </div>
       )}
 
@@ -152,9 +146,7 @@ export default function DashboardPage() {
                     <p className="text-xs text-slate-400">{ticket.customerName}</p>
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
-                    <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${ticket.app === 'FishingPalPro' ? 'bg-[#00B4D8]/15 text-[#00B4D8]' : 'bg-purple-100 text-purple-600'}`}>
-                      {ticket.app === 'FishingPalPro' ? '🎣' : '🎵'} {ticket.app}
-                    </span>
+                    {appBadge(ticket.app)}
                     <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${PRIORITY_COLORS[ticket.priority]}`}>{ticket.priority}</span>
                     <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${STATUS_COLORS[ticket.status]}`}>{ticket.status.replace('_', ' ')}</span>
                     <span className="text-xs text-slate-400 hidden lg:block">{formatDistanceToNow(new Date(ticket.createdAt), { addSuffix: true })}</span>
