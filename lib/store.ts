@@ -194,7 +194,8 @@ export async function getStats(): Promise<{
   total: number
   open: number
   inProgress: number
-  pending: number resolved: number
+  pending: number
+ resolved: number
   byApp: Record<string, number>
 }> {
   const [totals, byApp] = await Promise.all([
