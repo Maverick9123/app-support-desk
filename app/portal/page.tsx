@@ -10,7 +10,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { CheckCircle, Fish, Music, Search, AlertCircle, BookOpen } from 'lucide-react'
+import { CheckCircle, Fish, Music, Search, AlertCircle, BookOpen, LogIn } from 'lucide-react'
 
 export default function PortalPage() {
   const [form, setForm] = useState({
@@ -73,8 +73,20 @@ export default function PortalPage() {
 
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #0D1B2A 0%, #0a2a3a 100%)' }}>
+
+      {/* Top Nav Bar */}
+      <div className="max-w-xl mx-auto px-4 pt-5 flex justify-end">
+        <a
+          href="/"
+          className="inline-flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors text-xs font-medium"
+        >
+          <LogIn className="h-3.5 w-3.5" />
+          Team Login
+        </a>
+      </div>
+
       {/* Header */}
-      <div className="text-center pt-10 pb-8 px-4">
+      <div className="text-center pt-6 pb-8 px-4">
         <div className="flex items-center justify-center gap-3 mb-3">
           <Fish className="h-7 w-7 text-[#00B4D8]" />
           <Music className="h-6 w-6 text-[#00B4D8]" />
