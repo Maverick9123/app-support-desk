@@ -33,7 +33,7 @@ const AGENTS = [
 
 export default function TicketDetailPage() {
   const pathname = usePathname()
-  const id = pathname.split('/').pop() || ''
+  const id = pathname?.split('/').pop() || ''
   const [ticket, setTicket] = useState<Ticket | null>(null)
   const [loading, setLoading] = useState(true)
   const [noteText, setNoteText] = useState('')
