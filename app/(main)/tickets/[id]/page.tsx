@@ -1,8 +1,8 @@
- 'use client'
+'use client'
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
@@ -33,7 +33,6 @@ const AGENTS = [
 
 export default function TicketDetailPage() {
   const pathname = usePathname()
-  const router = useRouter()
   const id = pathname.split('/').pop() || ''
   const [ticket, setTicket] = useState<Ticket | null>(null)
   const [loading, setLoading] = useState(true)
@@ -49,9 +48,7 @@ export default function TicketDetailPage() {
 
   useEffect(() => {
     if (!id) return
-    fetch(`/api/tickets/${id}`, { cache: 'no-store' })
-      .then(r => r.json())
-      .then(data => { setTicket(data); setLoading(false) })
+    fetch(`/api/tickets/${id}`).then(r => r.json()).then(data => { setTicket(data); setLoading(false) })
   }, [id])
 
   async function updateField(field: string, value: string) {
@@ -63,7 +60,6 @@ export default function TicketDetailPage() {
     })
     const updated = await res.json()
     setTicket(updated)
-    router.refresh()
   }
 
   async function sendNote() {
@@ -78,7 +74,6 @@ export default function TicketDetailPage() {
     setTicket(prev => prev ? { ...prev, notes: [...prev.notes, data.note], updatedAt: new Date().toISOString() } : prev)
     setNoteText('')
     setSending(false)
-    router.refresh()
   }
 
   if (loading) return (
@@ -204,6 +199,7 @@ export default function TicketDetailPage() {
 
         {/* Sidebar */}
         <div className="col-span-1 space-y-4">
+          {/* Status controls */}
           <Card>
             <CardHeader className="pb-3"><CardTitle className="text-sm font-semibold text-slate-600 uppercase tracking-wide">Ticket Properties</CardTitle></CardHeader>
             <CardContent className="space-y-4">

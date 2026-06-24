@@ -3,9 +3,10 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
-import { AlertCircle, Clock, CheckCircle, Loader2, TrendingUp, Plus, Fish, Music, Search, ArrowRight } from 'lucide-react'
+import { AlertCircle, Clock, CheckCircle, Loader2, TrendingUp, Plus, Fish, Music, ArrowRight } from 'lucide-react'
 import { Stats, Ticket } from '@/types'
 import { formatDistanceToNow } from 'date-fns'
 
@@ -21,13 +22,6 @@ const PRIORITY_COLORS: Record<string, string> = {
   high: 'bg-orange-100 text-orange-700',
   medium: 'bg-yellow-100 text-yellow-700',
   low: 'bg-slate-100 text-slate-600',
-}
-
-function appBadge(app: string) {
-  if (app === 'FishingPalPro') return { emoji: '🎣', cls: 'bg-[#00B4D8]/15 text-[#00B4D8]' }
-  if (app === 'PlayListAI') return { emoji: '🎵', cls: 'bg-purple-100 text-purple-600' }
-  if (app === 'SleuthPro') return { emoji: '🔍', cls: 'bg-amber-100 text-amber-700' }
-  return { emoji: '❓', cls: 'bg-slate-100 text-slate-600' }
 }
 
 export default function DashboardPage() {
@@ -86,9 +80,9 @@ export default function DashboardPage() {
         ))}
       </div>
 
-      {/* App breakdown — 3 apps */}
+      {/* App breakdown */}
       {stats && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Link href="/tickets?app=FishingPalPro">
             <Card className="border border-[#00B4D8]/30 hover:border-[#00B4D8] transition-colors cursor-pointer group">
               <CardContent className="p-5">
@@ -99,7 +93,7 @@ export default function DashboardPage() {
                     </div>
                     <div>
                       <p className="font-semibold text-slate-800">FishingPalPro</p>
-                      <p className="text-xs text-slate-500">Active tickets</p>
+                      <p className="text-xs text-slate-500">Active support tickets</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -120,32 +114,11 @@ export default function DashboardPage() {
                     </div>
                     <div>
                       <p className="font-semibold text-slate-800">PlayListAI</p>
-                      <p className="text-xs text-slate-500">Active tickets</p>
+                      <p className="text-xs text-slate-500">Active support tickets</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-2xl font-bold text-slate-800">{stats.playListAI}</span>
-                    <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-[#00B4D8] transition-colors" />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
-          <Link href="/tickets?app=SleuthPro">
-            <Card className="border border-[#00B4D8]/30 hover:border-[#00B4D8] transition-colors cursor-pointer group">
-              <CardContent className="p-5">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(0,180,216,0.15)' }}>
-                      <Search className="h-5 w-5 text-[#00B4D8]" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-slate-800">SleuthPro</p>
-                      <p className="text-xs text-slate-500">Active tickets</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-2xl font-bold text-slate-800">{stats.sleuthPro}</span>
                     <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-[#00B4D8] transition-colors" />
                   </div>
                 </div>
@@ -171,26 +144,23 @@ export default function DashboardPage() {
             </div>
           ) : (
             <div className="divide-y divide-slate-100">
-              {tickets.map(ticket => {
-                const badge = appBadge(ticket.app)
-                return (
-                  <Link key={ticket.id} href={`/tickets/${ticket.id}`} className="flex items-center gap-4 px-6 py-3.5 hover:bg-slate-50 transition-colors">
-                    <span className="text-xs text-slate-400 w-10 shrink-0">#{ticket.ticketNumber}</span>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-slate-800 truncate">{ticket.subject}</p>
-                      <p className="text-xs text-slate-400">{ticket.customerName}</p>
-                    </div>
-                    <div className="flex items-center gap-2 shrink-0">
-                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${badge.cls}`}>
-                        {badge.emoji} {ticket.app}
-                      </span>
-                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${PRIORITY_COLORS[ticket.priority]}`}>{ticket.priority}</span>
-                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${STATUS_COLORS[ticket.status]}`}>{ticket.status.replace('_', ' ')}</span>
-                      <span className="text-xs text-slate-400 hidden lg:block">{formatDistanceToNow(new Date(ticket.createdAt), { addSuffix: true })}</span>
-                    </div>
-                  </Link>
-                )
-              })}
+              {tickets.map(ticket => (
+                <Link key={ticket.id} href={`/tickets/${ticket.id}`} className="flex items-center gap-4 px-6 py-3.5 hover:bg-slate-50 transition-colors">
+                  <span className="text-xs text-slate-400 w-10 shrink-0">#{ticket.ticketNumber}</span>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-slate-800 truncate">{ticket.subject}</p>
+                    <p className="text-xs text-slate-400">{ticket.customerName}</p>
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${ticket.app === 'FishingPalPro' ? 'bg-[#00B4D8]/15 text-[#00B4D8]' : 'bg-purple-100 text-purple-600'}`}>
+                      {ticket.app === 'FishingPalPro' ? '🎣' : '🎵'} {ticket.app}
+                    </span>
+                    <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${PRIORITY_COLORS[ticket.priority]}`}>{ticket.priority}</span>
+                    <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${STATUS_COLORS[ticket.status]}`}>{ticket.status.replace('_', ' ')}</span>
+                    <span className="text-xs text-slate-400 hidden lg:block">{formatDistanceToNow(new Date(ticket.createdAt), { addSuffix: true })}</span>
+                  </div>
+                </Link>
+              ))}
             </div>
           )}
         </CardContent>

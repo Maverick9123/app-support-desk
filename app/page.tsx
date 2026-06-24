@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { AlertCircle, Fish, Music, Search } from 'lucide-react'
+import { AlertCircle, Fish, Music } from 'lucide-react'
 
 const AGENTS = [
   { email: 'btwynn@bellsouth.net', name: 'Bruce Wynn', initials: 'BW', role: 'Admin' },
@@ -43,11 +43,10 @@ export default function LoginPage() {
             <div className="flex items-center gap-1">
               <Fish className="h-7 w-7 text-[#00B4D8]" />
               <Music className="h-5 w-5 text-[#00B4D8]" />
-              <Search className="h-5 w-5 text-[#00B4D8]" />
             </div>
             <h1 className="text-3xl font-bold text-white">AppSupport</h1>
           </div>
-          <p className="text-slate-400 text-sm">FishingPalPro · PlayListAI · SleuthPro Help Desk</p>
+          <p className="text-slate-400 text-sm">FishingPalPro &amp; PlayListAI Help Desk</p>
         </div>
 
         <Card className="border-0 shadow-2xl">

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useCallback, Suspense } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { Card, CardContent } from '@/components/ui/card'
@@ -19,6 +19,12 @@ const STATUS_COLORS: Record<string, string> = {
   resolved: 'bg-green-100 text-green-700',
   closed: 'bg-gray-100 text-gray-600',
 }
+const PRIORITY_COLORS: Record<string, string> = {
+  urgent: 'bg-red-100 text-red-700',
+  high: 'bg-orange-100 text-orange-700',
+  medium: 'bg-yellow-100 text-yellow-700',
+  low: 'bg-slate-100 text-slate-600',
+}
 const PRIORITY_DOT: Record<string, string> = {
   urgent: 'bg-red-500',
   high: 'bg-orange-500',
@@ -26,7 +32,7 @@ const PRIORITY_DOT: Record<string, string> = {
   low: 'bg-slate-400',
 }
 
-function TicketsContent() {
+export default function TicketsPage() {
   const searchParams = useSearchParams()
   const appParam = searchParams.get('app') || 'all'
   const [tickets, setTickets] = useState<Ticket[]>([])
@@ -163,13 +169,5 @@ function TicketsContent() {
         </CardContent>
       </Card>
     </div>
-  )
-}
-
-export default function TicketsPage() {
-  return (
-    <Suspense fallback={<div className="p-6 space-y-3">{Array(5).fill(0).map((_, i) => <Skeleton key={i} className="h-12 w-full" />)}</div>}>
-      <TicketsContent />
-    </Suspense>
   )
 }

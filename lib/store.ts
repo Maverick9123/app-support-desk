@@ -194,20 +194,20 @@ export async function getStats(): Promise<{
   total: number
   open: number
   inProgress: number
-  resolved: number
+  pending: number resolved: number
   byApp: Record<string, number>
 }> {
   const [totals, byApp] = await Promise.all([
     sql`SELECT status, COUNT(*) as count FROM tickets GROUP BY status`,
     sql`SELECT app, COUNT(*) as count FROM tickets WHERE app IS NOT NULL GROUP BY app`,
   ])
-  const stats = { total: 0, open: 0, inProgress: 0, resolved: 0, byApp: {} as Record<string, number> }
+  const stats = { total: 0, open: 0, inProgress: 0, pending: 0, resolved: 0, byApp: {} as Record<string, number> }
   for (const row of totals) {
     const count = parseInt(row.count)
     stats.total += count
     if (row.status === 'open') stats.open = count
     else if (row.status === 'in_progress') stats.inProgress = count
-    else if (row.status === 'resolved') stats.resolved = count
+    else if (row.status === 'pending') stats.pending = count else if (row.status === 'resolved') stats.resolved = count
   }
   for (const row of byApp) {
     stats.byApp[row.app] = parseInt(row.count)

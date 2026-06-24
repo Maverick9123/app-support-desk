@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { Home, FileText, Plus, Users, Settings, Globe, Fish, Music, Search, LogOut, ChevronRight, BookOpen } from 'lucide-react'
+import { Home, FileText, Plus, Users, Settings, Globe, Fish, Music, LogOut, ChevronRight } from 'lucide-react'
 import { Stats } from '@/types'
 
 interface AgentInfo {
@@ -34,14 +34,12 @@ export function Sidebar() {
   }
 
   const navItems = [
-    { href: '/dashboard',   label: 'Dashboard',        icon: Home },
-    { href: '/tickets',     label: 'All Tickets',      icon: FileText, badge: stats ? stats.open + stats.inProgress + stats.pending : null },
-    { href: '/tickets/new', label: 'New Ticket',       icon: Plus },
-    { href: '/contacts',    label: 'Contacts',         icon: Users },
-    { href: '/faqs',        label: 'FAQ Database',     icon: BookOpen },
-    { href: '/portal',      label: 'Customer Portal',  icon: Globe, external: true },
-    { href: '/portal/faq',  label: 'Public FAQ Page',  icon: Globe, external: true },
-    { href: '/settings',    label: 'Settings',         icon: Settings },
+    { href: '/dashboard', label: 'Dashboard', icon: Home },
+    { href: '/tickets', label: 'All Tickets', icon: FileText, badge: stats ? stats.open + stats.inProgress + stats.pending : null },
+    { href: '/tickets/new', label: 'New Ticket', icon: Plus },
+    { href: '/contacts', label: 'Contacts', icon: Users },
+    { href: '/portal', label: 'Customer Portal', icon: Globe, external: true },
+    { href: '/settings', label: 'Settings', icon: Settings },
   ]
 
   return (
@@ -77,15 +75,6 @@ export function Sidebar() {
             </div>
             {stats.playListAI > 0 && (
               <span className="text-xs bg-orange-500/80 text-white px-1.5 py-0.5 rounded-full font-medium">{stats.playListAI}</span>
-            )}
-          </Link>
-          <Link href="/tickets?app=SleuthPro" className="flex items-center justify-between px-2 py-1.5 rounded-md hover:bg-white/5 transition-colors group">
-            <div className="flex items-center gap-2">
-              <Search className="h-3.5 w-3.5 text-[#00B4D8]" />
-              <span className="text-xs text-slate-400 group-hover:text-slate-200">SleuthPro</span>
-            </div>
-            {stats.sleuthPro > 0 && (
-              <span className="text-xs bg-teal-500/80 text-white px-1.5 py-0.5 rounded-full font-medium">{stats.sleuthPro}</span>
             )}
           </Link>
         </div>
