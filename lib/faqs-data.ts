@@ -6,7 +6,7 @@
 
 export interface FAQ {
   id: string
-  app: 'FishingPalPro' | 'PlayListAI' | 'SleuthPro' | 'General'
+  app: 'FishingPalPro' | 'PlayListAI' | 'SleuthPro' | 'General' | 'AppSupportDesk'
   category: string
   question: string
   answer: string
