@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { Home, FileText, Plus, Users, Settings, Globe, Fish, Music, Search, LogOut, ChevronRight, Archive } from 'lucide-react'
+import { Home, FileText, Plus, Users, Settings, Globe, Fish, Music, Search, LogOut, ChevronRight, Archive, BookOpen } from 'lucide-react'
 import { Stats } from '@/types'
 
 interface AgentInfo {
@@ -41,13 +41,15 @@ export function Sidebar() {
   const spCount = byApp['SleuthPro'] || 0
 
   const navItems = [
-    { href: '/dashboard', label: 'Dashboard', icon: Home },
-    { href: '/tickets', label: 'All Tickets', icon: FileText, badge: totalActive },
-    { href: '/tickets/new', label: 'New Ticket', icon: Plus },
-    { href: '/tickets/archived', label: 'Archived', icon: Archive, badge: archivedCount > 0 ? archivedCount : null },
-    { href: '/contacts', label: 'Contacts', icon: Users },
-    { href: '/portal', label: 'Customer Portal', icon: Globe, external: true },
-    { href: '/settings', label: 'Settings', icon: Settings },
+    { href: '/dashboard',        label: 'Dashboard',       icon: Home },
+    { href: '/tickets',          label: 'All Tickets',     icon: FileText, badge: totalActive },
+    { href: '/tickets/new',      label: 'New Ticket',      icon: Plus },
+    { href: '/tickets/archived', label: 'Archived',        icon: Archive, badge: archivedCount > 0 ? archivedCount : null, badgeColor: 'bg-amber-500/80' },
+    { href: '/contacts',         label: 'Contacts',        icon: Users },
+    { href: '/faqs',             label: 'FAQ Database',    icon: BookOpen },
+    { href: '/portal',           label: 'Customer Portal', icon: Globe, external: true },
+    { href: '/portal/faq',       label: 'Public FAQ Page', icon: Globe, external: true },
+    { href: '/settings',         label: 'Settings',        icon: Settings },
   ]
 
   return (
@@ -93,7 +95,8 @@ export function Sidebar() {
         {navItems.map(item => {
           const isActive = pathname === item.href ||
             (item.href !== '/dashboard' && item.href !== '/tickets/new' && item.href !== '/tickets/archived' &&
-             pathname?.startsWith(item.href) && item.href !== '/tickets/new') ||
+             item.href !== '/portal' && item.href !== '/portal/faq' && item.href !== '/settings' &&
+             pathname?.startsWith(item.href)) ||
             (item.href === '/tickets/archived' && pathname === '/tickets/archived')
           return item.external ? (
             <a key={item.href} href={item.href} target="_blank" rel="noopener noreferrer"
@@ -115,7 +118,7 @@ export function Sidebar() {
               </div>
               {item.badge != null && item.badge > 0 && (
                 <span className={`text-xs text-white px-1.5 py-0.5 rounded-full font-medium ${
-                  item.href === '/tickets/archived' ? 'bg-amber-500/80' : 'bg-[#00B4D8]'
+                  item.badgeColor ?? 'bg-[#00B4D8]'
                 }`}>{item.badge}</span>
               )}
             </Link>
