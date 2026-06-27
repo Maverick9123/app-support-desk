@@ -34,20 +34,27 @@ export default function ArchivedTicketsPage() {
 
   const fetchTickets = useCallback(async () => {
     setLoading(true)
-    const params = new URLSearchParams({ archived: 'true' })
-    if (appFilter !== 'all') params.set('app', appFilter)
-    const res = await fetch(`/api/tickets?${params.toString()}`)
-    const data = await res.json()
-    setTickets(data)
-    setLoading(false)
+    try {
+      const params = new URLSearchParams({ archived: 'true' })
+      if (appFilter !== 'all') params.set('app', appFilter)
+      const res = await fetch(`/api/tickets?${params.toString()}`)
+      if (!res.ok) throw new Error('Failed to fetch')
+      const data = await res.json()
+      setTickets(Array.isArray(data) ? data : [])
+    } catch {
+      setTickets([])
+    } finally {
+      setLoading(false)
+    }
   }, [appFilter])
 
   useEffect(() => { fetchTickets() }, [fetchTickets])
 
   const filtered = tickets.filter(t =>
-    !search || t.subject.toLowerCase().includes(search.toLowerCase()) ||
-    t.customerName.toLowerCase().includes(search.toLowerCase()) ||
-    t.customerEmail.toLowerCase().includes(search.toLowerCase())
+    !search ||
+    (t.subject ?? '').toLowerCase().includes(search.toLowerCase()) ||
+    (t.customerName ?? '').toLowerCase().includes(search.toLowerCase()) ||
+    (t.customerEmail ?? '').toLowerCase().includes(search.toLowerCase())
   )
 
   async function handleRestore(e: React.MouseEvent, ticketId: string) {
@@ -143,8 +150,8 @@ export default function ArchivedTicketsPage() {
                 >
                   <div className="col-span-1 text-xs text-slate-400 font-mono">#{ticket.ticketNumber}</div>
                   <div className="col-span-3">
-                    <p className="text-sm font-medium text-slate-600 truncate">{ticket.subject}</p>
-                    <p className="text-xs text-slate-400 truncate">{ticket.category.replace('_', ' ')}</p>
+                    <p className="text-sm font-medium text-slate-600 truncate">{ticket.subject ?? '—'}</p>
+                    <p className="text-xs text-slate-400 truncate">{(ticket.category ?? '').replace('_', ' ')}</p>
                   </div>
                   <div className="col-span-2">
                     <span className={`inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium ${
@@ -156,24 +163,23 @@ export default function ArchivedTicketsPage() {
                        ticket.app === 'SleuthPro' ? <Search className="h-3 w-3" /> :
                        <Music className="h-3 w-3" />}
                       {ticket.app === 'FishingPalPro' ? 'Fishing' :
-                       ticket.app === 'SleuthPro' ? 'Sleuth' :
-                       'Playlist'}
+                       ticket.app === 'SleuthPro' ? 'Sleuth' : 'Playlist'}
                     </span>
                   </div>
                   <div className="col-span-1">
                     <div className="flex items-center gap-1.5">
-                      <div className={`h-2 w-2 rounded-full shrink-0 ${PRIORITY_DOT[ticket.priority]}`} />
-                      <span className="text-xs text-slate-600 capitalize">{ticket.priority}</span>
+                      <div className={`h-2 w-2 rounded-full shrink-0 ${PRIORITY_DOT[ticket.priority ?? 'low'] ?? 'bg-slate-400'}`} />
+                      <span className="text-xs text-slate-600 capitalize">{ticket.priority ?? '—'}</span>
                     </div>
                   </div>
                   <div className="col-span-1">
-                    <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${STATUS_COLORS[ticket.status]}`}>
-                      {ticket.status.replace('_', ' ')}
+                    <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${STATUS_COLORS[ticket.status ?? ''] ?? 'bg-gray-100 text-gray-600'}`}>
+                      {(ticket.status ?? '').replace('_', ' ')}
                     </span>
                   </div>
                   <div className="col-span-2">
-                    <p className="text-xs text-slate-700 truncate">{ticket.customerName}</p>
-                    <p className="text-xs text-slate-400 truncate">{ticket.customerEmail}</p>
+                    <p className="text-xs text-slate-700 truncate">{ticket.customerName ?? '—'}</p>
+                    <p className="text-xs text-slate-400 truncate">{ticket.customerEmail ?? '—'}</p>
                   </div>
                   <div className="col-span-1 text-xs text-slate-400">
                     {ticket.archivedAt
@@ -193,7 +199,7 @@ export default function ArchivedTicketsPage() {
                           <ArchiveRestore className="h-4 w-4" />
                         </button>
                         <button
-                          onClick={(e) => handleDelete(e, ticket.id, ticket.subject)}
+                          onClick={(e) => handleDelete(e, ticket.id, ticket.subject ?? '')}
                           title="Permanently delete"
                           className="p-1.5 rounded-md hover:bg-red-100 text-slate-400 hover:text-red-600 transition-colors"
                         >
