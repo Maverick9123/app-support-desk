@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { Home, FileText, Plus, Users, Settings, Globe, Fish, Music, Search, LogOut, ChevronRight } from 'lucide-react'
+import { Home, FileText, Plus, Users, Settings, Globe, Fish, Music, Search, LogOut, ChevronRight, Archive } from 'lucide-react'
 import { Stats } from '@/types'
 
 interface AgentInfo {
@@ -34,6 +34,7 @@ export function Sidebar() {
   }
 
   const totalActive = stats ? stats.open + stats.inProgress + stats.pending : null
+  const archivedCount = stats?.archived ?? 0
   const byApp = stats ? (stats.byApp || {}) : {}
   const fpCount = byApp['FishingPalPro'] || 0
   const plCount = byApp['PlayListAI'] || 0
@@ -43,6 +44,7 @@ export function Sidebar() {
     { href: '/dashboard', label: 'Dashboard', icon: Home },
     { href: '/tickets', label: 'All Tickets', icon: FileText, badge: totalActive },
     { href: '/tickets/new', label: 'New Ticket', icon: Plus },
+    { href: '/tickets/archived', label: 'Archived', icon: Archive, badge: archivedCount > 0 ? archivedCount : null },
     { href: '/contacts', label: 'Contacts', icon: Users },
     { href: '/portal', label: 'Customer Portal', icon: Globe, external: true },
     { href: '/settings', label: 'Settings', icon: Settings },
@@ -89,7 +91,10 @@ export function Sidebar() {
 
       <nav className="flex-1 px-3 py-4 space-y-0.5">
         {navItems.map(item => {
-          const isActive = pathname === item.href || (item.href !== '/dashboard' && pathname?.startsWith(item.href) && item.href !== '/tickets/new')
+          const isActive = pathname === item.href ||
+            (item.href !== '/dashboard' && item.href !== '/tickets/new' && item.href !== '/tickets/archived' &&
+             pathname?.startsWith(item.href) && item.href !== '/tickets/new') ||
+            (item.href === '/tickets/archived' && pathname === '/tickets/archived')
           return item.external ? (
             <a key={item.href} href={item.href} target="_blank" rel="noopener noreferrer"
               className="flex items-center justify-between px-3 py-2.5 rounded-lg text-slate-400 hover:bg-white/5 hover:text-slate-200 transition-all text-sm">
@@ -109,7 +114,9 @@ export function Sidebar() {
                 {item.label}
               </div>
               {item.badge != null && item.badge > 0 && (
-                <span className="text-xs bg-[#00B4D8] text-white px-1.5 py-0.5 rounded-full font-medium">{item.badge}</span>
+                <span className={`text-xs text-white px-1.5 py-0.5 rounded-full font-medium ${
+                  item.href === '/tickets/archived' ? 'bg-amber-500/80' : 'bg-[#00B4D8]'
+                }`}>{item.badge}</span>
               )}
             </Link>
           )
