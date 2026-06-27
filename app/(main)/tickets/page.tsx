@@ -1,14 +1,13 @@
 'use client'
 
 import { useEffect, useState, useCallback, Suspense } from 'react'
-import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Plus, Search, Fish, Music, AlertCircle } from 'lucide-react'
+import { Plus, Search, Fish, Music, AlertCircle, Archive } from 'lucide-react'
 import { Ticket } from '@/types'
 import { formatDistanceToNow } from 'date-fns'
 
@@ -19,12 +18,6 @@ const STATUS_COLORS: Record<string, string> = {
   resolved: 'bg-green-100 text-green-700',
   closed: 'bg-gray-100 text-gray-600',
 }
-const PRIORITY_COLORS: Record<string, string> = {
-  urgent: 'bg-red-100 text-red-700',
-  high: 'bg-orange-100 text-orange-700',
-  medium: 'bg-yellow-100 text-yellow-700',
-  low: 'bg-slate-100 text-slate-600',
-}
 const PRIORITY_DOT: Record<string, string> = {
   urgent: 'bg-red-500',
   high: 'bg-orange-500',
@@ -33,6 +26,7 @@ const PRIORITY_DOT: Record<string, string> = {
 }
 
 function TicketsPageContent() {
+  const router = useRouter()
   const searchParams = useSearchParams()
   const appParam = searchParams?.get('app') || 'all'
   const [tickets, setTickets] = useState<Ticket[]>([])
@@ -40,6 +34,7 @@ function TicketsPageContent() {
   const [search, setSearch] = useState('')
   const [appFilter, setAppFilter] = useState(appParam)
   const [statusFilter, setStatusFilter] = useState('all')
+  const [archiving, setArchiving] = useState<string | null>(null)
 
   const fetchTickets = useCallback(async () => {
     setLoading(true)
@@ -61,6 +56,20 @@ function TicketsPageContent() {
     t.customerEmail.toLowerCase().includes(search.toLowerCase())
   )
 
+  async function handleArchive(e: React.MouseEvent, ticketId: string) {
+    e.preventDefault()
+    e.stopPropagation()
+    setArchiving(ticketId)
+    try {
+      await fetch(`/api/tickets/${ticketId}/archive`, { method: 'POST' })
+      setTickets(prev => prev.filter(t => t.id !== ticketId))
+    } catch {
+      // silently fail — ticket stays in list
+    } finally {
+      setArchiving(null)
+    }
+  }
+
   return (
     <div className="p-6 space-y-5">
       {/* Header */}
@@ -69,11 +78,13 @@ function TicketsPageContent() {
           <h1 className="text-2xl font-bold text-slate-800">Tickets</h1>
           <p className="text-slate-500 text-sm mt-0.5">{filtered.length} ticket{filtered.length !== 1 ? 's' : ''} found</p>
         </div>
-        <Link href="/tickets/new">
-          <Button className="text-white gap-2" style={{ background: 'linear-gradient(135deg, #00B4D8, #0096b4)' }}>
-            <Plus className="h-4 w-4" /> New Ticket
-          </Button>
-        </Link>
+        <Button
+          onClick={() => router.push('/tickets/new')}
+          className="text-white gap-2"
+          style={{ background: 'linear-gradient(135deg, #00B4D8, #0096b4)' }}
+        >
+          <Plus className="h-4 w-4" /> New Ticket
+        </Button>
       </div>
 
       {/* Filters */}
@@ -124,18 +135,23 @@ function TicketsPageContent() {
               {/* Table header */}
               <div className="grid grid-cols-12 gap-3 px-5 py-2.5 bg-slate-50 border-b border-slate-200 text-xs font-semibold text-slate-500 uppercase tracking-wide">
                 <div className="col-span-1">#</div>
-                <div className="col-span-4">Subject</div>
+                <div className="col-span-3">Subject</div>
                 <div className="col-span-2">App</div>
                 <div className="col-span-1">Priority</div>
                 <div className="col-span-1">Status</div>
                 <div className="col-span-2">Customer</div>
                 <div className="col-span-1">Created</div>
+                <div className="col-span-1 text-right">Archive</div>
               </div>
               {/* Rows */}
               {filtered.map(ticket => (
-                <Link key={ticket.id} href={`/tickets/${ticket.id}`} className="grid grid-cols-12 gap-3 px-5 py-3.5 border-b border-slate-100 hover:bg-slate-50 transition-colors items-center cursor-pointer last:border-0">
+                <div
+                  key={ticket.id}
+                  onClick={() => router.push(`/tickets/${ticket.id}`)}
+                  className="grid grid-cols-12 gap-3 px-5 py-3.5 border-b border-slate-100 hover:bg-slate-50 transition-colors items-center cursor-pointer last:border-0 group"
+                >
                   <div className="col-span-1 text-xs text-slate-400 font-mono">#{ticket.ticketNumber}</div>
-                  <div className="col-span-4">
+                  <div className="col-span-3">
                     <p className="text-sm font-medium text-slate-800 truncate">{ticket.subject}</p>
                     <p className="text-xs text-slate-400 truncate">{ticket.category.replace('_', ' ')}</p>
                   </div>
@@ -171,7 +187,21 @@ function TicketsPageContent() {
                   <div className="col-span-1 text-xs text-slate-400">
                     {formatDistanceToNow(new Date(ticket.createdAt), { addSuffix: true })}
                   </div>
-                </Link>
+                  <div className="col-span-1 flex justify-end">
+                    <button
+                      onClick={(e) => handleArchive(e, ticket.id)}
+                      disabled={archiving === ticket.id}
+                      title="Archive this ticket"
+                      className="opacity-0 group-hover:opacity-100 transition-opacity p-1.5 rounded-md hover:bg-amber-100 text-slate-400 hover:text-amber-600 disabled:cursor-wait"
+                    >
+                      {archiving === ticket.id ? (
+                        <div className="h-4 w-4 border-2 border-amber-400 border-t-transparent rounded-full animate-spin" />
+                      ) : (
+                        <Archive className="h-4 w-4" />
+                      )}
+                    </button>
+                  </div>
+                </div>
               ))}
             </>
           )}
