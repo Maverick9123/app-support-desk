@@ -77,7 +77,9 @@ export default function ContactsPage() {
                     <span className="text-sm font-semibold text-slate-700">{contact.ticketCount}</span>
                   </div>
                   <div className="col-span-2 text-xs text-slate-400">
-                    {formatDistanceToNow(new Date(contact.lastTicketDate), { addSuffix: true })}
+                    {contact.lastTicketDate
+                      ? formatDistanceToNow(new Date(contact.lastTicketDate), { addSuffix: true })
+                      : '—'}
                   </div>
                 </div>
               ))}
