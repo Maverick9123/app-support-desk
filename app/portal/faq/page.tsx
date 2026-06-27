@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { ALL_FAQS, getCategories, type FAQ } from '@/lib/faqs-data'
-import { Fish, Music, Search, ChevronDown, ChevronUp, ExternalLink, ArrowLeft } from 'lucide-react'
+import { Fish, Music, Search, ChevronDown, ChevronUp, ExternalLink, ArrowLeft, LifeBuoy } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 
 const APP_CONFIG = {
@@ -30,9 +30,15 @@ const APP_CONFIG = {
     color: '#64748B',
     icon: null,
   },
+  AppSupportDesk: {
+    label: 'AppSupport Desk',
+    emoji: '🛠️',
+    color: '#6366F1',
+    icon: LifeBuoy,
+  },
 } as const
 
-type AppName = 'all' | 'FishingPalPro' | 'PlayListAI' | 'SleuthPro' | 'General'
+type AppName = 'all' | 'FishingPalPro' | 'PlayListAI' | 'SleuthPro' | 'General' | 'AppSupportDesk'
 
 function FAQItem({ faq }: { faq: FAQ }) {
   const [open, setOpen] = useState(false)
@@ -93,13 +99,16 @@ function CategoryGroup({ app, category, faqs }: { app: string; category: string;
   )
 }
 
+// Apps excluded from the public-facing portal (internal/chatbot-only)
+const INTERNAL_APPS: FAQ['app'][] = ['General', 'AppSupportDesk']
+
 export default function FAQPage() {
   const [selectedApp, setSelectedApp] = useState<AppName>('all')
   const [query, setQuery] = useState('')
 
   const filtered = useMemo(() => {
     let pool = selectedApp === 'all'
-      ? ALL_FAQS.filter(f => f.app !== 'General')
+      ? ALL_FAQS.filter(f => !INTERNAL_APPS.includes(f.app))
       : ALL_FAQS.filter(f => f.app === selectedApp)
 
     if (query.trim()) {
@@ -129,7 +138,7 @@ export default function FAQPage() {
       value: 'all',
       label: 'All Apps',
       emoji: '📚',
-      count: ALL_FAQS.filter(f => f.app !== 'General').length,
+      count: ALL_FAQS.filter(f => !INTERNAL_APPS.includes(f.app)).length,
     },
     {
       value: 'FishingPalPro',
