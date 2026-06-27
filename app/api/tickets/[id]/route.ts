@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getTicketById, updateTicket } from '@/lib/store'
+import { getTicketById, updateTicket, deleteTicket } from '@/lib/store'
 
 export async function GET(
   _req: Request,
@@ -20,4 +20,14 @@ export async function PUT(
   const updated = await updateTicket(id, body)
   if (!updated) return NextResponse.json({ error: 'Not found' }, { status: 404 })
   return NextResponse.json(updated)
+}
+
+export async function DELETE(
+  _req: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params
+  const deleted = await deleteTicket(id)
+  if (!deleted) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+  return NextResponse.json({ success: true })
 }
