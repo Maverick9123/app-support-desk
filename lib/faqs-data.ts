@@ -1050,6 +1050,402 @@ export const ALL_FAQS: FAQ[] = [
       'FishingPalPro, PlayListAI, and SleuthPro are currently iOS-only apps. Android versions are not available at this time but may be considered for future development.',
     keywords: ['android', 'google play', 'other platform', 'non-apple', 'cross platform'],
   },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // APPSUPPORTDESK — AGENT TRAINING & SYSTEM GUIDE
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  // SECTION 1: SYSTEM OVERVIEW
+  {
+    id: 'asd-overview-1',
+    app: 'AppSupportDesk',
+    category: 'System Overview',
+    question: 'What is AppSupport Desk and what is it used for?',
+    answer: 'AppSupport Desk is the internal customer support management system for DreamTeamApps. It is used by support agents to receive, track, respond to, and resolve support tickets submitted by customers using FishingPalPro, PlayListAI, and SleuthPro. The system also powers a public-facing customer portal where users can submit tickets and search the FAQ, and it includes an AI-assisted chatbot that automatically handles common questions 24/7 using the FAQ knowledge base.',
+    keywords: ['overview', 'what is', 'system', 'purpose', 'appsupport', 'helpdesk'],
+  },
+  {
+    id: 'asd-overview-2',
+    app: 'AppSupportDesk',
+    category: 'System Overview',
+    question: 'What are the three main sections of AppSupport Desk?',
+    answer: 'AppSupport Desk is divided into three main areas: (1) The Internal Dashboard — where agents manage tickets, view stats, and work with customer contacts. This is the main area agents use daily. (2) The Public Customer Portal — the page customers see when they visit the support site. They can submit tickets, chat with the AI assistant, and browse FAQs here. (3) The FAQ Knowledge Base — the database of questions and answers that powers both the public FAQ page and the AI chatbot. Keeping this database current and thorough is one of the most important ongoing tasks.',
+    keywords: ['sections', 'areas', 'dashboard', 'portal', 'knowledge base', 'structure'],
+  },
+  {
+    id: 'asd-overview-3',
+    app: 'AppSupportDesk',
+    category: 'System Overview',
+    question: 'Which apps does DreamTeamApps currently support through AppSupport Desk?',
+    answer: 'AppSupport Desk currently handles support for three iOS applications: FishingPalPro (a lunar-phase-based fishing forecast and catch logging app), PlayListAI (an AI-powered playlist creation and management app that works with both Apple Music and Spotify), and SleuthPro (a public records and people search investigation app). Each app has its own ticket category, FAQ section, and chatbot training data. When working a ticket, always confirm which app the customer is writing about before researching an answer.',
+    keywords: ['apps', 'FishingPalPro', 'PlayListAI', 'SleuthPro', 'DreamTeamApps', 'products'],
+  },
+  {
+    id: 'asd-overview-4',
+    app: 'AppSupportDesk',
+    category: 'System Overview',
+    question: 'Who has access to AppSupport Desk and how do I log in?',
+    answer: 'AppSupport Desk is a private internal tool — access is restricted to authorized DreamTeamApps support agents. You will be provided with your login credentials by the system administrator. Navigate to the AppSupport Desk URL provided to you, enter your email and password on the login screen, and you will be taken directly to the dashboard. If you have trouble logging in or need a password reset, contact the administrator directly. Never share your login credentials with anyone.',
+    keywords: ['login', 'access', 'credentials', 'password', 'sign in', 'agent'],
+  },
+  {
+    id: 'asd-overview-5',
+    app: 'AppSupportDesk',
+    category: 'System Overview',
+    question: 'What is the general daily workflow for a support agent?',
+    answer: "A typical agent's daily workflow is: (1) Log in and check the Dashboard for new and open ticket counts. (2) Go to the Tickets section and filter by Open status — handle Urgent and High priority tickets first. (3) Read each ticket carefully, review the customer's history under Contacts if needed, and craft a thorough response. (4) Update the ticket status appropriately: In Progress, Pending, or Resolved. (5) At end of day, archive any tickets that are Closed and no longer need to be visible in the main list. (6) Check the chatbot conversation logs periodically — if a question comes up that is not in the FAQ, add it so the chatbot learns.",
+    keywords: ['daily', 'workflow', 'routine', 'process', 'agent', 'tasks', 'steps'],
+  },
+
+  // SECTION 2: NAVIGATION & SIDEBAR
+  {
+    id: 'asd-nav-1',
+    app: 'AppSupportDesk',
+    category: 'Navigation & Sidebar',
+    question: 'How do I navigate between sections in AppSupport Desk?',
+    answer: 'The left sidebar is your main navigation. It contains links to: Dashboard (home screen with stats and recent activity), Tickets (the full ticket list), Contacts (customer directory), Archived (hidden/closed tickets), FAQ Database (internal knowledge base), Customer Portal (public support page), and Settings. Click any item in the sidebar to navigate to that section. The currently active section is highlighted.',
+    keywords: ['navigate', 'sidebar', 'menu', 'sections', 'how to', 'navigation'],
+  },
+  {
+    id: 'asd-nav-2',
+    app: 'AppSupportDesk',
+    category: 'Navigation & Sidebar',
+    question: 'What does the number badge on the sidebar items mean?',
+    answer: 'Colored number badges appear next to sidebar items to give you a quick status count at a glance. On the Tickets item, the badge shows the count of open, in-progress, and pending tickets that need attention. On the Archived item, the amber badge shows how many tickets are currently archived. These counts update automatically every time you navigate to a new section.',
+    keywords: ['badge', 'count', 'number', 'sidebar', 'indicator', 'notification'],
+  },
+  {
+    id: 'asd-nav-3',
+    app: 'AppSupportDesk',
+    category: 'Navigation & Sidebar',
+    question: 'How do I filter and search the ticket list?',
+    answer: 'At the top of the Tickets page there are two filter controls: (1) A search box — type any text to filter tickets by subject, customer name, or customer email in real time. (2) An App dropdown — select FishingPalPro, PlayListAI, or SleuthPro to show only tickets for that app, or leave it on All Apps to see everything. You can combine both filters at the same time. The ticket count updates to reflect how many tickets match your current filters.',
+    keywords: ['filter', 'search', 'find', 'tickets', 'app filter', 'narrow down'],
+  },
+
+  // SECTION 3: UNDERSTANDING TICKETS
+  {
+    id: 'asd-tickets-1',
+    app: 'AppSupportDesk',
+    category: 'Understanding Tickets',
+    question: 'What is a support ticket?',
+    answer: "A support ticket is a recorded customer request for help. When a customer submits a question or problem through the public portal, the system creates a ticket that captures: the customer's name and email, which app they are using, a subject line, a full description of their issue, the category type (Bug Report, Feature Request, Billing, Technical Issue, General Inquiry, etc.), and an automatically assigned priority level. Every ticket is assigned a unique ticket number for reference. The ticket remains in the system until it is resolved and archived.",
+    keywords: ['ticket', 'what is', 'support request', 'definition', 'basics'],
+  },
+  {
+    id: 'asd-tickets-2',
+    app: 'AppSupportDesk',
+    category: 'Understanding Tickets',
+    question: 'What are the ticket status levels and what does each one mean?',
+    answer: 'Every ticket has one of five statuses: (1) Open — the ticket has just been submitted and has not been looked at yet. Requires immediate attention. (2) In Progress — an agent is actively working on the ticket. (3) Pending — the agent has responded and is waiting for a reply from the customer. (4) Resolved — the issue has been fixed or the question has been fully answered. (5) Closed — the ticket is fully complete with no further action needed. Closed tickets are candidates for archiving.',
+    keywords: ['status', 'open', 'in progress', 'pending', 'resolved', 'closed', 'meaning'],
+  },
+  {
+    id: 'asd-tickets-3',
+    app: 'AppSupportDesk',
+    category: 'Understanding Tickets',
+    question: 'What are the ticket priority levels and how are they determined?',
+    answer: 'Tickets are assigned one of four priority levels: (1) Urgent — the customer cannot use the app at all, has been charged incorrectly, or the issue affects many users. Respond within 1-2 hours. (2) High — a major feature is broken or the customer is very frustrated. Respond within 4 hours. (3) Medium — a non-critical feature issue or general question. Respond within 24 hours. (4) Low — a minor cosmetic issue, general feedback, or a simple question. Respond within 48 hours.',
+    keywords: ['priority', 'urgent', 'high', 'medium', 'low', 'response time', 'urgency'],
+  },
+  {
+    id: 'asd-tickets-4',
+    app: 'AppSupportDesk',
+    category: 'Understanding Tickets',
+    question: 'What are the ticket category types?',
+    answer: 'Each ticket is filed under one of six categories: (1) Bug Report — something is not working as intended. (2) Feature Request — the customer wants a new feature added. (3) Billing — subscription, payment, or refund issues. Always handle with highest care. (4) Technical Issue — app crashes, performance problems, or device-specific behavior. (5) Account — login problems, password resets, or subscription access. (6) General Inquiry — questions about how the app works. The FAQ chatbot handles most of these automatically.',
+    keywords: ['category', 'bug report', 'feature request', 'billing', 'technical', 'account', 'general'],
+  },
+  {
+    id: 'asd-tickets-5',
+    app: 'AppSupportDesk',
+    category: 'Understanding Tickets',
+    question: 'What information should I look for when first reading a new ticket?',
+    answer: "When reading a new ticket, check these things in order: (1) Which app is it for? (2) What is the customer's actual problem — read the full description, not just the subject line. (3) What device and iOS version are they on, if mentioned? (4) Have they tried any troubleshooting steps already? (5) Is this a billing issue or a technical issue? (6) What is the urgency — are they blocked from using the app entirely? (7) Check the Contacts section for this customer's email to see if they have had previous tickets.",
+    keywords: ['reading', 'new ticket', 'what to look for', 'assess', 'context', 'first steps'],
+  },
+  {
+    id: 'asd-tickets-6',
+    app: 'AppSupportDesk',
+    category: 'Understanding Tickets',
+    question: 'Can a customer submit more than one ticket?',
+    answer: "Yes — a customer can submit as many tickets as they need. All tickets from the same email address are linked in the Contacts section. If you see multiple open tickets from the same customer about the same issue, it usually means they did not hear back fast enough and submitted again. Consolidate your response to the most recent ticket and close or archive the duplicate(s). Always acknowledge in your reply that you saw multiple messages.",
+    keywords: ['multiple tickets', 'duplicate', 'same customer', 'submitted twice', 'history'],
+  },
+
+  // SECTION 4: MANAGING TICKETS
+  {
+    id: 'asd-manage-1',
+    app: 'AppSupportDesk',
+    category: 'Managing Tickets',
+    question: 'How do I change the status of a ticket?',
+    answer: 'Open the ticket by clicking on it. In the detail view, find the Status field — click on it to open a dropdown and select the new status. Save the change. Best practice: change status to In Progress as soon as you begin working on a ticket so other agents know it is being handled. Change to Pending after you reply and are waiting for the customer. Change to Resolved once the issue is fixed or fully answered.',
+    keywords: ['change status', 'update status', 'how to', 'in progress', 'resolved', 'status change'],
+  },
+  {
+    id: 'asd-manage-2',
+    app: 'AppSupportDesk',
+    category: 'Managing Tickets',
+    question: 'When should I mark a ticket as Resolved versus Closed?',
+    answer: 'Use Resolved when you have provided a complete answer or fix and want to give the customer a short window to confirm. After 3-5 days with no reply from the customer, change the ticket to Closed. Use Closed when a ticket is definitively done — the customer confirmed it is fixed, or it was a feature request with no further action needed. A Closed ticket is the most appropriate candidate for archiving to keep the main list clean.',
+    keywords: ['resolved', 'closed', 'difference', 'when to', 'resolve', 'close', 'done'],
+  },
+  {
+    id: 'asd-manage-3',
+    app: 'AppSupportDesk',
+    category: 'Managing Tickets',
+    question: 'How do I handle a billing or refund issue?',
+    answer: 'Billing and refund tickets require special care. Steps: (1) Set priority to High or Urgent immediately. (2) Verify the app they purchased. (3) Remind them that all payments are processed by Apple — DreamTeamApps does not have access to their payment information. (4) Direct them to request a refund at reportaproblem.apple.com — sign in with their Apple ID, select the app, choose a reason, and submit. Apple typically processes refund decisions within 24-48 hours. (5) If charged multiple times, ask them to check Settings > [Their Name] > Subscriptions.',
+    keywords: ['billing', 'refund', 'charge', 'payment', 'subscription', 'money', 'Apple', 'reportaproblem'],
+  },
+  {
+    id: 'asd-manage-4',
+    app: 'AppSupportDesk',
+    category: 'Managing Tickets',
+    question: 'How do I handle a feature request ticket?',
+    answer: 'Feature requests are valuable. When you receive one: (1) Thank the customer genuinely. (2) Tell them the suggestion has been passed to the development team. (3) Do NOT promise it will be built or give a timeline. (4) If the feature already exists, walk them through how to use it. (5) Add an internal note with the feature description for developer review. (6) Set the ticket to Closed after your reply. Feature request tickets do not stay open — they are captured and closed.',
+    keywords: ['feature request', 'new feature', 'suggestion', 'idea', 'request', 'handle'],
+  },
+  {
+    id: 'asd-manage-5',
+    app: 'AppSupportDesk',
+    category: 'Managing Tickets',
+    question: 'What should I do if I cannot reproduce or understand the customer issue?',
+    answer: "If you cannot reproduce the issue or the description is unclear, set the ticket status to Pending and reply asking for more information. Helpful things to ask for: the specific steps they took before the problem occurred, their iPhone model and iOS version (Settings > General > About), whether the issue happens every time or randomly, and if possible a screenshot of the error. Be friendly and explain why you are asking — customers respond better when they understand it will help solve their problem faster.",
+    keywords: ['cannot reproduce', 'unclear', 'more information', 'ask customer', 'reproduce'],
+  },
+
+  // SECTION 5: ARCHIVING & DELETION
+  {
+    id: 'asd-archive-1',
+    app: 'AppSupportDesk',
+    category: 'Archiving & Deletion',
+    question: 'What is the difference between archiving and deleting a ticket?',
+    answer: 'Archiving hides a ticket from the main ticket list but keeps it permanently in the system. Archived tickets can be viewed, searched, restored, and referenced at any time — nothing is lost. Deleting a ticket permanently removes it from the database with no recovery possible. As a general rule: archive Closed tickets to keep the main list clean, and only permanently delete tickets that are clearly spam, test submissions, or contain no useful information. When in doubt, archive rather than delete.',
+    keywords: ['archive', 'delete', 'difference', 'hide', 'permanent', 'remove', 'restore'],
+  },
+  {
+    id: 'asd-archive-2',
+    app: 'AppSupportDesk',
+    category: 'Archiving & Deletion',
+    question: 'How do I archive a ticket?',
+    answer: 'From the main Tickets list, hover over any ticket row and an archive button will appear on the right side. Click it to archive the ticket. The ticket immediately disappears from the main list and moves to the Archived section in the sidebar. Only archive tickets that are Closed or fully Resolved with no further action needed.',
+    keywords: ['how to archive', 'archive button', 'hide ticket', 'move to archive'],
+  },
+  {
+    id: 'asd-archive-3',
+    app: 'AppSupportDesk',
+    category: 'Archiving & Deletion',
+    question: 'How do I restore an archived ticket back to the main ticket list?',
+    answer: 'Go to the Archived section in the sidebar. Find the ticket you want to restore. On the right side of the ticket row, click the Restore button (circular arrow icon). The ticket will immediately move back to the main Tickets list with its original status, priority, and all notes intact. This is useful if a customer re-contacts you about a previously closed issue.',
+    keywords: ['restore', 'unarchive', 'bring back', 'move back', 'restore ticket'],
+  },
+  {
+    id: 'asd-archive-4',
+    app: 'AppSupportDesk',
+    category: 'Archiving & Deletion',
+    question: 'How do I permanently delete a ticket and when should I do it?',
+    answer: 'From the Archived Tickets page, click the Delete button (trash can icon) on any archived ticket. A confirmation dialog will appear — you must confirm before the deletion proceeds. Once confirmed, the ticket and all its notes are permanently removed and cannot be recovered. Only permanently delete tickets that are: clearly spam or test submissions, accidentally created duplicates, or contain no useful historical information. For all real customer interactions, use archive instead of delete so you have a record.',
+    keywords: ['permanently delete', 'delete ticket', 'trash', 'remove forever', 'when to delete'],
+  },
+
+  // SECTION 6: CONTACTS & CUSTOMER HISTORY
+  {
+    id: 'asd-contacts-1',
+    app: 'AppSupportDesk',
+    category: 'Contacts & Customer History',
+    question: 'What is the Contacts section and how is it used?',
+    answer: "The Contacts section is an automatically maintained directory of every customer who has ever submitted a support ticket. You do not need to manually add contacts — the system creates a contact record the first time a customer submits a ticket. Each contact record shows: their name, email address, which apps they have contacted support about, their full ticket history, and the total number of tickets they have submitted. Use Contacts to look up a customer's history before responding to a ticket.",
+    keywords: ['contacts', 'customer', 'directory', 'history', 'customer record'],
+  },
+  {
+    id: 'asd-contacts-2',
+    app: 'AppSupportDesk',
+    category: 'Contacts & Customer History',
+    question: 'Why should I check a customer contact history before responding?',
+    answer: "Checking contact history before replying prevents you from: giving advice you already gave them on a previous ticket, missing context about an ongoing issue, overlooking a pattern (a customer who has had the same crash three times likely has a device or settings issue needing a deeper solution), and appearing uninformed when the customer references a previous conversation. A 30-second history check can make the difference between a one-reply resolution and a frustrating back-and-forth.",
+    keywords: ['why check', 'history', 'previous tickets', 'context', 'repeat customer'],
+  },
+  {
+    id: 'asd-contacts-3',
+    app: 'AppSupportDesk',
+    category: 'Contacts & Customer History',
+    question: 'Can customers see their own ticket history through the portal?',
+    answer: 'Currently the customer portal allows customers to submit new tickets and browse the FAQ — they do not have a personal account login to view their previous tickets. If a customer asks about the status of a previous ticket, they will need to contact support again and provide their ticket number or the email address they used. You can then look up their history in Contacts and update them directly.',
+    keywords: ['customer portal', 'ticket history', 'customer login', 'view my tickets', 'status check'],
+  },
+
+  // SECTION 7: DASHBOARD & STATISTICS
+  {
+    id: 'asd-dash-1',
+    app: 'AppSupportDesk',
+    category: 'Dashboard & Statistics',
+    question: 'What does the Dashboard show?',
+    answer: 'The Dashboard is your home screen and gives you an instant overview of the support operation. It displays: total ticket counts broken down by status (Open, In Progress, Pending, Resolved, Closed), a ticket count by app (how many tickets each app has received), recent ticket activity, and any urgent tickets that need immediate attention. Check the Dashboard every time you log in to understand the current state before diving into the ticket list.',
+    keywords: ['dashboard', 'home screen', 'overview', 'stats', 'counts'],
+  },
+  {
+    id: 'asd-dash-2',
+    app: 'AppSupportDesk',
+    category: 'Dashboard & Statistics',
+    question: 'Why might the ticket counts on the dashboard seem higher than expected?',
+    answer: 'If counts seem unexpectedly high, the most likely reasons are: (1) A recent app update caused a new wave of bug reports. (2) Archived tickets are not included in dashboard counts — if you have not been archiving closed tickets regularly, the active counts may be inflated with stale tickets. Make a habit of archiving Closed tickets weekly to keep counts accurate. (3) Duplicate tickets from the same customer submitting multiple times.',
+    keywords: ['high count', 'inflated', 'counts wrong', 'too many', 'dashboard count'],
+  },
+
+  // SECTION 8: AI CHATBOT SYSTEM
+  {
+    id: 'asd-chatbot-1',
+    app: 'AppSupportDesk',
+    category: 'AI Chatbot System',
+    question: 'How does the AI chatbot work?',
+    answer: "The AI chatbot on the public customer portal is powered by OpenAI's GPT model combined with the AppSupport Desk FAQ knowledge base. When a customer types a question, the chatbot searches the FAQ database for matching answers using keyword matching and semantic understanding. It then generates a natural, conversational response based on that content. The chatbot is available 24/7 and handles the majority of common questions automatically — reducing the number of tickets agents need to manually respond to.",
+    keywords: ['chatbot', 'AI', 'how does it work', 'automated', 'bot', 'artificial intelligence'],
+  },
+  {
+    id: 'asd-chatbot-2',
+    app: 'AppSupportDesk',
+    category: 'AI Chatbot System',
+    question: 'What happens when the chatbot cannot answer a customer question?',
+    answer: 'When the chatbot cannot find a relevant answer in the FAQ database, it tells the customer it does not have enough information and encourages them to submit a support ticket for personalized help. The customer is then directed to the ticket submission form. This handoff from bot to human agent is intentional — the chatbot handles easy questions so agents can focus on complex or unique issues.',
+    keywords: ['chatbot fail', 'cannot answer', 'escalate', 'handoff', 'fallback', 'no answer'],
+  },
+  {
+    id: 'asd-chatbot-3',
+    app: 'AppSupportDesk',
+    category: 'AI Chatbot System',
+    question: 'How do I improve the chatbot ability to answer questions?',
+    answer: "The chatbot's quality is directly tied to the FAQ knowledge base. To improve it: (1) When you receive a ticket about a question the chatbot could not answer, add that question and answer to the FAQ after resolving the ticket. (2) Review existing FAQ answers for accuracy — outdated answers make the chatbot give wrong information. (3) Add strong keywords to each FAQ entry. (4) Write FAQ answers in plain, conversational language — the chatbot reproduces the tone of the answer, so robotic text produces robotic responses.",
+    keywords: ['improve chatbot', 'better answers', 'train chatbot', 'update FAQ', 'chatbot quality'],
+  },
+  {
+    id: 'asd-chatbot-4',
+    app: 'AppSupportDesk',
+    category: 'AI Chatbot System',
+    question: 'What is the API key used for in the chatbot and why is it never stored in code?',
+    answer: "The chatbot uses an OpenAI API key to send customer messages to the GPT model and receive AI-generated responses. This key is a paid credential — anyone who has it can charge API usage to the DreamTeamApps account. For this reason the API key is NEVER stored in the code files or committed to GitHub. It is stored exclusively in Vercel environment variables, which are encrypted and accessible only to the deployed application. If you ever see an API key in a code file, report it to the administrator immediately.",
+    keywords: ['API key', 'OpenAI', 'security', 'environment variable', 'Vercel', 'never in code'],
+  },
+
+  // SECTION 9: FAQ KNOWLEDGE BASE MANAGEMENT
+  {
+    id: 'asd-faq-1',
+    app: 'AppSupportDesk',
+    category: 'FAQ Knowledge Base',
+    question: 'What makes a good FAQ answer for the knowledge base?',
+    answer: 'A high-quality FAQ answer: (1) Fully answers the question — do not end with contact support if you can provide the answer yourself. (2) Includes specific steps where applicable — numbered instructions are more helpful than vague descriptions. (3) Uses natural, friendly language. (4) Anticipates follow-up questions. (5) Is accurate and up to date — stale answers actively mislead customers. (6) Has keywords that include every word a customer might use when searching, including synonyms.',
+    keywords: ['good FAQ', 'quality', 'writing tips', 'best answer', 'FAQ writing'],
+  },
+  {
+    id: 'asd-faq-2',
+    app: 'AppSupportDesk',
+    category: 'FAQ Knowledge Base',
+    question: 'How often should the FAQ knowledge base be reviewed and updated?',
+    answer: 'The FAQ knowledge base should be reviewed at least once per month. Specifically: (1) After every app update — new features need FAQ coverage and old answers about changed features need updating. (2) After any surge in a particular ticket type — if 10 customers asked about the same thing this week, that question belongs in the FAQ. (3) When a customer reports that the chatbot gave wrong or outdated information — fix that entry immediately. Treat the FAQ as a living document, not a one-time project.',
+    keywords: ['FAQ review', 'update frequency', 'maintain FAQ', 'keep current', 'review schedule'],
+  },
+
+  // SECTION 10: RESPONSE GUIDELINES & TONE
+  {
+    id: 'asd-tone-1',
+    app: 'AppSupportDesk',
+    category: 'Response Guidelines & Tone',
+    question: 'What tone should I use when responding to customers?',
+    answer: 'DreamTeamApps is a small independent developer and customers respond very well to a personal, human tone. Guidelines: (1) Be warm and friendly — start with a greeting and use the customer first name. (2) Be empathetic — if something is broken or they are frustrated, acknowledge it before jumping to solutions. (3) Be clear and specific — avoid technical jargon unless the customer is clearly technical. (4) Be honest — if you do not know the answer, say so and tell them you will find out. (5) Be concise — short paragraphs are easier to read. (6) Never be defensive or dismissive.',
+    keywords: ['tone', 'response style', 'professional', 'friendly', 'how to respond', 'communication'],
+  },
+  {
+    id: 'asd-tone-2',
+    app: 'AppSupportDesk',
+    category: 'Response Guidelines & Tone',
+    question: 'How do I handle an angry or upset customer?',
+    answer: "Angry customers require extra care. Approach: (1) Start by acknowledging their frustration specifically — I completely understand how frustrating this is, and I am sorry for the trouble. Do not skip this step. (2) Do not argue or correct them immediately even if they are wrong — address their feelings first, then the facts. (3) Focus on what you CAN do, not what you cannot. (4) If they are demanding a refund, direct them to Apple's refund process at reportaproblem.apple.com. (5) If a customer is abusive, you may close the ticket and document the reason in an internal note.",
+    keywords: ['angry customer', 'upset', 'frustrated', 'rude', 'handle', 'conflict', 'difficult'],
+  },
+  {
+    id: 'asd-tone-3',
+    app: 'AppSupportDesk',
+    category: 'Response Guidelines & Tone',
+    question: 'What is the expected response time for each priority level?',
+    answer: 'Response time targets by priority: Urgent — within 1-2 hours. High — within 4 hours. Medium — within 24 hours (by the next business day). Low — within 48 hours. These are targets, not guarantees, but consistency in response time is one of the biggest factors in customer satisfaction. If you know you will miss a target, send a brief acknowledgment reply so the customer knows their ticket was received and is being looked at.',
+    keywords: ['response time', 'how long', 'reply time', 'SLA', 'target', 'expected', 'timing'],
+  },
+  {
+    id: 'asd-tone-4',
+    app: 'AppSupportDesk',
+    category: 'Response Guidelines & Tone',
+    question: 'What should I never say or promise in a customer response?',
+    answer: 'Never say or promise: (1) We will fix this in the next update — only the developer can commit to a fix timeline. (2) We will give you a refund — refunds go through Apple, not DreamTeamApps. (3) This has never happened before — it may well have. (4) That is not a bug, that is a feature — even if true, it sounds dismissive. (5) I do not know without a follow-up — always add but I will find out and get back to you. (6) Any response that implies the customer is at fault for the issue.',
+    keywords: ['never say', 'avoid', 'do not promise', 'what not to say', 'mistakes'],
+  },
+  {
+    id: 'asd-tone-5',
+    app: 'AppSupportDesk',
+    category: 'Response Guidelines & Tone',
+    question: 'How do I close out a resolved ticket professionally?',
+    answer: "When closing a resolved ticket, send a closing message that: (1) Confirms what was done or what the solution was. (2) Invites the customer to contact support again if the issue returns. (3) Asks them to consider leaving a review on the App Store if they are satisfied — positive reviews help the app greatly. Example: I am glad we got that sorted out! If anything else comes up, do not hesitate to reach back out. If you are enjoying the app, we would really appreciate a rating on the App Store. Then set the ticket to Resolved.",
+    keywords: ['close ticket', 'closing message', 'resolved reply', 'final message', 'App Store review'],
+  },
+
+  // SECTION 11: COMMON SUPPORT SCENARIOS
+  {
+    id: 'asd-scenario-1',
+    app: 'AppSupportDesk',
+    category: 'Common Support Scenarios',
+    question: 'A customer subscribed but still sees the free version — what do I do?',
+    answer: "This is a very common issue. Walk the customer through these steps: (1) Force-quit the app and reopen it. (2) Open iPhone Settings > [Their Name] > Subscriptions — confirm the subscription shows as Active. (3) Inside the app, go to Settings or Account > Restore Purchases. (4) Ensure the device is connected to the internet. (5) Sign out of their Apple ID in Settings and sign back in, then reopen the app. If none of these work, ask them to delete and reinstall the app — their subscription is tied to their Apple ID, not the app install, so reinstalling does not cancel it.",
+    keywords: ['subscribed', 'still free', 'premium not working', 'subscription not showing', 'restore purchases'],
+  },
+  {
+    id: 'asd-scenario-2',
+    app: 'AppSupportDesk',
+    category: 'Common Support Scenarios',
+    question: 'A customer wants to cancel their subscription — what steps do I give them?',
+    answer: 'DreamTeamApps does not process subscription cancellations directly — all subscriptions are managed through Apple. Give the customer these steps: (1) Open iPhone Settings. (2) Tap their name at the top. (3) Tap Subscriptions. (4) Find and tap the app subscription. (5) Tap Cancel Subscription and confirm. The subscription will remain active until the end of the current billing period — they will NOT lose access immediately. Also let them know that canceling does not delete their data — if they resubscribe later, everything is still there.',
+    keywords: ['cancel subscription', 'how to cancel', 'stop subscription', 'unsubscribe', 'turn off auto-renew'],
+  },
+  {
+    id: 'asd-scenario-3',
+    app: 'AppSupportDesk',
+    category: 'Common Support Scenarios',
+    question: 'A customer reports the app crashes immediately on opening — how do I respond?',
+    answer: 'For an app that crashes on launch, gather this information first: (1) iPhone model and iOS version (Settings > General > About). (2) App version — visible in the App Store on the app page next to Version. (3) When did it start — after an app update, iOS update, or randomly? (4) Have they tried deleting and reinstalling? Once you have this: if it started after a specific update, escalate to the developer with those details. If it is an isolated case, have them delete the app, restart the iPhone fully, and reinstall from the App Store.',
+    keywords: ['crash', 'app crash', 'crashes on open', 'launch crash', 'not opening'],
+  },
+  {
+    id: 'asd-scenario-4',
+    app: 'AppSupportDesk',
+    category: 'Common Support Scenarios',
+    question: 'A customer Siri commands are not working — what are the troubleshooting steps?',
+    answer: "For Siri not working with DreamTeamApps: (1) Check that Siri is enabled: Settings > Siri & Search. (2) Check that the specific app has Siri permission: Settings > Siri & Search > scroll to the app name — ensure Use with Siri is toggled on. (3) Make sure the app has been opened at least once after the latest update. (4) Try asking Siri using exact phrases from the app's help guide. (5) If on iOS 17 or later, try deleting the app and reinstalling to re-register App Intents. (6) Restart the iPhone fully.",
+    keywords: ['Siri not working', 'voice command', 'Siri broken', 'Hey Siri', 'Siri permission'],
+  },
+
+  // SECTION 12: ESCALATION GUIDE
+  {
+    id: 'asd-escalate-1',
+    app: 'AppSupportDesk',
+    category: 'Escalation Guide',
+    question: 'When should I escalate a ticket to the administrator?',
+    answer: 'Escalate a ticket to the administrator when: (1) The customer is reporting a crash or bug that appears to affect multiple customers. (2) A billing dispute cannot be resolved through normal Apple refund channels. (3) The customer is threatening legal action or filing a chargeback dispute. (4) An app feature is fundamentally broken and troubleshooting steps cannot fix it. (5) You need confirmation of a technical detail before answering. (6) A customer is requesting a feature change or business policy decision. When escalating, add an internal note with a complete summary of what you tried.',
+    keywords: ['escalate', 'when to escalate', 'administrator', 'escalation', 'involve developer'],
+  },
+  {
+    id: 'asd-escalate-2',
+    app: 'AppSupportDesk',
+    category: 'Escalation Guide',
+    question: 'What is considered a critical issue that requires immediate escalation?',
+    answer: 'Critical issues requiring immediate escalation are: (1) The app is completely unavailable or the App Store listing was removed. (2) Multiple customers are reporting the same new crash simultaneously — this indicates a server-side or API issue. (3) A security vulnerability is reported — for example a customer can see another user data. (4) The AI chatbot or public portal is down. (5) Payment processor errors that affect all subscribers. For any of these, contact the administrator immediately by the fastest available means — do not wait for them to check the ticket system.',
+    keywords: ['critical', 'emergency', 'immediate', 'urgent escalation', 'outage', 'major bug'],
+  },
+  {
+    id: 'asd-escalate-3',
+    app: 'AppSupportDesk',
+    category: 'Escalation Guide',
+    question: 'What should I do if I am new and unsure whether to escalate a ticket?',
+    answer: 'When in doubt, escalate — it is always better to involve the administrator on a difficult ticket than to give a customer wrong information or an incomplete solution. As a new agent, a good rule of thumb is: if your troubleshooting steps did not solve the issue after two exchanges with the customer, escalate. If the answer involves a promise about billing, refunds, or app functionality that you are not certain about, escalate. There is no penalty for escalating too often during your first weeks — it is the right instinct.',
+    keywords: ['new agent', 'unsure', 'escalate or not', 'when in doubt', 'guidance', 'first weeks'],
+  },
 ]
 
 export function getFAQsByApp(app: FAQ['app']): FAQ[] {
@@ -1075,4 +1471,4 @@ export function searchFAQs(query: string, app?: FAQ['app']): FAQ[] {
   )
 }
 
-export const APP_NAMES: FAQ['app'][] = ['FishingPalPro', 'PlayListAI', 'SleuthPro', 'General']
+export const APP_NAMES: FAQ['app'][] = ['FishingPalPro', 'PlayListAI', 'SleuthPro', 'General', 'AppSupportDesk']
