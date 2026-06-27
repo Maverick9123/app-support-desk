@@ -1,10 +1,15 @@
 import { NextResponse } from 'next/server'
-import { getTickets, createTicket } from '@/lib/store'
+import { getTickets, getArchivedTickets, createTicket } from '@/lib/store'
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const app = searchParams.get('app') || undefined
   const status = searchParams.get('status') || undefined
+  const archived = searchParams.get('archived') === 'true'
+
+  if (archived) {
+    return NextResponse.json(await getArchivedTickets(app))
+  }
   return NextResponse.json(await getTickets(app, status))
 }
 
