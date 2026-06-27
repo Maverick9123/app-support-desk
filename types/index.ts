@@ -27,24 +27,26 @@ export interface Ticket {
   notes: TicketNote[]
   createdAt: string
   updatedAt: string
-}
-
-export interface Contact {
-  id: string
-  name: string
-  email: string
-  app: AppType
-  ticketCount: number
-  lastTicketDate: string
-  createdAt: string
+  archived: boolean
+  archivedAt: string | null
 }
 
 export interface Agent {
   id: string
   name: string
   email: string
-  role: 'admin' | 'agent'
+  role: string
   initials: string
+}
+
+export interface Contact {
+  id: string
+  name: string
+  email: string
+  app: string | null
+  ticketCount: number
+  lastTicketDate: string | null
+  createdAt: string
 }
 
 export interface Stats {
@@ -53,5 +55,6 @@ export interface Stats {
   inProgress: number
   pending: number
   resolved: number
+  archived: number
   byApp: Record<string, number>
 }
