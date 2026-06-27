@@ -34,6 +34,8 @@ function rowToTicket(row: any): Ticket {
     assignedTo: row.assigned_to,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
+    archived: row.archived ?? false,
+    archivedAt: row.archived_at ?? null,
     notes: Array.isArray(row.notes)
       ? row.notes.map((n: any) => ({
           id: n.id,
@@ -65,28 +67,49 @@ export async function getTickets(app?: string, status?: string): Promise<Ticket[
     rows = await sql`
       SELECT t.*, COALESCE(json_agg(tn ORDER BY tn.created_at) FILTER (WHERE tn.id IS NOT NULL), '[]') as notes
       FROM tickets t LEFT JOIN ticket_notes tn ON t.id = tn.ticket_id
-      WHERE t.app = ${app} AND t.status = ${status}
+      WHERE t.app = ${app} AND t.status = ${status} AND t.archived = false
       GROUP BY t.id ORDER BY t.created_at DESC
     `
   } else if (app) {
     rows = await sql`
       SELECT t.*, COALESCE(json_agg(tn ORDER BY tn.created_at) FILTER (WHERE tn.id IS NOT NULL), '[]') as notes
       FROM tickets t LEFT JOIN ticket_notes tn ON t.id = tn.ticket_id
-      WHERE t.app = ${app}
+      WHERE t.app = ${app} AND t.archived = false
       GROUP BY t.id ORDER BY t.created_at DESC
     `
   } else if (status) {
     rows = await sql`
       SELECT t.*, COALESCE(json_agg(tn ORDER BY tn.created_at) FILTER (WHERE tn.id IS NOT NULL), '[]') as notes
       FROM tickets t LEFT JOIN ticket_notes tn ON t.id = tn.ticket_id
-      WHERE t.status = ${status}
+      WHERE t.status = ${status} AND t.archived = false
       GROUP BY t.id ORDER BY t.created_at DESC
     `
   } else {
     rows = await sql`
       SELECT t.*, COALESCE(json_agg(tn ORDER BY tn.created_at) FILTER (WHERE tn.id IS NOT NULL), '[]') as notes
       FROM tickets t LEFT JOIN ticket_notes tn ON t.id = tn.ticket_id
+      WHERE t.archived = false
       GROUP BY t.id ORDER BY t.created_at DESC
+    `
+  }
+  return rows.map(rowToTicket)
+}
+
+export async function getArchivedTickets(app?: string): Promise<Ticket[]> {
+  let rows: any[]
+  if (app) {
+    rows = await sql`
+      SELECT t.*, COALESCE(json_agg(tn ORDER BY tn.created_at) FILTER (WHERE tn.id IS NOT NULL), '[]') as notes
+      FROM tickets t LEFT JOIN ticket_notes tn ON t.id = tn.ticket_id
+      WHERE t.archived = true AND t.app = ${app}
+      GROUP BY t.id ORDER BY t.archived_at DESC
+    `
+  } else {
+    rows = await sql`
+      SELECT t.*, COALESCE(json_agg(tn ORDER BY tn.created_at) FILTER (WHERE tn.id IS NOT NULL), '[]') as notes
+      FROM tickets t LEFT JOIN ticket_notes tn ON t.id = tn.ticket_id
+      WHERE t.archived = true
+      GROUP BY t.id ORDER BY t.archived_at DESC
     `
   }
   return rows.map(rowToTicket)
@@ -116,8 +139,8 @@ export async function createTicket(data: {
 }): Promise<Ticket> {
   const id = `ticket-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
   const rows = await sql`
-    INSERT INTO tickets (id, subject, description, status, priority, app, category, customer_name, customer_email, assigned_to)
-    VALUES (${id}, ${data.subject}, ${data.description}, ${data.status}, ${data.priority}, ${data.app ?? null}, ${data.category}, ${data.customerName}, ${data.customerEmail}, ${data.assignedTo ?? null})
+    INSERT INTO tickets (id, subject, description, status, priority, app, category, customer_name, customer_email, assigned_to, archived)
+    VALUES (${id}, ${data.subject}, ${data.description}, ${data.status}, ${data.priority}, ${data.app ?? null}, ${data.category}, ${data.customerName}, ${data.customerEmail}, ${data.assignedTo ?? null}, false)
     RETURNING *
   `
   if (data.customerEmail) {
@@ -162,6 +185,34 @@ export async function updateTicket(id: string, data: UpdateTicketData): Promise<
   return getTicketById(id)
 }
 
+export async function archiveTicket(id: string): Promise<Ticket | null> {
+  const existing = await getTicketById(id)
+  if (!existing) return null
+  await sql`
+    UPDATE tickets SET archived = true, archived_at = NOW(), updated_at = NOW()
+    WHERE id = ${id}
+  `
+  return getTicketById(id)
+}
+
+export async function unarchiveTicket(id: string): Promise<Ticket | null> {
+  const existing = await getTicketById(id)
+  if (!existing) return null
+  await sql`
+    UPDATE tickets SET archived = false, archived_at = NULL, updated_at = NOW()
+    WHERE id = ${id}
+  `
+  return getTicketById(id)
+}
+
+export async function deleteTicket(id: string): Promise<boolean> {
+  const existing = await getTicketById(id)
+  if (!existing) return false
+  await sql`DELETE FROM ticket_notes WHERE ticket_id = ${id}`
+  await sql`DELETE FROM tickets WHERE id = ${id}`
+  return true
+}
+
 export async function addNote(
   ticketId: string,
   data: { content: string; author: string; isInternal: boolean }
@@ -195,21 +246,31 @@ export async function getStats(): Promise<{
   open: number
   inProgress: number
   pending: number
- resolved: number
+  resolved: number
+  archived: number
   byApp: Record<string, number>
 }> {
-  const [totals, byApp] = await Promise.all([
-    sql`SELECT status, COUNT(*) as count FROM tickets GROUP BY status`,
-    sql`SELECT app, COUNT(*) as count FROM tickets WHERE app IS NOT NULL GROUP BY app`,
+  const [totals, byApp, archivedCount] = await Promise.all([
+    sql`SELECT status, COUNT(*) as count FROM tickets WHERE archived = false GROUP BY status`,
+    sql`SELECT app, COUNT(*) as count FROM tickets WHERE app IS NOT NULL AND archived = false GROUP BY app`,
+    sql`SELECT COUNT(*) as count FROM tickets WHERE archived = true`,
   ])
-  const stats = { total: 0, open: 0, inProgress: 0, pending: 0, resolved: 0, byApp: {} as Record<string, number> }
+  const stats = {
+    total: 0,
+    open: 0,
+    inProgress: 0,
+    pending: 0,
+    resolved: 0,
+    archived: parseInt(archivedCount[0]?.count ?? '0'),
+    byApp: {} as Record<string, number>,
+  }
   for (const row of totals) {
     const count = parseInt(row.count)
     stats.total += count
     if (row.status === 'open') stats.open = count
     else if (row.status === 'in_progress') stats.inProgress = count
     else if (row.status === 'pending') stats.pending = count
- else if (row.status === 'resolved') stats.resolved = count
+    else if (row.status === 'resolved') stats.resolved = count
   }
   for (const row of byApp) {
     stats.byApp[row.app] = parseInt(row.count)
