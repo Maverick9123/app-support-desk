@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Plus, Search, Fish, Music, AlertCircle, Archive } from 'lucide-react'
+import { Plus, Search, Fish, Music, ShieldCheck, AlertCircle, Archive } from 'lucide-react'
 import { Ticket } from '@/types'
 import { formatDistanceToNow } from 'date-fns'
 
@@ -102,6 +102,7 @@ function TicketsPageContent() {
             <SelectItem value="FishingPalPro">🎣 FishingPalPro</SelectItem>
             <SelectItem value="PlayListAI">🎵 PlayListAI</SelectItem>
             <SelectItem value="SleuthPro">🔍 SleuthPro</SelectItem>
+            <SelectItem value="SkinGuardAI">🛡️ SkinGuardAI</SelectItem>
           </SelectContent>
         </Select>
         <Select value={statusFilter} onValueChange={setStatusFilter}>
@@ -159,13 +160,16 @@ function TicketsPageContent() {
                     <span className={`inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium ${
                       ticket.app === 'FishingPalPro' ? 'bg-[#00B4D8]/15 text-[#00B4D8]' :
                       ticket.app === 'SleuthPro' ? 'bg-green-100 text-green-600' :
+                      ticket.app === 'SkinGuardAI' ? 'bg-cyan-100 text-cyan-600' :
                       'bg-purple-100 text-purple-600'
                     }`}>
                       {ticket.app === 'FishingPalPro' ? <Fish className="h-3 w-3" /> :
                        ticket.app === 'SleuthPro' ? <Search className="h-3 w-3" /> :
+                       ticket.app === 'SkinGuardAI' ? <ShieldCheck className="h-3 w-3" /> :
                        <Music className="h-3 w-3" />}
                       {ticket.app === 'FishingPalPro' ? 'Fishing' :
                        ticket.app === 'SleuthPro' ? 'Sleuth' :
+                       ticket.app === 'SkinGuardAI' ? 'Skin' :
                        'Playlist'}
                     </span>
                   </div>

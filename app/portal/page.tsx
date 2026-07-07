@@ -93,7 +93,7 @@ export default function PortalPage() {
           <Search className="h-6 w-6 text-[#00B4D8]" />
         </div>
         <h1 className="text-3xl font-bold text-white mb-2">Support Center</h1>
-        <p className="text-slate-400 mb-4">FishingPalPro · PlayListAI · SleuthPro — How can we help you?</p>
+        <p className="text-slate-400 mb-4">FishingPalPro · PlayListAI · SleuthPro · SkinGuardAI — How can we help you?</p>
 
         {/* FAQ Quick-Access */}
         <a
@@ -142,6 +142,7 @@ export default function PortalPage() {
                       <SelectItem value="FishingPalPro">🎣 FishingPalPro</SelectItem>
                       <SelectItem value="PlayListAI">🎵 PlayListAI</SelectItem>
                       <SelectItem value="SleuthPro">🔍 SleuthPro</SelectItem>
+                      <SelectItem value="SkinGuardAI">🛡️ SkinGuardAI</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { Home, FileText, Plus, Users, Settings, Globe, Fish, Music, Search, LogOut, ChevronRight, Archive, BookOpen } from 'lucide-react'
+import { Home, FileText, Plus, Users, Settings, Globe, Fish, Music, Search, ShieldCheck, LogOut, ChevronRight, Archive, BookOpen } from 'lucide-react'
 import { Stats } from '@/types'
 
 interface AgentInfo {
@@ -39,6 +39,7 @@ export function Sidebar() {
   const fpCount = byApp['FishingPalPro'] || 0
   const plCount = byApp['PlayListAI'] || 0
   const spCount = byApp['SleuthPro'] || 0
+  const sgaCount = byApp['SkinGuardAI'] || 0
 
   const navItems = [
     { href: '/dashboard',        label: 'Dashboard',       icon: Home },
@@ -87,6 +88,13 @@ export function Sidebar() {
               <span className="text-xs text-slate-400 group-hover:text-slate-200">SleuthPro</span>
             </div>
             {spCount > 0 && <span className="text-xs bg-teal-500/80 text-white px-1.5 py-0.5 rounded-full font-medium">{spCount}</span>}
+          </Link>
+          <Link href="/tickets?app=SkinGuardAI" className="flex items-center justify-between px-2 py-1.5 rounded-md hover:bg-white/5 transition-colors group">
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="h-3.5 w-3.5 text-[#00D4C8]" />
+              <span className="text-xs text-slate-400 group-hover:text-slate-200">SkinGuardAI</span>
+            </div>
+            {sgaCount > 0 && <span className="text-xs bg-cyan-500/80 text-white px-1.5 py-0.5 rounded-full font-medium">{sgaCount}</span>}
           </Link>
         </div>
       )}

@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { ALL_FAQS, getCategories, type FAQ } from '@/lib/faqs-data'
-import { Fish, Music, Search, ChevronDown, ChevronUp, ExternalLink, ArrowLeft, LifeBuoy } from 'lucide-react'
+import { Fish, Music, Search, ShieldCheck, ChevronDown, ChevronUp, ExternalLink, ArrowLeft, LifeBuoy } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 
 const APP_CONFIG = {
@@ -24,6 +24,12 @@ const APP_CONFIG = {
     color: '#0D9488',
     icon: Search,
   },
+  SkinGuardAI: {
+    label: 'SkinGuardAI',
+    emoji: '🛡️',
+    color: '#00D4C8',
+    icon: ShieldCheck,
+  },
   General: {
     label: 'General',
     emoji: '💬',
@@ -38,7 +44,7 @@ const APP_CONFIG = {
   },
 } as const
 
-type AppName = 'all' | 'FishingPalPro' | 'PlayListAI' | 'SleuthPro' | 'General' | 'AppSupportDesk'
+type AppName = 'all' | 'FishingPalPro' | 'PlayListAI' | 'SleuthPro' | 'SkinGuardAI' | 'General' | 'AppSupportDesk'
 
 function FAQItem({ faq }: { faq: FAQ }) {
   const [open, setOpen] = useState(false)
@@ -158,6 +164,12 @@ export default function FAQPage() {
       emoji: '🔍',
       count: ALL_FAQS.filter(f => f.app === 'SleuthPro').length,
     },
+    {
+      value: 'SkinGuardAI',
+      label: 'SkinGuardAI',
+      emoji: '🛡️',
+      count: ALL_FAQS.filter(f => f.app === 'SkinGuardAI').length,
+    },
   ]
 
   return (
@@ -183,7 +195,7 @@ export default function FAQPage() {
         </div>
         <h1 className="text-3xl font-bold text-white mb-2">Help & FAQ</h1>
         <p className="text-slate-400 mb-6">
-          FishingPalPro · PlayListAI · SleuthPro — Find answers instantly
+          FishingPalPro · PlayListAI · SleuthPro · SkinGuardAI — Find answers instantly
         </p>
 
         {/* Search */}

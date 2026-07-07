@@ -12,7 +12,7 @@ export function ChatWidget() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
-      content: "Hi! I'm the DreamTeamApps support assistant 👋 I can help with FishingPalPro, SleuthPro, and PlayListAI. What can I help you with today?",
+      content: "Hi! I'm the DreamTeamApps support assistant 👋 I can help with FishingPalPro, SleuthPro, PlayListAI, and SkinGuardAI. What can I help you with today?",
     },
   ])
   const [input, setInput] = useState('')

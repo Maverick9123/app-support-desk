@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
-import { AlertCircle, Clock, CheckCircle, Loader2, TrendingUp, Plus, Fish, Music, Search, ArrowRight } from 'lucide-react'
+import { AlertCircle, Clock, CheckCircle, Loader2, TrendingUp, Plus, Fish, Music, Search, ShieldCheck, ArrowRight } from 'lucide-react'
 import { Stats, Ticket } from '@/types'
 import { formatDistanceToNow } from 'date-fns'
 
@@ -28,6 +28,7 @@ function appBadge(app: string) {
   if (app === 'FishingPalPro') return <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-[#00B4D8]/15 text-[#00B4D8]">🎣 {app}</span>
   if (app === 'PlayListAI') return <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-purple-100 text-purple-600">🎵 {app}</span>
   if (app === 'SleuthPro') return <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-teal-100 text-teal-600">🔍 {app}</span>
+  if (app === 'SkinGuardAI') return <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-cyan-100 text-cyan-600">🛡️ {app}</span>
   return <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-slate-100 text-slate-600">{app}</span>
 }
 
@@ -59,6 +60,7 @@ export default function DashboardPage() {
     { app: 'FishingPalPro', icon: Fish, color: '#00B4D8', emoji: '🎣' },
     { app: 'PlayListAI', icon: Music, color: '#7C3AED', emoji: '🎵' },
     { app: 'SleuthPro', icon: Search, color: '#0D9488', emoji: '🔍' },
+    { app: 'SkinGuardAI', icon: ShieldCheck, color: '#00D4C8', emoji: '🛡️' },
   ]
 
   return (

@@ -1,12 +1,12 @@
 /**
- * Static FAQ database for all three DreamTeamApps iOS applications.
+ * Static FAQ database for all DreamTeamApps iOS applications.
  * Used by: the public FAQ page, the AI chat system prompt, and the admin FAQ view.
  * To add or update FAQs, edit this file and deploy.
  */
 
 export interface FAQ {
   id: string
-  app: 'FishingPalPro' | 'PlayListAI' | 'SleuthPro' | 'General' | 'AppSupportDesk'
+  app: 'FishingPalPro' | 'PlayListAI' | 'SleuthPro' | 'SkinGuardAI' | 'General' | 'AppSupportDesk'
   category: string
   question: string
   answer: string
@@ -1446,6 +1446,137 @@ export const ALL_FAQS: FAQ[] = [
     answer: 'When in doubt, escalate — it is always better to involve the administrator on a difficult ticket than to give a customer wrong information or an incomplete solution. As a new agent, a good rule of thumb is: if your troubleshooting steps did not solve the issue after two exchanges with the customer, escalate. If the answer involves a promise about billing, refunds, or app functionality that you are not certain about, escalate. There is no penalty for escalating too often during your first weeks — it is the right instinct.',
     keywords: ['new agent', 'unsure', 'escalate or not', 'when in doubt', 'guidance', 'first weeks'],
   },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // SKINGUARDAI
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  {
+    id: 'sga-gs-1',
+    app: 'SkinGuardAI',
+    category: 'Getting Started',
+    question: 'What is SkinGuardAI and what does it do?',
+    answer:
+      'SkinGuardAI is an AI-powered skin-health tracking app for iPhone. You photograph a mole or skin spot and receive an instant AI risk assessment, then track that spot over time on a visual body map. It is designed to help you stay aware of changes and know when it may be time to see a dermatologist. SkinGuardAI is for informational and tracking purposes only and is not a medical diagnosis.',
+    keywords: ['what is', 'about', 'overview', 'skin', 'mole', 'description'],
+  },
+  {
+    id: 'sga-gs-2',
+    app: 'SkinGuardAI',
+    category: 'Getting Started',
+    question: 'How do I get started with SkinGuardAI?',
+    answer:
+      'Download SkinGuardAI from the App Store and open it. Complete the short onboarding, then allow camera access so you can scan a mole or skin spot. Tap Scan, capture a clear photo in good light, and the app returns an AI risk assessment. You can begin with a free trial or subscribe to unlock unlimited scans and full tracking.',
+    keywords: ['start', 'setup', 'begin', 'download', 'install', 'new'],
+  },
+  {
+    id: 'sga-scan-1',
+    app: 'SkinGuardAI',
+    category: 'Scanning & Analysis',
+    question: 'How do I scan a mole?',
+    answer:
+      'Tap Scan on the dashboard, allow camera access if prompted, and frame the mole in good even lighting. Hold the phone steady about six to eight inches away and capture the photo. The image is sent securely for AI analysis and a risk result is returned within a few seconds. For best results, avoid shadows, glare, and blur, and keep the spot centered.',
+    keywords: ['scan', 'photo', 'camera', 'capture', 'mole', 'how to'],
+  },
+  {
+    id: 'sga-scan-2',
+    app: 'SkinGuardAI',
+    category: 'Scanning & Analysis',
+    question: 'How does the AI risk assessment work?',
+    answer:
+      'When you scan a spot, the photo is sent over an encrypted connection to a secure backend that uses OpenAI vision analysis to evaluate visual features. SkinGuardAI returns a risk level of Low (green), Monitor (amber), or Urgent (red), along with guidance. The photo is not permanently stored by the backend or the AI provider. This is an informational screening aid, not a diagnosis.',
+    keywords: ['ai', 'analysis', 'risk', 'how it works', 'assessment', 'openai'],
+  },
+  {
+    id: 'sga-scan-3',
+    app: 'SkinGuardAI',
+    category: 'Scanning & Analysis',
+    question: 'What do the Low, Monitor, and Urgent results mean?',
+    answer:
+      'Low (green) means the AI did not flag notable concern, though you should keep tracking the spot. Monitor (amber) means there are features worth watching, so rescan periodically and note any changes. Urgent (red) means the AI flagged features that warrant prompt attention, and you should consider seeing a dermatologist soon. All results are informational only and never replace a professional exam.',
+    keywords: ['low', 'monitor', 'urgent', 'risk level', 'green', 'amber', 'red', 'meaning'],
+  },
+  {
+    id: 'sga-scan-4',
+    app: 'SkinGuardAI',
+    category: 'Troubleshooting',
+    question: 'The AI analysis is not working or fails.',
+    answer:
+      'AI analysis requires an active internet connection because the photo is sent to a secure backend for processing. If analysis fails, confirm you are online and retry. If it still fails, close and reopen the app. Very dark, blurry, or overly zoomed photos can also fail to analyze, so recapture in good light with the spot centered. If problems continue, contact support at support@dreamteamapps.com.',
+    keywords: ['not working', 'failed', 'error', 'analysis', 'stuck', 'internet', 'retry'],
+  },
+  {
+    id: 'sga-track-1',
+    app: 'SkinGuardAI',
+    category: 'Tracking',
+    question: 'How do I track a mole over time with the body map?',
+    answer:
+      'After a scan you can save the spot to a location on the visual body map. Each saved mole keeps its own history, so you can rescan it later and compare photos and risk levels side by side over weeks and months. Tracking changes over time is one of the most useful ways to catch anything new, so aim to rescan tracked spots on a regular schedule.',
+    keywords: ['track', 'body map', 'history', 'compare', 'over time', 'location'],
+  },
+  {
+    id: 'sga-track-2',
+    app: 'SkinGuardAI',
+    category: 'Tracking',
+    question: 'Can I compare a mole to previous scans?',
+    answer:
+      'Yes. Open a tracked mole from your history to see all of its past scans in order, with dates and risk levels, so you can compare how it looks over time. Watching for changes in size, shape, color, or border is exactly what regular tracking is for.',
+    keywords: ['compare', 'history', 'previous', 'changes', 'side by side'],
+  },
+  {
+    id: 'sga-remind-1',
+    app: 'SkinGuardAI',
+    category: 'Reminders & Alerts',
+    question: 'How do I set up self-exam reminders?',
+    answer:
+      'In Settings, enable scan reminders and choose how often you want to be reminded to perform a self-exam. Reminders require Notifications permission, so allow notifications when prompted, or enable them later in iPhone Settings, SkinGuardAI, Notifications. Regular monthly self-exams are a good habit.',
+    keywords: ['reminder', 'self-exam', 'notification', 'schedule', 'alert'],
+  },
+  {
+    id: 'sga-remind-2',
+    app: 'SkinGuardAI',
+    category: 'Reminders & Alerts',
+    question: 'How do UV-index alerts work?',
+    answer:
+      'SkinGuardAI can alert you when the local UV index is high so you can protect your skin. UV alerts require Location permission to fetch UV data for your area from a free weather service. Your location is used only to retrieve UV data and is not stored or shared. Enable Location for SkinGuardAI in iPhone Settings if UV alerts are not appearing.',
+    keywords: ['uv', 'sun', 'alert', 'location', 'index', 'sunscreen'],
+  },
+  {
+    id: 'sga-sub-1',
+    app: 'SkinGuardAI',
+    category: 'Subscription',
+    question: 'What does SkinGuardAI Premium include?',
+    answer:
+      'Premium unlocks unlimited AI scans, full mole history and body-map tracking, PDF report export, and reminder features. SkinGuardAI offers Monthly and Annual Premium plans. All subscriptions are billed and managed by Apple through the App Store.',
+    keywords: ['premium', 'subscription', 'price', 'plans', 'monthly', 'annual', 'features'],
+  },
+  {
+    id: 'sga-sub-2',
+    app: 'SkinGuardAI',
+    category: 'Subscription',
+    question: 'How do I manage, cancel, or restore my subscription?',
+    answer:
+      'Subscriptions are handled by Apple. To manage or cancel, open iPhone Settings, tap your name at the top, tap Subscriptions, select SkinGuardAI, and make your change. To restore a purchase on a new device or after reinstalling, open SkinGuardAI, go to the paywall or Settings, and tap Restore Purchases while signed in to the same Apple ID.',
+    keywords: ['cancel', 'manage', 'restore', 'subscription', 'refund', 'billing'],
+  },
+  {
+    id: 'sga-priv-1',
+    app: 'SkinGuardAI',
+    category: 'Privacy',
+    question: 'Are my mole photos private?',
+    answer:
+      'Yes. Your mole photos, tracking history, and notes are stored locally on your device, not on our servers. When you request an AI assessment, the image is sent securely and only temporarily to our backend and the AI provider to generate the result, and is not permanently stored. SkinGuardAI does not use advertising or third-party tracking. Deleting the app removes all locally stored data.',
+    keywords: ['privacy', 'photos', 'private', 'data', 'stored', 'secure'],
+  },
+  {
+    id: 'sga-med-1',
+    app: 'SkinGuardAI',
+    category: 'Medical Disclaimer',
+    question: 'Is SkinGuardAI a medical diagnosis?',
+    answer:
+      'No. SkinGuardAI is for informational and tracking purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. The AI risk assessment is a screening aid, not a diagnosis. Always seek the advice of a qualified dermatologist or physician about any skin concern, and seek prompt care for a spot that is new, changing, bleeding, or otherwise worrying.',
+    keywords: ['diagnosis', 'medical', 'disclaimer', 'doctor', 'dermatologist', 'not medical advice'],
+  },
 ]
 
 export function getFAQsByApp(app: FAQ['app']): FAQ[] {
@@ -1471,4 +1602,4 @@ export function searchFAQs(query: string, app?: FAQ['app']): FAQ[] {
   )
 }
 
-export const APP_NAMES: FAQ['app'][] = ['FishingPalPro', 'PlayListAI', 'SleuthPro', 'General', 'AppSupportDesk']
+export const APP_NAMES: FAQ['app'][] = ['FishingPalPro', 'PlayListAI', 'SleuthPro', 'SkinGuardAI', 'General', 'AppSupportDesk']
