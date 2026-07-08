@@ -6,7 +6,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Search, Fish, Music, ShieldCheck, AlertCircle, ArchiveRestore, Trash2 } from 'lucide-react'
+import { Search, Fish, Music, ShieldCheck, Guitar, AlertCircle, ArchiveRestore, Trash2 } from 'lucide-react'
 import { Ticket } from '@/types'
 import { formatDistanceToNow } from 'date-fns'
 
@@ -114,6 +114,7 @@ export default function ArchivedTicketsPage() {
             <SelectItem value="PlayListAI">🎵 PlayListAI</SelectItem>
             <SelectItem value="SleuthPro">🔍 SleuthPro</SelectItem>
             <SelectItem value="SkinGuardAI">🛡️ SkinGuardAI</SelectItem>
+            <SelectItem value="GigStand">🎸 GigStand</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -159,15 +160,18 @@ export default function ArchivedTicketsPage() {
                       ticket.app === 'FishingPalPro' ? 'bg-[#00B4D8]/15 text-[#00B4D8]' :
                       ticket.app === 'SleuthPro' ? 'bg-green-100 text-green-600' :
                       ticket.app === 'SkinGuardAI' ? 'bg-cyan-100 text-cyan-600' :
+                      ticket.app === 'GigStand' ? 'bg-amber-100 text-amber-600' :
                       'bg-purple-100 text-purple-600'
                     }`}>
                       {ticket.app === 'FishingPalPro' ? <Fish className="h-3 w-3" /> :
                        ticket.app === 'SleuthPro' ? <Search className="h-3 w-3" /> :
                        ticket.app === 'SkinGuardAI' ? <ShieldCheck className="h-3 w-3" /> :
+                       ticket.app === 'GigStand' ? <Guitar className="h-3 w-3" /> :
                        <Music className="h-3 w-3" />}
                       {ticket.app === 'FishingPalPro' ? 'Fishing' :
                        ticket.app === 'SleuthPro' ? 'Sleuth' :
-                       ticket.app === 'SkinGuardAI' ? 'Skin' : 'Playlist'}
+                       ticket.app === 'SkinGuardAI' ? 'Skin' :
+                       ticket.app === 'GigStand' ? 'Gig' : 'Playlist'}
                     </span>
                   </div>
                   <div className="col-span-1">

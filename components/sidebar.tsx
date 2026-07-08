@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { Home, FileText, Plus, Users, Settings, Globe, Fish, Music, Search, ShieldCheck, LogOut, ChevronRight, Archive, BookOpen } from 'lucide-react'
+import { Home, FileText, Plus, Users, Settings, Globe, Fish, Music, Search, ShieldCheck, Guitar, LogOut, ChevronRight, Archive, BookOpen } from 'lucide-react'
 import { Stats } from '@/types'
 
 interface AgentInfo {
@@ -40,6 +40,7 @@ export function Sidebar() {
   const plCount = byApp['PlayListAI'] || 0
   const spCount = byApp['SleuthPro'] || 0
   const sgaCount = byApp['SkinGuardAI'] || 0
+  const gsCount = byApp['GigStand'] || 0
 
   const navItems = [
     { href: '/dashboard',        label: 'Dashboard',       icon: Home },
@@ -95,6 +96,13 @@ export function Sidebar() {
               <span className="text-xs text-slate-400 group-hover:text-slate-200">SkinGuardAI</span>
             </div>
             {sgaCount > 0 && <span className="text-xs bg-cyan-500/80 text-white px-1.5 py-0.5 rounded-full font-medium">{sgaCount}</span>}
+          </Link>
+          <Link href="/tickets?app=GigStand" className="flex items-center justify-between px-2 py-1.5 rounded-md hover:bg-white/5 transition-colors group">
+            <div className="flex items-center gap-2">
+              <Guitar className="h-3.5 w-3.5 text-[#F2A83B]" />
+              <span className="text-xs text-slate-400 group-hover:text-slate-200">GigStand</span>
+            </div>
+            {gsCount > 0 && <span className="text-xs bg-amber-500/80 text-white px-1.5 py-0.5 rounded-full font-medium">{gsCount}</span>}
           </Link>
         </div>
       )}

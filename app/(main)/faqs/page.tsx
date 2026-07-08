@@ -13,6 +13,7 @@ const APP_COLORS: Record<FAQ['app'], string> = {
   PlayListAI:     'bg-purple-100 text-purple-800',
   SleuthPro:      'bg-teal-100 text-teal-800',
   SkinGuardAI:    'bg-cyan-100 text-cyan-800',
+  GigStand:       'bg-amber-100 text-amber-800',
   General:        'bg-slate-100 text-slate-700',
   AppSupportDesk: 'bg-indigo-100 text-indigo-800',
 }
@@ -22,6 +23,7 @@ const APP_EMOJI: Record<FAQ['app'], string> = {
   PlayListAI:     '🎵',
   SleuthPro:      '🔍',
   SkinGuardAI:    '🛡️',
+  GigStand:       '🎸',
   General:        '💬',
   AppSupportDesk: '🛠️',
 }
@@ -100,6 +102,7 @@ export default function AdminFAQsPage() {
     { value: 'PlayListAI',     label: 'PlayListAI',      emoji: '🎵', count: ALL_FAQS.filter(f => f.app === 'PlayListAI').length },
     { value: 'SleuthPro',      label: 'SleuthPro',       emoji: '🔍', count: ALL_FAQS.filter(f => f.app === 'SleuthPro').length },
     { value: 'SkinGuardAI',    label: 'SkinGuardAI',     emoji: '🛡️', count: ALL_FAQS.filter(f => f.app === 'SkinGuardAI').length },
+    { value: 'GigStand',       label: 'GigStand',        emoji: '🎸', count: ALL_FAQS.filter(f => f.app === 'GigStand').length },
     { value: 'General',        label: 'General',         emoji: '💬', count: ALL_FAQS.filter(f => f.app === 'General').length },
     { value: 'AppSupportDesk', label: 'AppSupport Desk', emoji: '🛠️', count: ALL_FAQS.filter(f => f.app === 'AppSupportDesk').length },
   ]

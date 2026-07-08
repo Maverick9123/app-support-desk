@@ -6,7 +6,7 @@
 
 export interface FAQ {
   id: string
-  app: 'FishingPalPro' | 'PlayListAI' | 'SleuthPro' | 'SkinGuardAI' | 'General' | 'AppSupportDesk'
+  app: 'FishingPalPro' | 'PlayListAI' | 'SleuthPro' | 'SkinGuardAI' | 'GigStand' | 'General' | 'AppSupportDesk'
   category: string
   question: string
   answer: string
@@ -1577,6 +1577,182 @@ export const ALL_FAQS: FAQ[] = [
       'No. SkinGuardAI is for informational and tracking purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. The AI risk assessment is a screening aid, not a diagnosis. Always seek the advice of a qualified dermatologist or physician about any skin concern, and seek prompt care for a spot that is new, changing, bleeding, or otherwise worrying.',
     keywords: ['diagnosis', 'medical', 'disclaimer', 'doctor', 'dermatologist', 'not medical advice'],
   },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // GIGSTAND
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  // Getting Started
+  {
+    id: 'gs-gs-1',
+    app: 'GigStand',
+    category: 'Getting Started',
+    question: 'What is GigStand?',
+    answer:
+      'GigStand is an app for gigging musicians that keeps your chord charts, setlists, and backing tracks in one place, built for the stage. Store each song as a transposable chord chart (ChordPro) or an imported PDF, organize songs into setlists, attach a backing track to any song, and perform in Stage Mode with big, high-contrast text and hands-free foot-pedal control. Everything works offline.',
+    keywords: ['what', 'about', 'gigstand', 'overview', 'musician', 'chords', 'setlist'],
+  },
+  {
+    id: 'gs-gs-2',
+    app: 'GigStand',
+    category: 'Getting Started',
+    question: 'What devices does GigStand run on?',
+    answer:
+      'GigStand is built for iPad (iPadOS 17 or later) and also runs on Apple Silicon Macs through "Designed for iPad." Many performers prefer the larger screen of a Mac laptop or a big iPad on stage. Charts, setlists, and playback all work the same across devices.',
+    keywords: ['ipad', 'mac', 'device', 'compatible', 'requirement', 'ios', 'run'],
+  },
+  {
+    id: 'gs-gs-3',
+    app: 'GigStand',
+    category: 'Getting Started',
+    question: 'Does GigStand work offline?',
+    answer:
+      'Yes. Your songs, charts, setlists, and backing tracks live on your device and perform with no internet connection — perfect for venues with unreliable Wi-Fi. The only feature that uses the internet is the optional AI Chart Assistant, and only at the moment you tap Generate. Everything else, including the entire performance, is fully offline.',
+    keywords: ['offline', 'internet', 'wifi', 'connection', 'no signal', 'airplane mode'],
+  },
+
+  // Charts & Setlists
+  {
+    id: 'gs-chart-1',
+    app: 'GigStand',
+    category: 'Charts & Setlists',
+    question: 'How do I add a song and its chart?',
+    answer:
+      'On the Songs tab, tap the amber ＋ to create a song, then open it and use the Edit tab. You can type a chord chart in ChordPro (put each chord in square brackets right before the syllable, like "[G]Amazing [C]grace"), import a PDF chart, or use the AI Chart Assistant to build one from pasted lyrics and chords. Set the song\'s Key so transpose works.',
+    keywords: ['add', 'song', 'chart', 'chordpro', 'create', 'new', 'type', 'enter'],
+  },
+  {
+    id: 'gs-chart-2',
+    app: 'GigStand',
+    category: 'Charts & Setlists',
+    question: 'Can I import a PDF chart from Chordify or elsewhere?',
+    answer:
+      'Yes. Open a song → Edit tab → Chart section → "Import PDF Chart Instead," and pick the file from Files or iCloud. PDF charts scroll in Stage Mode, stay in sync with a backing track, and flip to white-on-black night mode. Note that PDF charts cannot be transposed — the key is fixed to the page — which is exactly right when you play along to a recording.',
+    keywords: ['pdf', 'import', 'chordify', 'chart', 'file', 'sheet'],
+  },
+  {
+    id: 'gs-chart-3',
+    app: 'GigStand',
+    category: 'Charts & Setlists',
+    question: 'How do I transpose a song to a different key?',
+    answer:
+      'For typed ChordPro charts, use the KEY − / + buttons in the song\'s Chart preview or in Stage Mode to change key on the fly — every chord, including slash chords, moves together. PDF charts are fixed-key images and cannot be transposed; use a typed chart if you need live transpose.',
+    keywords: ['transpose', 'key', 'change key', 'capo', 'pitch', 'higher', 'lower'],
+  },
+  {
+    id: 'gs-set-1',
+    app: 'GigStand',
+    category: 'Charts & Setlists',
+    question: 'How do I build a setlist for a show?',
+    answer:
+      'On the Setlists tab, tap the amber ＋ and give the show a name, venue, and date. Add songs from your library, split them into multiple sets, and note a break timer after any set. Tap Edit to drag songs into order. When it\'s showtime, tap Play to open Stage Mode at the first song and move through the whole set with the on-screen arrows or a foot pedal.',
+    keywords: ['setlist', 'set list', 'show', 'gig', 'order', 'sets', 'build', 'organize'],
+  },
+
+  // AI Chart Assistant
+  {
+    id: 'gs-ai-1',
+    app: 'GigStand',
+    category: 'AI Chart Assistant',
+    question: 'What is the AI Chart Assistant?',
+    answer:
+      'The AI Chart Assistant turns your lyrics and chords into a clean, stage-ready chord chart automatically. Open a song → Edit tab → Chart section → "Generate Chart with AI," paste the full lyrics and the chords (a plain progression, a list, or text from Chordify), and tap Generate. In a few seconds you get a formatted ChordPro chart with the chords placed over the right syllables — ready to edit, transpose, and perform.',
+    keywords: ['ai', 'assistant', 'generate', 'chart', 'auto', 'chords', 'lyrics', 'create'],
+  },
+  {
+    id: 'gs-ai-2',
+    app: 'GigStand',
+    category: 'AI Chart Assistant',
+    question: 'Does the AI Chart Assistant need an internet connection?',
+    answer:
+      'Yes — it is the one part of GigStand that uses the internet, and only at the moment you tap Generate. Building the chart happens on a secure server. Once the chart is made, it is saved on your device and performs offline forever, like the rest of your songs. If you have no connection, you can still type a ChordPro chart or import a PDF completely offline.',
+    keywords: ['ai', 'internet', 'connection', 'online', 'offline', 'wifi', 'generate'],
+  },
+  {
+    id: 'gs-ai-3',
+    app: 'GigStand',
+    category: 'AI Chart Assistant',
+    question: 'Where do my lyrics and chords go — is my content private?',
+    answer:
+      'When you tap Generate, the lyrics and chords you entered are sent over an encrypted connection to our backend and to our AI provider, Anthropic, solely to build your chart. The text is used only to generate the chart — it is not sold, not used for advertising, and not stored on our servers after your chart is returned. If you never use the AI Chart Assistant, no song content ever leaves your device. Full details are in our Privacy Policy.',
+    keywords: ['privacy', 'private', 'lyrics', 'data', 'anthropic', 'stored', 'secure', 'server'],
+  },
+  {
+    id: 'gs-ai-4',
+    app: 'GigStand',
+    category: 'AI Chart Assistant',
+    question: "The AI Chart Assistant won't generate a chart — what's wrong?",
+    answer:
+      'Almost always it\'s the internet connection, since the assistant is the only online feature. Check that you\'re connected and tap Generate again. For a very long song, give it a few seconds to finish. If it still fails, close and reopen the assistant and retry. Everything else in GigStand keeps working offline in the meantime.',
+    keywords: ['ai', 'fail', 'error', 'not working', 'generate', 'stuck', 'wont', 'problem'],
+  },
+  {
+    id: 'gs-ai-5',
+    app: 'GigStand',
+    category: 'AI Chart Assistant',
+    question: 'Is the AI Chart Assistant free?',
+    answer:
+      'The AI Chart Assistant is a GigStand Premium feature. If you\'re on the free tier, tapping it opens the upgrade screen. Premium (Monthly, Annual, or Lifetime) also unlocks backing-track imports and the rest of the premium features.',
+    keywords: ['ai', 'free', 'premium', 'cost', 'price', 'subscription', 'pay'],
+  },
+
+  // Stage Mode, Pedal & Tracks
+  {
+    id: 'gs-stage-1',
+    app: 'GigStand',
+    category: 'Stage Mode & Performance',
+    question: 'How does Stage Mode work?',
+    answer:
+      'Stage Mode is the performance screen: large white-on-black text, no clutter, and the display never sleeps mid-song. Open it with Perform (▶) from a song, or Play from a setlist. Tap once to show or hide the controls — Previous/Next, KEY − / +, text size, and the tortoise·play·hare auto-scroll. Tap again for a totally clean chart.',
+    keywords: ['stage mode', 'perform', 'play', 'night mode', 'screen', 'awake', 'scroll'],
+  },
+  {
+    id: 'gs-stage-2',
+    app: 'GigStand',
+    category: 'Stage Mode & Performance',
+    question: 'How do I connect a Bluetooth foot pedal?',
+    answer:
+      'Page-turner pedals (AirTurn, iRig BlueTurn, Donner, and others) connect like a Bluetooth keyboard. Put the pedal in pairing mode and set it to its "keyboard" or "page-turn" mode, then add it in iPad Settings > Bluetooth — no setup is needed inside GigStand. In Stage Mode: → / ↓ / Space go to the next song, ← / ↑ go to the previous, and Return/Enter starts or stops the song (track + scroll).',
+    keywords: ['foot pedal', 'bluetooth', 'pedal', 'airturn', 'page turner', 'pair', 'connect', 'hands free'],
+  },
+  {
+    id: 'gs-stage-3',
+    app: 'GigStand',
+    category: 'Stage Mode & Performance',
+    question: "Auto-scroll isn't moving — why?",
+    answer:
+      'If the whole chart already fits on the screen, there\'s nothing to scroll. Auto-scroll moves once the chart is longer than the display. Use the tortoise and hare buttons to set the speed, and note that with a backing track attached the scroll paces itself to the song. A quick tap of play (or Return on a foot pedal) starts it.',
+    keywords: ['auto scroll', 'scroll', 'not moving', 'stuck', 'speed', 'stage mode'],
+  },
+  {
+    id: 'gs-track-1',
+    app: 'GigStand',
+    category: 'Stage Mode & Performance',
+    question: 'How do I add a backing track to a song?',
+    answer:
+      'Open a song → Edit tab → Backing Track section → "Add Backing Track," and choose an audio file (MP3, M4A, or WAV). Get files onto your device via the Files app, iCloud Drive, Dropbox, or AirDrop. In Stage Mode a track bar appears above the controls; tap play (or stomp a foot pedal) and the track starts while the chart scrolls in time. Backing-track imports are a Premium feature.',
+    keywords: ['backing track', 'audio', 'mp3', 'm4a', 'wav', 'import', 'track', 'music'],
+  },
+
+  // Subscription & Privacy
+  {
+    id: 'gs-sub-1',
+    app: 'GigStand',
+    category: 'Subscription & Billing',
+    question: 'What does GigStand Premium include, and how is it priced?',
+    answer:
+      'Premium unlocks the AI Chart Assistant, backing-track imports, and the full feature set. It\'s offered as a Monthly or Annual subscription, or a one-time Lifetime purchase that you own forever — all billed through Apple. A free tier lets you try the app. Manage or cancel a subscription at iPhone Settings > [Your Name] > Subscriptions; restore a purchase from within the app using the same Apple ID.',
+    keywords: ['premium', 'subscription', 'price', 'lifetime', 'monthly', 'annual', 'cost', 'billing', 'upgrade'],
+  },
+  {
+    id: 'gs-priv-1',
+    app: 'GigStand',
+    category: 'Privacy',
+    question: 'What data does GigStand collect?',
+    answer:
+      'GigStand has no account, no login, no analytics, and no tracking. Your songs, charts, setlists, and tracks stay in the app\'s private storage on your device. The single exception is the optional AI Chart Assistant: when you use it, the lyrics and chords you enter are sent securely to our server and to Anthropic solely to build your chart, and are not stored afterward or sold. See our Privacy Policy for full details.',
+    keywords: ['privacy', 'data', 'collect', 'account', 'tracking', 'personal', 'anthropic'],
+  },
 ]
 
 export function getFAQsByApp(app: FAQ['app']): FAQ[] {
@@ -1602,4 +1778,4 @@ export function searchFAQs(query: string, app?: FAQ['app']): FAQ[] {
   )
 }
 
-export const APP_NAMES: FAQ['app'][] = ['FishingPalPro', 'PlayListAI', 'SleuthPro', 'SkinGuardAI', 'General', 'AppSupportDesk']
+export const APP_NAMES: FAQ['app'][] = ['FishingPalPro', 'PlayListAI', 'SleuthPro', 'SkinGuardAI', 'GigStand', 'General', 'AppSupportDesk']
