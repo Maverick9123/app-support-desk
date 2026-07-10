@@ -52,7 +52,7 @@ export default function PortalPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center px-4" style={{ background: 'linear-gradient(135deg, #0D1B2A 0%, #0a2a3a 100%)' }}>
+      <div className="min-h-screen flex items-center justify-center px-4" style={{ background: 'linear-gradient(135deg, #3A6EA5 0%, #2B5586 100%)' }}>
         <Card className="max-w-md w-full text-center shadow-2xl border-0">
           <CardContent className="pt-12 pb-10 px-8">
             <div className="h-18 w-18 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-5" style={{ width: 72, height: 72 }}>
@@ -72,7 +72,7 @@ export default function PortalPage() {
   }
 
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #0D1B2A 0%, #0a2a3a 100%)' }}>
+    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #3A6EA5 0%, #2B5586 100%)' }}>
 
       {/* Top Nav Bar */}
       <div className="max-w-xl mx-auto px-4 pt-5 flex justify-end">
