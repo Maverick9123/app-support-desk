@@ -78,7 +78,7 @@ export default function PortalPage() {
       <div className="max-w-xl mx-auto px-4 pt-5 flex justify-end">
         <a
           href="/"
-          className="inline-flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors text-xs font-medium"
+          className="inline-flex items-center gap-1.5 text-white/80 hover:text-white transition-colors text-xs font-medium"
         >
           <LogIn className="h-3.5 w-3.5" />
           Team Login
@@ -93,7 +93,7 @@ export default function PortalPage() {
           <Search className="h-6 w-6 text-[#00B4D8]" />
         </div>
         <h1 className="text-3xl font-bold text-white mb-2">Support Center</h1>
-        <p className="text-slate-400 mb-4">FishingPalPro · PlayListAI · SleuthPro · SkinGuardAI · GigStand — How can we help you?</p>
+        <p className="text-white/90 mb-4">FishingPalPro · PlayListAI · SleuthPro · SkinGuardAI · GigStand — How can we help you?</p>
 
         {/* FAQ Quick-Access */}
         <a
@@ -109,7 +109,7 @@ export default function PortalPage() {
       <div className="max-w-xl mx-auto px-4 mb-6">
         <div className="flex items-center gap-3">
           <div className="flex-1 h-px bg-white/10" />
-          <span className="text-slate-500 text-xs">or submit a support request below</span>
+          <span className="text-white/70 text-xs">or submit a support request below</span>
           <div className="flex-1 h-px bg-white/10" />
         </div>
       </div>
@@ -177,7 +177,7 @@ export default function PortalPage() {
           </CardContent>
         </Card>
         <ChatWidget />
-        <p className="text-center text-slate-500 text-xs mt-6">Powered by DreamTeamApps · Average response time: 24 hours</p>
+        <p className="text-center text-white/70 text-xs mt-6">Powered by DreamTeamApps · Average response time: 24 hours</p>
       </div>
     </div>
   )
