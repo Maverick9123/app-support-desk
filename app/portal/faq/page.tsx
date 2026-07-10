@@ -185,13 +185,13 @@ export default function FAQPage() {
   ]
 
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #0D1B2A 0%, #0a2a3a 100%)' }}>
+    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #3A6EA5 0%, #2B5586 100%)' }}>
 
       {/* Back Navigation */}
       <div className="max-w-4xl mx-auto px-4 pt-5">
         <a
           href="/portal"
-          className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm font-medium"
+          className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm font-medium"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to Support
@@ -206,13 +206,13 @@ export default function FAQPage() {
           <Search className="h-6 w-6 text-[#0D9488]" />
         </div>
         <h1 className="text-3xl font-bold text-white mb-2">Help & FAQ</h1>
-        <p className="text-slate-400 mb-6">
+        <p className="text-white/90 mb-6">
           FishingPalPro · PlayListAI · SleuthPro · SkinGuardAI · GigStand — Find answers instantly
         </p>
 
         {/* Search */}
         <div className="max-w-xl mx-auto relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/70" />
           <Input
             placeholder="Search all FAQs..."
             value={query}
@@ -232,7 +232,7 @@ export default function FAQPage() {
               className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all ${
                 selectedApp === tab.value
                   ? 'bg-[#00B4D8] text-white shadow-lg shadow-[#00B4D8]/30'
-                  : 'bg-white/10 text-slate-300 hover:bg-white/15'
+                  : 'bg-white/10 text-white/85 hover:bg-white/15'
               }`}
             >
               <span>{tab.emoji}</span>
