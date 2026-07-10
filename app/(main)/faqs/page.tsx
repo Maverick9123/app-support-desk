@@ -11,7 +11,7 @@ type AppFilter = 'all' | FAQ['app']
 const APP_COLORS: Record<FAQ['app'], string> = {
   FishingPalPro:  'bg-cyan-100 text-cyan-800',
   PlayListAI:     'bg-purple-100 text-purple-800',
-  SleuthPro:      'bg-teal-100 text-teal-800',
+  'Search Quest':      'bg-teal-100 text-teal-800',
   SkinGuardAI:    'bg-cyan-100 text-cyan-800',
   GigStand:       'bg-amber-100 text-amber-800',
   General:        'bg-slate-100 text-slate-700',
@@ -21,7 +21,7 @@ const APP_COLORS: Record<FAQ['app'], string> = {
 const APP_EMOJI: Record<FAQ['app'], string> = {
   FishingPalPro:  '🎣',
   PlayListAI:     '🎵',
-  SleuthPro:      '🔍',
+  'Search Quest':      '🔍',
   SkinGuardAI:    '🛡️',
   GigStand:       '🎸',
   General:        '💬',
@@ -100,7 +100,7 @@ export default function AdminFAQsPage() {
     { value: 'all',            label: 'All',             emoji: '📚', count: ALL_FAQS.length },
     { value: 'FishingPalPro',  label: 'FishingPalPro',   emoji: '🎣', count: ALL_FAQS.filter(f => f.app === 'FishingPalPro').length },
     { value: 'PlayListAI',     label: 'PlayListAI',      emoji: '🎵', count: ALL_FAQS.filter(f => f.app === 'PlayListAI').length },
-    { value: 'SleuthPro',      label: 'SleuthPro',       emoji: '🔍', count: ALL_FAQS.filter(f => f.app === 'SleuthPro').length },
+    { value: 'Search Quest',      label: 'Search Quest',       emoji: '🔍', count: ALL_FAQS.filter(f => f.app === 'Search Quest').length },
     { value: 'SkinGuardAI',    label: 'SkinGuardAI',     emoji: '🛡️', count: ALL_FAQS.filter(f => f.app === 'SkinGuardAI').length },
     { value: 'GigStand',       label: 'GigStand',        emoji: '🎸', count: ALL_FAQS.filter(f => f.app === 'GigStand').length },
     { value: 'General',        label: 'General',         emoji: '💬', count: ALL_FAQS.filter(f => f.app === 'General').length },

@@ -18,8 +18,8 @@ const APP_CONFIG = {
     color: '#7C3AED',
     icon: Music,
   },
-  SleuthPro: {
-    label: 'SleuthPro',
+  'Search Quest': {
+    label: 'Search Quest',
     emoji: '🔍',
     color: '#0D9488',
     icon: Search,
@@ -50,7 +50,7 @@ const APP_CONFIG = {
   },
 } as const
 
-type AppName = 'all' | 'FishingPalPro' | 'PlayListAI' | 'SleuthPro' | 'SkinGuardAI' | 'GigStand' | 'General' | 'AppSupportDesk'
+type AppName = 'all' | 'FishingPalPro' | 'PlayListAI' | 'Search Quest' | 'SkinGuardAI' | 'GigStand' | 'General' | 'AppSupportDesk'
 
 function FAQItem({ faq }: { faq: FAQ }) {
   const [open, setOpen] = useState(false)
@@ -165,10 +165,10 @@ export default function FAQPage() {
       count: ALL_FAQS.filter(f => f.app === 'PlayListAI').length,
     },
     {
-      value: 'SleuthPro',
-      label: 'SleuthPro',
+      value: 'Search Quest',
+      label: 'Search Quest',
       emoji: '🔍',
-      count: ALL_FAQS.filter(f => f.app === 'SleuthPro').length,
+      count: ALL_FAQS.filter(f => f.app === 'Search Quest').length,
     },
     {
       value: 'SkinGuardAI',
@@ -207,7 +207,7 @@ export default function FAQPage() {
         </div>
         <h1 className="text-3xl font-bold text-white mb-2">Help & FAQ</h1>
         <p className="text-white/90 mb-6">
-          FishingPalPro · PlayListAI · SleuthPro · SkinGuardAI · GigStand — Find answers instantly
+          FishingPalPro · PlayListAI · Search Quest · SkinGuardAI · GigStand — Find answers instantly
         </p>
 
         {/* Search */}

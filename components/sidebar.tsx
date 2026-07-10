@@ -38,7 +38,7 @@ export function Sidebar() {
   const byApp = stats ? (stats.byApp || {}) : {}
   const fpCount = byApp['FishingPalPro'] || 0
   const plCount = byApp['PlayListAI'] || 0
-  const spCount = byApp['SleuthPro'] || 0
+  const spCount = byApp['Search Quest'] || 0
   const sgaCount = byApp['SkinGuardAI'] || 0
   const gsCount = byApp['GigStand'] || 0
 
@@ -83,10 +83,10 @@ export function Sidebar() {
             </div>
             {plCount > 0 && <span className="text-xs bg-orange-500/80 text-white px-1.5 py-0.5 rounded-full font-medium">{plCount}</span>}
           </Link>
-          <Link href="/tickets?app=SleuthPro" className="flex items-center justify-between px-2 py-1.5 rounded-md hover:bg-white/5 transition-colors group">
+          <Link href="/tickets?app=Search Quest" className="flex items-center justify-between px-2 py-1.5 rounded-md hover:bg-white/5 transition-colors group">
             <div className="flex items-center gap-2">
               <Search className="h-3.5 w-3.5 text-[#00B4D8]" />
-              <span className="text-xs text-slate-400 group-hover:text-slate-200">SleuthPro</span>
+              <span className="text-xs text-slate-400 group-hover:text-slate-200">Search Quest</span>
             </div>
             {spCount > 0 && <span className="text-xs bg-teal-500/80 text-white px-1.5 py-0.5 rounded-full font-medium">{spCount}</span>}
           </Link>

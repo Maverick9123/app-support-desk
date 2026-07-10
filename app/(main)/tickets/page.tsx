@@ -101,7 +101,7 @@ function TicketsPageContent() {
             <SelectItem value="all">All Apps</SelectItem>
             <SelectItem value="FishingPalPro">🎣 FishingPalPro</SelectItem>
             <SelectItem value="PlayListAI">🎵 PlayListAI</SelectItem>
-            <SelectItem value="SleuthPro">🔍 SleuthPro</SelectItem>
+            <SelectItem value="Search Quest">🔍 Search Quest</SelectItem>
             <SelectItem value="SkinGuardAI">🛡️ SkinGuardAI</SelectItem>
             <SelectItem value="GigStand">🎸 GigStand</SelectItem>
           </SelectContent>
@@ -160,18 +160,18 @@ function TicketsPageContent() {
                   <div className="col-span-2">
                     <span className={`inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium ${
                       ticket.app === 'FishingPalPro' ? 'bg-[#00B4D8]/15 text-[#00B4D8]' :
-                      ticket.app === 'SleuthPro' ? 'bg-green-100 text-green-600' :
+                      ticket.app === 'Search Quest' ? 'bg-green-100 text-green-600' :
                       ticket.app === 'SkinGuardAI' ? 'bg-cyan-100 text-cyan-600' :
                       ticket.app === 'GigStand' ? 'bg-amber-100 text-amber-600' :
                       'bg-purple-100 text-purple-600'
                     }`}>
                       {ticket.app === 'FishingPalPro' ? <Fish className="h-3 w-3" /> :
-                       ticket.app === 'SleuthPro' ? <Search className="h-3 w-3" /> :
+                       ticket.app === 'Search Quest' ? <Search className="h-3 w-3" /> :
                        ticket.app === 'SkinGuardAI' ? <ShieldCheck className="h-3 w-3" /> :
                        ticket.app === 'GigStand' ? <Guitar className="h-3 w-3" /> :
                        <Music className="h-3 w-3" />}
                       {ticket.app === 'FishingPalPro' ? 'Fishing' :
-                       ticket.app === 'SleuthPro' ? 'Sleuth' :
+                       ticket.app === 'Search Quest' ? 'Search' :
                        ticket.app === 'SkinGuardAI' ? 'Skin' :
                        ticket.app === 'GigStand' ? 'Gig' :
                        'Playlist'}

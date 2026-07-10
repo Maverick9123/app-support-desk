@@ -6,7 +6,7 @@
 
 export interface FAQ {
   id: string
-  app: 'FishingPalPro' | 'PlayListAI' | 'SleuthPro' | 'SkinGuardAI' | 'GigStand' | 'General' | 'AppSupportDesk'
+  app: 'FishingPalPro' | 'PlayListAI' | 'Search Quest' | 'SkinGuardAI' | 'GigStand' | 'General' | 'AppSupportDesk'
   category: string
   question: string
   answer: string
@@ -745,251 +745,141 @@ export const ALL_FAQS: FAQ[] = [
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
-  // SLEUTHPRO
+  // SEARCH QUEST
   // ─────────────────────────────────────────────────────────────────────────────
 
   // Getting Started
   {
-    id: 'sp-gs-1',
-    app: 'SleuthPro',
+    id: 'sq-gs-1',
+    app: 'Search Quest',
     category: 'Getting Started',
-    question: 'What is SleuthPro and what does it do?',
-    answer:
-      'SleuthPro is a people search and public records investigation app for iOS. It gives you access to publicly available data to help you find people, verify identities, reconnect with family or old friends, and investigate background information. It is for personal, informational use only.',
-    keywords: ['what is', 'description', 'about', 'overview', 'people search', 'investigation'],
+    question: 'What is Search Quest?',
+    answer: 'Search Quest is a people and contact lookup app for iOS. Search by name, phone number, email address, or physical address and get publicly available contact information — addresses, phone numbers, relatives, and social profiles — in a clean, easy-to-read report. It is for personal, informational use only.',
+    keywords: ['what is', 'about', 'overview', 'people', 'contact', 'lookup', 'finder'],
   },
   {
-    id: 'sp-gs-2',
-    app: 'SleuthPro',
+    id: 'sq-gs-2',
+    app: 'Search Quest',
     category: 'Getting Started',
-    question: 'What subscription tiers are available in SleuthPro?',
-    answer:
-      'SleuthPro offers three tiers: Basic (entry-level access to public records), Pro (expanded search capabilities and more detailed results), and Professional (full access to all data sources and unlimited searches). There is also a Deep Dive Investigation add-on purchase for comprehensive one-time reports.',
-    keywords: ['tiers', 'subscription', 'basic', 'pro', 'professional', 'plans'],
+    question: 'What devices does Search Quest run on?',
+    answer: 'Search Quest runs on iPhone and iPad. Download it from the App Store and start with a 15-day free trial.',
+    keywords: ['device', 'iphone', 'ipad', 'requirement', 'download'],
   },
   {
-    id: 'sp-gs-3',
-    app: 'SleuthPro',
+    id: 'sq-gs-3',
+    app: 'Search Quest',
     category: 'Getting Started',
-    question: 'What is the Deep Dive Investigation add-on?',
-    answer:
-      'Deep Dive Investigation is an optional one-time purchase add-on that generates the most comprehensive investigation report available for a specific person. It aggregates data from all public record sources and typically compiles in 30–60 seconds. Each Deep Dive purchase covers one specific search subject.',
-    keywords: ['deep dive', 'investigation', 'addon', 'add-on', 'report', 'one time'],
-  },
-  {
-    id: 'sp-gs-4',
-    app: 'SleuthPro',
-    category: 'Getting Started',
-    question: 'Is SleuthPro legal to use?',
-    answer:
-      'Yes. SleuthPro only accesses publicly available information. It is for personal and informational use. Important: SleuthPro is NOT for use in employment screening, tenant screening, credit decisions, or any use governed by the Fair Credit Reporting Act (FCRA). Users must agree to the Terms of Service, which prohibit illegal or discriminatory use of results.',
-    keywords: ['legal', 'allowed', 'lawful', 'fcra', 'terms of service', 'use'],
-  },
-  {
-    id: 'sp-gs-5',
-    app: 'SleuthPro',
-    category: 'Getting Started',
-    question: 'What iOS version does SleuthPro require?',
-    answer:
-      'SleuthPro requires iOS 16.0 or later for optimal performance. We recommend iOS 17 or newer for the best experience. Check your version at iPhone Settings > General > About > iOS Version.',
-    keywords: ['ios', 'version', 'requirement', 'compatible', 'device'],
+    question: 'What plans are available?',
+    answer: 'Search Quest offers two plans: Basic for everyday lookups, and Pro for unlimited searches plus PDF export, alerts, and the full Siri suite. Both are billed through Apple (Monthly or Annual) and include a 15-day free trial.',
+    keywords: ['plan', 'tier', 'basic', 'pro', 'price', 'subscription', 'free trial'],
   },
 
-  // Subscription & Billing (SleuthPro)
+  // How to Search
   {
-    id: 'sp-sub-1',
-    app: 'SleuthPro',
-    category: 'Subscription & Billing',
-    question: 'How do I subscribe to SleuthPro?',
-    answer:
-      'Open SleuthPro and tap any locked feature or the Subscribe button. Select your preferred tier (Basic, Pro, or Professional) and complete the purchase through your Apple ID. Your selected tier activates immediately.',
-    keywords: ['subscribe', 'how to', 'purchase', 'buy', 'upgrade', 'tier'],
+    id: 'sq-search-1',
+    app: 'Search Quest',
+    category: 'How to Search',
+    question: 'How do I search for someone?',
+    answer: 'On the Search tab, pick a search type — Name, Phone, Email, or Address — enter what you know, and tap Search. Adding more detail (such as a full name plus a state) returns more accurate matches.',
+    keywords: ['how', 'search', 'name', 'phone', 'email', 'address', 'find'],
   },
   {
-    id: 'sp-sub-2',
-    app: 'SleuthPro',
-    category: 'Subscription & Billing',
-    question: 'How do I upgrade from Basic to Pro or Professional?',
-    answer:
-      'Go to SleuthPro > Settings > Subscription > Upgrade Plan. Select your new tier and confirm through Apple. Apple prorates the cost for any remaining days in your current billing period — you only pay the difference.',
-    keywords: ['upgrade', 'basic to pro', 'tier', 'higher plan', 'professional'],
+    id: 'sq-search-2',
+    app: 'Search Quest',
+    category: 'How to Search',
+    question: 'How does reverse phone lookup work?',
+    answer: 'Choose Phone as the search type and enter a 10-digit number including the area code. Search Quest returns the registered owner and public records associated with that number.',
+    keywords: ['reverse', 'phone', 'number', 'caller', 'lookup'],
   },
   {
-    id: 'sp-sub-3',
-    app: 'SleuthPro',
-    category: 'Subscription & Billing',
-    question: 'How do I restore my SleuthPro subscription after reinstalling?',
-    answer:
-      'Open SleuthPro > Settings > Restore Purchases. Use the same Apple ID as your original purchase. Your subscription tier and any Deep Dive report history restore immediately.',
-    keywords: ['restore', 'reinstall', 'lost', 'subscription', 'recover', 'missing'],
-  },
-  {
-    id: 'sp-sub-4',
-    app: 'SleuthPro',
-    category: 'Subscription & Billing',
-    question: 'My Deep Dive Report never generated after purchase — what happened?',
-    answer:
-      'First, check your internet connection and force-close/reopen the app — the report compiles in the background and can take up to 60 seconds. Go to SleuthPro > My Reports to see if it completed. If it\'s not there after 5 minutes, submit a support ticket with your Apple purchase receipt and the search details. Our team will verify the purchase and either regenerate the report or arrange a refund.',
-    keywords: ['deep dive', 'not generated', 'purchase', 'report missing', 'spinner', 'didn\'t load'],
-  },
-  {
-    id: 'sp-sub-5',
-    app: 'SleuthPro',
-    category: 'Subscription & Billing',
-    question: 'How do I cancel my SleuthPro subscription?',
-    answer:
-      'Go to iPhone Settings > [Your Name] > Subscriptions > SleuthPro > Cancel Subscription. Your current tier access continues until the end of your billing period and you won\'t be charged again.',
-    keywords: ['cancel', 'stop', 'end subscription', 'unsubscribe'],
-  },
-  {
-    id: 'sp-sub-6',
-    app: 'SleuthPro',
-    category: 'Subscription & Billing',
-    question: 'I was charged but my tier wasn\'t upgraded — what do I do?',
-    answer:
-      'First, try Restore Purchases in SleuthPro Settings. If your tier still doesn\'t reflect the upgrade, submit a support ticket and include your Apple receipt (screenshot from App Store > Account > Purchase History). We\'ll manually verify and update your account.',
-    keywords: ['charged', 'not upgraded', 'tier wrong', 'billing issue', 'receipt'],
-  },
-  {
-    id: 'sp-sub-7',
-    app: 'SleuthPro',
-    category: 'Subscription & Billing',
-    question: 'How do I request a refund for a Deep Dive Report I didn\'t receive?',
-    answer:
-      'Visit reportaproblem.apple.com, sign in with the Apple ID used for the purchase, find the SleuthPro charge, and request a refund. You can also submit a support ticket with your receipt — we\'ll investigate and assist with the Apple refund process.',
-    keywords: ['refund', 'deep dive', 'didn\'t receive', 'money back', 'apple', 'report'],
+    id: 'sq-search-3',
+    app: 'Search Quest',
+    category: 'How to Search',
+    question: 'Why are my search results limited or empty?',
+    answer: 'Make sure you are connected to the internet, and add more detail to narrow the search. An active subscription is required to view full results. Public records can also lag 30 to 90 days behind real life.',
+    keywords: ['no results', 'empty', 'limited', 'not found', 'missing'],
   },
 
-  // Search Features
+  // Reading Your Report
   {
-    id: 'sp-search-1',
-    app: 'SleuthPro',
-    category: 'Search Features',
-    question: 'How do I search for a person in SleuthPro?',
-    answer:
-      'From the home screen, tap New Search. Enter as much information as you have — first name, last name, city, state, age range, or phone number. More details improve accuracy and narrow the results. Tap Search to run the query. Results appear within seconds.',
-    keywords: ['search', 'find person', 'how to', 'new search', 'start search'],
+    id: 'sq-report-1',
+    app: 'Search Quest',
+    category: 'Reading Your Report',
+    question: 'What information is in a report?',
+    answer: 'Each report can include full name and aliases, age, current location, address history, phone numbers, email addresses, relatives, social media profiles, and employment history.',
+    keywords: ['report', 'sections', 'contains', 'data', 'information'],
   },
   {
-    id: 'sp-search-2',
-    app: 'SleuthPro',
-    category: 'Search Features',
-    question: 'What information can SleuthPro find?',
-    answer:
-      'Depending on your subscription tier, SleuthPro may provide: full name and known aliases, current and previous addresses, phone numbers, email addresses, known relatives and associates, social media profiles, and general public record history. More detail is unlocked on Pro and Professional tiers.',
-    keywords: ['what information', 'data', 'find', 'results', 'records', 'show'],
-  },
-  {
-    id: 'sp-search-3',
-    app: 'SleuthPro',
-    category: 'Search Features',
-    question: 'Why do some result fields show "Upgrade Required"?',
-    answer:
-      'Certain data fields are only available on higher subscription tiers. Basic shows a limited view, Pro expands to more detailed records, and Professional unlocks all available information. To see those fields, upgrade your plan in SleuthPro > Settings > Subscription > Upgrade Plan.',
-    keywords: ['upgrade required', 'locked', 'tier', 'upgrade', 'more data'],
-  },
-  {
-    id: 'sp-search-4',
-    app: 'SleuthPro',
-    category: 'Search Features',
-    question: 'Why does my search return no results?',
-    answer:
-      'Try broadening your search — use first name and last name without a city, or try an alternate spelling of the name. Very common names may need extra detail like state or approximate age. If you\'re certain the person exists but there are no results, it likely means very limited public records exist for that individual.',
-    keywords: ['no results', 'nothing found', 'empty', 'can\'t find', 'zero results'],
-  },
-  {
-    id: 'sp-search-5',
-    app: 'SleuthPro',
-    category: 'Search Features',
-    question: 'How current is the data in SleuthPro?',
-    answer:
-      'SleuthPro aggregates data from public record sources that update on their own schedules — some daily, some weekly, some monthly. The data reflects the most recently available public records but may not include changes from the past 30–90 days.',
-    keywords: ['current', 'up to date', 'recent', 'old data', 'how fresh'],
-  },
-  {
-    id: 'sp-search-6',
-    app: 'SleuthPro',
-    category: 'Search Features',
-    question: 'Can I save search results?',
-    answer:
-      'Yes. On any search result, tap the Save or Bookmark icon to store it in My Reports. Saved reports are accessible anytime under the My Reports tab, even without an internet connection.',
-    keywords: ['save', 'bookmark', 'my reports', 'saved results', 'store'],
-  },
-  {
-    id: 'sp-search-7',
-    app: 'SleuthPro',
-    category: 'Search Features',
-    question: 'How many searches can I perform?',
-    answer:
-      'Search limits depend on your tier: Basic has a limited monthly search quota, Pro offers significantly more searches per month, and Professional includes unlimited searches. You can view your current usage at SleuthPro > Settings > Search Quota.',
-    keywords: ['search limit', 'quota', 'how many', 'unlimited', 'monthly'],
+    id: 'sq-report-2',
+    app: 'Search Quest',
+    category: 'Reading Your Report',
+    question: 'How do I save or share a report?',
+    answer: 'Open any result and tap the bookmark icon to save it to your on-device Reports Vault (the Reports tab). Pro subscribers can also export a report as a PDF to share via AirDrop, Messages, or email.',
+    keywords: ['save', 'share', 'export', 'pdf', 'reports vault'],
   },
 
-  // Deep Dive Investigation
+  // Siri Voice
   {
-    id: 'sp-dd-1',
-    app: 'SleuthPro',
-    category: 'Deep Dive Investigation',
-    question: 'What\'s included in a Deep Dive Investigation report?',
-    answer:
-      'A Deep Dive report provides the most comprehensive data available from all public sources, including: full address history, all associated phone numbers, known relatives and associates, professional history, social media profiles, and all available public record data. The report typically compiles in 30–60 seconds.',
-    keywords: ['deep dive', 'included', 'what\'s in', 'report', 'comprehensive', 'details'],
-  },
-  {
-    id: 'sp-dd-2',
-    app: 'SleuthPro',
-    category: 'Deep Dive Investigation',
-    question: 'My Deep Dive report shows N/A in some sections — is that normal?',
-    answer:
-      'Yes, this is completely normal. N/A means no publicly available records were found for that specific data category for this person. Not everyone has every type of public record. The completeness of a Deep Dive report depends entirely on what public records exist for the subject.',
-    keywords: ['n/a', 'empty sections', 'incomplete', 'missing data', 'not available', 'normal'],
-  },
-  {
-    id: 'sp-dd-3',
-    app: 'SleuthPro',
-    category: 'Deep Dive Investigation',
-    question: 'Can I share or export my Deep Dive report?',
-    answer:
-      'Yes. On the report screen, tap the Share button to open the iOS share sheet. You can send the report via Messages, email, or save it as a PDF to your Files app. All saved reports are also accessible in the My Reports tab anytime.',
-    keywords: ['share', 'export', 'pdf', 'send', 'report', 'download'],
-  },
-  {
-    id: 'sp-dd-4',
-    app: 'SleuthPro',
-    category: 'Deep Dive Investigation',
-    question: 'How many Deep Dive reports can I purchase?',
-    answer:
-      'Deep Dive is an à la carte add-on with no limit. Each purchase covers one investigation report for one specific search subject. You can buy as many Deep Dive reports as you need, independently of your subscription tier.',
-    keywords: ['how many', 'limit', 'multiple', 'purchase again', 'à la carte'],
+    id: 'sq-siri-1',
+    app: 'Search Quest',
+    category: 'Siri Voice',
+    question: 'How do I search hands-free with Siri?',
+    answer: 'Say "Hey Siri," then a phrase that clearly contains "Search Quest," such as "Search Quest look up a person." Siri opens the app and asks for the details. You can also open your last report or have a report read aloud. Set up shortcuts in Account then Siri Voice Commands.',
+    keywords: ['siri', 'voice', 'hands-free', 'shortcuts', 'speak'],
   },
 
-  // Privacy & Legal (SleuthPro)
+  // Subscription & Billing
   {
-    id: 'sp-priv-1',
-    app: 'SleuthPro',
+    id: 'sq-bill-1',
+    app: 'Search Quest',
+    category: 'Subscription & Billing',
+    question: 'How do I manage or cancel my subscription?',
+    answer: 'Subscriptions are billed through Apple. Manage, upgrade, or cancel at iPhone Settings > [Your Name] > Subscriptions > Search Quest. Changes take effect at the end of the current billing period.',
+    keywords: ['manage', 'cancel', 'subscription', 'billing', 'upgrade'],
+  },
+  {
+    id: 'sq-bill-2',
+    app: 'Search Quest',
+    category: 'Subscription & Billing',
+    question: 'How do I restore a purchase after reinstalling?',
+    answer: 'Open the Account tab and tap Restore Purchases, using the same Apple ID you subscribed with. Your plan will be restored automatically.',
+    keywords: ['restore', 'purchase', 'reinstall', 'apple id'],
+  },
+
+  // Alerts & Security
+  {
+    id: 'sq-alert-1',
+    app: 'Search Quest',
+    category: 'Alerts & Security',
+    question: 'What are alerts?',
+    answer: 'With a Pro subscription you can set an alert on a saved person and be notified when new information — such as an address or phone change — appears. Manage them in the Alerts tab.',
+    keywords: ['alert', 'monitor', 'notify', 'watch'],
+  },
+  {
+    id: 'sq-alert-2',
+    app: 'Search Quest',
+    category: 'Alerts & Security',
+    question: 'Can I protect my saved reports?',
+    answer: 'Yes. Enable Face ID or Touch ID in the Account tab and Search Quest will require biometric authentication when the app opens. Your history and saved reports are stored privately on your device.',
+    keywords: ['face id', 'touch id', 'security', 'private', 'protect', 'biometric'],
+  },
+
+  // Privacy & Legal
+  {
+    id: 'sq-legal-1',
+    app: 'Search Quest',
     category: 'Privacy & Legal',
-    question: 'Can people tell if I searched for them in SleuthPro?',
-    answer:
-      'No. All searches are completely private. The subject of a search is never notified, and no record of your search is shared with the person you searched for.',
-    keywords: ['private', 'anonymous', 'notified', 'see', 'know', 'searched'],
+    question: 'Is Search Quest legal to use, and is my search private?',
+    answer: 'Search Quest compiles publicly available and licensed records for personal, informational use, and your searches are completely private — the person you look up is never notified. Search Quest is NOT a consumer reporting agency under the Fair Credit Reporting Act (FCRA), and its information may NOT be used for employment, tenant screening, credit, insurance, or any other FCRA-regulated purpose, or to stalk or harass anyone.',
+    keywords: ['legal', 'fcra', 'privacy', 'private', 'permissible', 'notified'],
   },
   {
-    id: 'sp-priv-2',
-    app: 'SleuthPro',
+    id: 'sq-legal-2',
+    app: 'Search Quest',
     category: 'Privacy & Legal',
-    question: 'My own information appears in SleuthPro — how do I remove it?',
-    answer:
-      'SleuthPro displays publicly available records data. We cannot modify public records directly, but we can submit data suppression requests to our data providers. Submit a support ticket identifying specifically what information appears and your full name — our team will initiate the data removal process.',
-    keywords: ['remove', 'myself', 'own information', 'data removal', 'opt out', 'personal'],
-  },
-  {
-    id: 'sp-priv-3',
-    app: 'SleuthPro',
-    category: 'Privacy & Legal',
-    question: 'I found incorrect information in a SleuthPro search result — what do I do?',
-    answer:
-      'Submit a support ticket identifying the incorrect data. We can flag inaccuracies to our data providers for review and correction in future record updates. Please include the search subject\'s name and the specific data that appears to be incorrect.',
-    keywords: ['incorrect', 'wrong', 'inaccurate', 'error', 'false information', 'report'],
+    question: 'Will the person I search know about it?',
+    answer: 'No. Searches are completely private and confidential. The subject of a search is never notified.',
+    keywords: ['notified', 'private', 'anonymous', 'know'],
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -1002,7 +892,7 @@ export const ALL_FAQS: FAQ[] = [
     category: 'General',
     question: 'How do I restore a purchase after deleting and reinstalling an app?',
     answer:
-      'Open the reinstalled app, go to Settings (gear icon), and tap Restore Purchases. Make sure you are signed in with the same Apple ID used for the original purchase. Your subscription activates immediately. This works for all three DreamTeamApps — FishingPalPro, PlayListAI, and SleuthPro.',
+      'Open the reinstalled app, go to Settings (gear icon), and tap Restore Purchases. Make sure you are signed in with the same Apple ID used for the original purchase. Your subscription activates immediately. This works for all three DreamTeamApps — FishingPalPro, PlayListAI, and Search Quest.',
     keywords: ['restore', 'reinstall', 'deleted', 'lost', 'purchase', 'all apps'],
   },
   {
@@ -1011,7 +901,7 @@ export const ALL_FAQS: FAQ[] = [
     category: 'General',
     question: 'Where are my DreamTeamApps subscriptions managed?',
     answer:
-      'All subscriptions are managed through Apple and your Apple ID — not through our apps directly. To view, modify, or cancel: go to iPhone Settings > [Your Name] > Subscriptions. You\'ll see all active App Store subscriptions including FishingPalPro, PlayListAI, and SleuthPro.',
+      'All subscriptions are managed through Apple and your Apple ID — not through our apps directly. To view, modify, or cancel: go to iPhone Settings > [Your Name] > Subscriptions. You\'ll see all active App Store subscriptions including FishingPalPro, PlayListAI, and Search Quest.',
     keywords: ['manage', 'subscriptions', 'apple', 'apple id', 'where', 'settings'],
   },
   {
@@ -1047,7 +937,7 @@ export const ALL_FAQS: FAQ[] = [
     category: 'General',
     question: 'Are DreamTeamApps available on Android?',
     answer:
-      'FishingPalPro, PlayListAI, and SleuthPro are currently iOS-only apps. Android versions are not available at this time but may be considered for future development.',
+      'FishingPalPro, PlayListAI, and Search Quest are currently iOS-only apps. Android versions are not available at this time but may be considered for future development.',
     keywords: ['android', 'google play', 'other platform', 'non-apple', 'cross platform'],
   },
 
@@ -1061,7 +951,7 @@ export const ALL_FAQS: FAQ[] = [
     app: 'AppSupportDesk',
     category: 'System Overview',
     question: 'What is AppSupport Desk and what is it used for?',
-    answer: 'AppSupport Desk is the internal customer support management system for DreamTeamApps. It is used by support agents to receive, track, respond to, and resolve support tickets submitted by customers using FishingPalPro, PlayListAI, and SleuthPro. The system also powers a public-facing customer portal where users can submit tickets and search the FAQ, and it includes an AI-assisted chatbot that automatically handles common questions 24/7 using the FAQ knowledge base.',
+    answer: 'AppSupport Desk is the internal customer support management system for DreamTeamApps. It is used by support agents to receive, track, respond to, and resolve support tickets submitted by customers using FishingPalPro, PlayListAI, and Search Quest. The system also powers a public-facing customer portal where users can submit tickets and search the FAQ, and it includes an AI-assisted chatbot that automatically handles common questions 24/7 using the FAQ knowledge base.',
     keywords: ['overview', 'what is', 'system', 'purpose', 'appsupport', 'helpdesk'],
   },
   {
@@ -1077,8 +967,8 @@ export const ALL_FAQS: FAQ[] = [
     app: 'AppSupportDesk',
     category: 'System Overview',
     question: 'Which apps does DreamTeamApps currently support through AppSupport Desk?',
-    answer: 'AppSupport Desk currently handles support for three iOS applications: FishingPalPro (a lunar-phase-based fishing forecast and catch logging app), PlayListAI (an AI-powered playlist creation and management app that works with both Apple Music and Spotify), and SleuthPro (a public records and people search investigation app). Each app has its own ticket category, FAQ section, and chatbot training data. When working a ticket, always confirm which app the customer is writing about before researching an answer.',
-    keywords: ['apps', 'FishingPalPro', 'PlayListAI', 'SleuthPro', 'DreamTeamApps', 'products'],
+    answer: 'AppSupport Desk currently handles support for three iOS applications: FishingPalPro (a lunar-phase-based fishing forecast and catch logging app), PlayListAI (an AI-powered playlist creation and management app that works with both Apple Music and Spotify), and Search Quest (a people and contact lookup app). Each app has its own ticket category, FAQ section, and chatbot training data. When working a ticket, always confirm which app the customer is writing about before researching an answer.',
+    keywords: ['apps', 'FishingPalPro', 'PlayListAI', 'Search Quest', 'DreamTeamApps', 'products'],
   },
   {
     id: 'asd-overview-4',
@@ -1119,7 +1009,7 @@ export const ALL_FAQS: FAQ[] = [
     app: 'AppSupportDesk',
     category: 'Navigation & Sidebar',
     question: 'How do I filter and search the ticket list?',
-    answer: 'At the top of the Tickets page there are two filter controls: (1) A search box — type any text to filter tickets by subject, customer name, or customer email in real time. (2) An App dropdown — select FishingPalPro, PlayListAI, or SleuthPro to show only tickets for that app, or leave it on All Apps to see everything. You can combine both filters at the same time. The ticket count updates to reflect how many tickets match your current filters.',
+    answer: 'At the top of the Tickets page there are two filter controls: (1) A search box — type any text to filter tickets by subject, customer name, or customer email in real time. (2) An App dropdown — select FishingPalPro, PlayListAI, or Search Quest to show only tickets for that app, or leave it on All Apps to see everything. You can combine both filters at the same time. The ticket count updates to reflect how many tickets match your current filters.',
     keywords: ['filter', 'search', 'find', 'tickets', 'app filter', 'narrow down'],
   },
 
@@ -1778,4 +1668,4 @@ export function searchFAQs(query: string, app?: FAQ['app']): FAQ[] {
   )
 }
 
-export const APP_NAMES: FAQ['app'][] = ['FishingPalPro', 'PlayListAI', 'SleuthPro', 'SkinGuardAI', 'GigStand', 'General', 'AppSupportDesk']
+export const APP_NAMES: FAQ['app'][] = ['FishingPalPro', 'PlayListAI', 'Search Quest', 'SkinGuardAI', 'GigStand', 'General', 'AppSupportDesk']
