@@ -762,7 +762,7 @@ export const ALL_FAQS: FAQ[] = [
     app: 'Search Quest',
     category: 'Getting Started',
     question: 'What devices does Search Quest run on?',
-    answer: 'Search Quest runs on iPhone and iPad. Download it from the App Store and start with a 15-day free trial.',
+    answer: 'Search Quest runs on iPhone and iPad. Download it from the App Store and start with a 2-week free trial.',
     keywords: ['device', 'iphone', 'ipad', 'requirement', 'download'],
   },
   {
@@ -770,7 +770,7 @@ export const ALL_FAQS: FAQ[] = [
     app: 'Search Quest',
     category: 'Getting Started',
     question: 'What plans are available?',
-    answer: 'Search Quest offers two plans: Basic for everyday lookups, and Pro for unlimited searches plus PDF export, alerts, and the full Siri suite. Both are billed through Apple (Monthly or Annual) and include a 15-day free trial.',
+    answer: 'Search Quest offers two plans: Basic for everyday lookups, and Pro for unlimited searches plus PDF export, alerts, and the full Siri suite. Both are billed through Apple (Monthly or Annual) and include a 2-week free trial.',
     keywords: ['plan', 'tier', 'basic', 'pro', 'price', 'subscription', 'free trial'],
   },
 
