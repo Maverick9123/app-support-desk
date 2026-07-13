@@ -1500,6 +1500,15 @@ export const ALL_FAQS: FAQ[] = [
       'Yes. Your songs, charts, setlists, and backing tracks live on your device and perform with no internet connection — perfect for venues with unreliable Wi-Fi. The only feature that uses the internet is the optional AI Chart Assistant, and only at the moment you tap Generate. Everything else, including the entire performance, is fully offline.',
     keywords: ['offline', 'internet', 'wifi', 'connection', 'no signal', 'airplane mode'],
   },
+  {
+    id: 'gs-gs-4',
+    app: 'GigStand',
+    category: 'Getting Started',
+    question: 'How can I try GigStand quickly without adding my own songs?',
+    answer:
+      'On a fresh install the Songs screen is empty — tap "Load Sample Setlist" there (or Settings > Demo Content) to instantly load two ready-to-play demo songs, complete with chord charts AND backing tracks, plus a Sample Setlist. Open the Sample Setlist and tap Play to explore Stage Mode, live transpose, auto-scroll, backing-track playback, and foot-pedal navigation before you add a single song of your own.',
+    keywords: ['demo', 'sample', 'try', 'example', 'load sample setlist', 'getting started', 'test'],
+  },
 
   // Charts & Setlists
   {
@@ -1602,8 +1611,8 @@ export const ALL_FAQS: FAQ[] = [
     category: 'Stage Mode & Performance',
     question: 'How do I connect a Bluetooth foot pedal?',
     answer:
-      'Page-turner pedals (AirTurn, iRig BlueTurn, Donner, and others) connect like a Bluetooth keyboard. Put the pedal in pairing mode and set it to its "keyboard" or "page-turn" mode, then add it in iPad Settings > Bluetooth — no setup is needed inside GigStand. In Stage Mode: → / ↓ / Space go to the next song, ← / ↑ go to the previous, and Return/Enter starts or stops the song (track + scroll).',
-    keywords: ['foot pedal', 'bluetooth', 'pedal', 'airturn', 'page turner', 'pair', 'connect', 'hands free'],
+      'Page-turner pedals (AirTurn, iRig BlueTurn, Donner, and others) connect like a Bluetooth keyboard. Put the pedal in pairing mode and set it to its keyboard mode, then add it under Settings > Bluetooth on your iPad or Mac — no setup is needed inside GigStand. AirTurn DUO 500 owners: set it to Mode 3 (Mac/PC keyboard) FIRST — hold the Mode button and release after the 3rd red blink; in its default App-Direct mode it sends nothing to a computer (a quick test is that it types in any text box). In Stage Mode, GigStand responds to these keys: Page Up (or Return/Enter) starts or stops the song; Page Down (or → / ↓ / Space) advances to the next song; ← / ↑ go to the previous. A simple two-pedal setup is left pedal = start/stop, right pedal = next song. Note: the pedal only works on the Stage Mode screen, and next/previous need a setlist with more than one song.',
+    keywords: ['foot pedal', 'bluetooth', 'pedal', 'airturn', 'duo 500', 'mode 3', 'page turner', 'pair', 'connect', 'hands free'],
   },
   {
     id: 'gs-stage-3',
