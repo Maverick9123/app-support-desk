@@ -252,7 +252,15 @@ export async function getStats(): Promise<{
 }> {
   const [totals, byApp, archivedCount] = await Promise.all([
     sql`SELECT status, COUNT(*) as count FROM tickets WHERE archived = false GROUP BY status`,
-    sql`SELECT app, COUNT(*) as count FROM tickets WHERE app IS NOT NULL AND archived = false GROUP BY app`,
+    // "Active" must mean the SAME thing everywhere. The sidebar already defines it
+    // as open + in_progress + pending (see totalActive), but this per-app count was
+    // just "not archived" — so a CLOSED ticket still showed as an active ticket on
+    // the dashboard card and the app's sidebar badge. Bruce closed #5 and PlayListAI
+    // stubbornly kept showing 1. Closed and resolved are finished; they aren't active.
+    sql`SELECT app, COUNT(*) as count FROM tickets
+        WHERE app IS NOT NULL AND archived = false
+          AND status IN ('open', 'in_progress', 'pending')
+        GROUP BY app`,
     sql`SELECT COUNT(*) as count FROM tickets WHERE archived = true`,
   ])
   const stats = {
