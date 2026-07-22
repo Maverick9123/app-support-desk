@@ -1621,6 +1621,15 @@ export const ALL_FAQS: FAQ[] = [
       'The AI Chart Assistant is a GigStand Premium feature. If you\'re on the free tier, tapping it opens the upgrade screen. Premium (Monthly, Annual, or Lifetime) also unlocks backing-track imports and the rest of the premium features.',
     keywords: ['ai', 'free', 'premium', 'cost', 'price', 'subscription', 'pay'],
   },
+  {
+    id: 'gs-ai-6',
+    app: 'GigStand',
+    category: 'AI Chart Assistant',
+    question: 'What if the AI Chart Assistant is unavailable or I have no internet — can I still use GigStand?',
+    answer:
+      'Yes — completely. The AI Chart Assistant is the only part of GigStand that ever uses the internet, and it is entirely optional. If you are offline, or the assistant is ever unavailable, nothing else is affected: you can still create charts (type them in ChordPro or import a PDF), build and reorder setlists, transpose, play backing tracks, and run your entire performance in Stage Mode — all with no connection. Your songs live on your device, so dead venue Wi-Fi never touches your show. The only thing that pauses when you are offline is the "Generate with AI" button; everything else works exactly the same.',
+    keywords: ['offline', 'no internet', 'ai down', 'unavailable', 'wifi', 'connection', 'still work', 'without ai', 'venue', 'no signal'],
+  },
 
   // Stage Mode, Pedal & Tracks
   {
