@@ -1530,6 +1530,33 @@ export const ALL_FAQS: FAQ[] = [
     keywords: ['pdf', 'import', 'chordify', 'chart', 'file', 'sheet'],
   },
   {
+    id: 'gs-chart-desktop',
+    app: 'GigStand',
+    category: 'Charts & Setlists',
+    question: 'What software can I use on my computer to make a chord chart for GigStand?',
+    answer:
+      "The format you want is called ChordPro — chords in square brackets sitting over the lyrics. There is no GigStand-specific file type: any PDF works, and any ChordPro text works. The simplest free way is to type your song in Pages, Word, or Google Docs using a monospace font (like Menlo or Courier) so the chords line up over the words, then choose File → Print → Save as PDF and import that. For the best results, use a dedicated ChordPro editor such as Chord Provider (free, macOS) or ChordPro Buddy (Mac App Store); these let you type chords over lyrics and export BOTH a .chordpro text file and a PDF. You can also skip outside software entirely and use GigStand's built-in AI Chart Assistant, which builds the chart from pasted lyrics and chords.",
+    keywords: ['software', 'app', 'computer', 'mac', 'create', 'make', 'chordpro editor', 'chord provider', 'chordpro buddy', 'pages', 'word', 'desktop', 'how do i make'],
+  },
+  {
+    id: 'gs-chart-textvspdf',
+    app: 'GigStand',
+    category: 'Charts & Setlists',
+    question: 'Should I import a PDF or type the chords as text?',
+    answer:
+      'Type or paste the chords as text whenever you can. A typed ChordPro chart transposes to any key and resizes for readability right inside GigStand. A PDF is a frozen image — its key and size are baked into the page, so it cannot be transposed or reflowed. Use a PDF when you are playing along to a fixed recording (where the key is fixed anyway) or when you already have a chart you would rather not retype. For your own songs, the text chart is almost always the better choice.',
+    keywords: ['pdf', 'text', 'chordpro', 'which', 'better', 'transpose', 'format', 'paste', 'type', 'frozen'],
+  },
+  {
+    id: 'gs-chart-chordify-nofile',
+    app: 'GigStand',
+    category: 'Charts & Setlists',
+    question: "Chordify won't give me a file I can import — how do I get those chords into GigStand?",
+    answer:
+      "Chordify shows chords in its web player but does not export a chart file, so there is nothing to hand GigStand directly. Use one of three easy paths instead: read the chords off Chordify and type them into GigStand's chart box in ChordPro (chords in [brackets] over the lyrics); paste your lyrics and chords into the built-in AI Chart Assistant and let it build the chart; or make a PDF with a ChordPro editor or a word processor (see the software question above) and import that. You never need Chordify to produce a special file.",
+    keywords: ['chordify', 'export', 'import', 'file', 'cant', 'no file', 'download', 'chords', 'website'],
+  },
+  {
     id: 'gs-chart-3',
     app: 'GigStand',
     category: 'Charts & Setlists',
