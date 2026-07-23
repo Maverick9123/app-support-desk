@@ -1668,6 +1668,15 @@ export const ALL_FAQS: FAQ[] = [
       'Open a song → Edit tab → Backing Track section → "Add Backing Track," and choose an audio file (MP3, M4A, or WAV). Get files onto your device via the Files app, iCloud Drive, Dropbox, or AirDrop. In Stage Mode a track bar appears above the controls; tap play (or stomp a foot pedal) and the track starts while the chart scrolls in time. Backing-track imports are a Premium feature.',
     keywords: ['backing track', 'audio', 'mp3', 'm4a', 'wav', 'import', 'track', 'music'],
   },
+  {
+    id: 'gs-track-2',
+    app: 'GigStand',
+    category: 'Stage Mode & Performance',
+    question: "There's no sound, the backing track won't play, and the controls are frozen — how do I fix it?",
+    answer:
+      'This is almost always a "stuck audio session" — another app, a phone call, or the microphone briefly grabbed your device\'s sound and GigStand can\'t get it back. It is NOT a problem with the app or your songs, and nothing is lost. Fix it in this order: (1) Fully quit GigStand and reopen it — on a Mac press Command-Q, on an iPad or iPhone swipe it away in the app switcher — then try again. (2) If it is still silent, restart the device (power all the way off, then back on). This clears the stuck audio session at the system level and resolves the large majority of cases. (3) Check that the device is not muted and the volume is up, and disconnect any Bluetooth speaker or headphones, since audio can silently route to a device that is no longer nearby. Please do NOT delete the app to fix this: your songs and setlists live on the device and deleting can erase them, while a simple restart is the real fix. (Your Premium purchase is always safe — it can be restored with "Restore Purchases.")',
+    keywords: ['no sound', 'silent', 'no audio', 'backing track', 'wont play', 'frozen', 'stuck', 'stop button', 'unresponsive', 'restart', 'reboot', 'not working', 'controls', 'command q'],
+  },
 
   // Subscription & Privacy
   {
