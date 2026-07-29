@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { Home, FileText, Plus, Users, Settings, Globe, Fish, Music, Search, ShieldCheck, Guitar, LogOut, ChevronRight, Archive, BookOpen } from 'lucide-react'
+import { Home, FileText, Plus, Users, Settings, Globe, Fish, Music, Search, ShieldCheck, Guitar, Flame, LogOut, ChevronRight, Archive, BookOpen } from 'lucide-react'
 import { Stats } from '@/types'
 
 interface AgentInfo {
@@ -41,6 +41,7 @@ export function Sidebar() {
   const spCount = byApp['Search Quest'] || 0
   const sgaCount = byApp['SkinGuardAI'] || 0
   const gsCount = byApp['GigStand'] || 0
+  const disCount = byApp['Does It Slap'] || 0
 
   const navItems = [
     { href: '/dashboard',        label: 'Dashboard',       icon: Home },
@@ -103,6 +104,13 @@ export function Sidebar() {
               <span className="text-xs text-slate-400 group-hover:text-slate-200">GigStand</span>
             </div>
             {gsCount > 0 && <span className="text-xs bg-amber-500/80 text-white px-1.5 py-0.5 rounded-full font-medium">{gsCount}</span>}
+          </Link>
+          <Link href="/tickets?app=Does It Slap" className="flex items-center justify-between px-2 py-1.5 rounded-md hover:bg-white/5 transition-colors group">
+            <div className="flex items-center gap-2">
+              <Flame className="h-3.5 w-3.5 text-[#EC4899]" />
+              <span className="text-xs text-slate-400 group-hover:text-slate-200">Does It Slap</span>
+            </div>
+            {disCount > 0 && <span className="text-xs bg-pink-500/80 text-white px-1.5 py-0.5 rounded-full font-medium">{disCount}</span>}
           </Link>
         </div>
       )}

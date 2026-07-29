@@ -6,7 +6,7 @@
 
 export interface FAQ {
   id: string
-  app: 'FishingPalPro' | 'PlayListAI' | 'Search Quest' | 'SkinGuardAI' | 'GigStand' | 'General' | 'AppSupportDesk'
+  app: 'FishingPalPro' | 'PlayListAI' | 'Search Quest' | 'SkinGuardAI' | 'GigStand' | 'Does It Slap' | 'General' | 'AppSupportDesk'
   category: string
   question: string
   answer: string
@@ -1697,6 +1697,159 @@ export const ALL_FAQS: FAQ[] = [
       'GigStand has no account, no login, no analytics, and no tracking. Your songs, charts, setlists, and tracks stay in the app\'s private storage on your device. The single exception is the optional AI Chart Assistant: when you use it, the lyrics and chords you enter are sent securely to our server and to Anthropic solely to build your chart, and are not stored afterward or sold. See our Privacy Policy for full details.',
     keywords: ['privacy', 'data', 'collect', 'account', 'tracking', 'personal', 'anthropic'],
   },
+  {
+    id: 'dis-start-1',
+    app: 'Does It Slap',
+    category: 'Getting Started',
+    question: 'What is Does It Slap?',
+    answer:
+      'Does It Slap? is a pass-the-phone party game. Everybody rates the same song in secret, then the app reveals the scores, the verdict, and whose taste actually won the night. You play the songs however you like — the app handles the rating, the reveal, and the awards.',
+    keywords: ['what', 'about', 'does it slap', 'overview', 'party', 'game', 'music', 'rating'],
+  },
+  {
+    id: 'dis-start-2',
+    app: 'Does It Slap',
+    category: 'Getting Started',
+    question: 'Does the app play the music for me?',
+    answer:
+      'No — you play songs your own way (aux cord, speaker, another phone). Does It Slap is the scorecard and the drama, not a music player, so any song ever made is fair game.',
+    keywords: ['music', 'play', 'song', 'spotify', 'apple music', 'stream', 'audio'],
+  },
+  {
+    id: 'dis-start-3',
+    app: 'Does It Slap',
+    category: 'Getting Started',
+    question: 'How many people can play?',
+    answer:
+      'Anywhere from 2 to 8 players. The more mixed the music taste, the better the arguments.',
+    keywords: ['players', 'how many', 'people', 'minimum', 'maximum', 'group'],
+  },
+  {
+    id: 'dis-start-4',
+    app: 'Does It Slap',
+    category: 'Getting Started',
+    question: 'Do I need an internet connection?',
+    answer:
+      'No — game night works fully offline. You only need a connection to buy or restore the Party Pack.',
+    keywords: ['internet', 'offline', 'wifi', 'connection', 'data'],
+  },
+  {
+    id: 'dis-play-1',
+    app: 'Does It Slap',
+    category: 'How to Play',
+    question: 'How does a round work?',
+    answer:
+      'Someone is the DJ and plays a song. The phone gets passed around and each player secretly answers five quick questions — did the first ten seconds grab you, is the hook stuck in your head, goosebumps or not, would you replay it, and your final verdict (Nap / Mid / Slaps / Certified Banger). The app tallies a Slap Score and reads the room\'s verdict out loud.',
+    keywords: ['round', 'how to play', 'rules', 'dj', 'rate', 'turn', 'gameplay'],
+  },
+  {
+    id: 'dis-play-2',
+    app: 'Does It Slap',
+    category: 'How to Play',
+    question: 'Round Battle vs. Classic — what is the difference?',
+    answer:
+      'Round Battle — everyone takes a turn as DJ, and best taste wins the night. Classic — one song, everybody rates, see where you landed.',
+    keywords: ['mode', 'round battle', 'classic', 'difference', 'game mode'],
+  },
+  {
+    id: 'dis-play-3',
+    app: 'Does It Slap',
+    category: 'How to Play',
+    question: 'How is the Slap Score figured out?',
+    answer:
+      'Each card becomes a score out of 100: the rating questions carry most of the weight, your final verdict swings it, and goosebumps add a small honest bonus. The round\'s average sets the verdict line the room reads out loud.',
+    keywords: ['score', 'slap score', 'points', 'rating', 'how scored', 'winner'],
+  },
+  {
+    id: 'dis-pack-1',
+    app: 'Does It Slap',
+    category: 'Decks & Party Pack',
+    question: 'Which decks are free?',
+    answer:
+      'The Core deck is free, forever.',
+    keywords: ['free', 'decks', 'core', 'cost', 'price'],
+  },
+  {
+    id: 'dis-pack-2',
+    app: 'Does It Slap',
+    category: 'Decks & Party Pack',
+    question: 'What is the Party Pack?',
+    answer:
+      'A one-time purchase (not a subscription) that unlocks the extra decks — Sleepover, Throwback, and Guilty Pleasures. Buy it once and it is yours for good on your Apple Account. The price is shown right on the unlock screen.',
+    keywords: ['party pack', 'unlock', 'purchase', 'buy', 'decks', 'sleepover', 'throwback', 'guilty pleasures', 'subscription'],
+  },
+  {
+    id: 'dis-pack-3',
+    app: 'Does It Slap',
+    category: 'Decks & Party Pack',
+    question: 'I paid, but the decks are locked — or I got a new phone.',
+    answer:
+      'Tap Restore Purchases on the unlock screen. Make sure you are signed in with the same Apple Account you bought it with, and that you are connected to the internet.',
+    keywords: ['restore', 'purchase', 'locked', 'new phone', 'paid', 'missing', 'unlock'],
+  },
+  {
+    id: 'dis-rec-1',
+    app: 'Does It Slap',
+    category: 'Recording & Sharing',
+    question: 'How do I record our game?',
+    answer:
+      'On the home screen, turn on "Record this game" before you start. Want faces in it too? Turn on "Film our reactions" to tuck your front camera and mic in the corner. The clip stays private on your phone until you choose to share it.',
+    keywords: ['record', 'recording', 'video', 'clip', 'film', 'capture', 'reactions'],
+  },
+  {
+    id: 'dis-rec-2',
+    app: 'Does It Slap',
+    category: 'Recording & Sharing',
+    question: 'Where do my clips go?',
+    answer:
+      'They save to your phone\'s Photos — nothing is uploaded automatically. From there, share them anywhere you like.',
+    keywords: ['clips', 'photos', 'save', 'share', 'video', 'where'],
+  },
+  {
+    id: 'dis-rec-3',
+    app: 'Does It Slap',
+    category: 'Recording & Sharing',
+    question: 'The song is not in my recording.',
+    answer:
+      'Recordings capture the app plus your microphone, so play the song out loud in the room and keep "Film our reactions" (which turns on the mic) on — that is what catches the music and the yelling.',
+    keywords: ['recording', 'no sound', 'song', 'audio', 'music', 'missing', 'microphone'],
+  },
+  {
+    id: 'dis-priv-1',
+    app: 'Does It Slap',
+    category: 'Permissions & Privacy',
+    question: 'Why does it ask for camera, mic, and photos access?',
+    answer:
+      'Only when you record: camera and mic power "Film our reactions," and photo access is to save your finished clip to your library. Skip recording and you can decline them all — the game still plays.',
+    keywords: ['permission', 'camera', 'microphone', 'photos', 'access', 'privacy', 'why'],
+  },
+  {
+    id: 'dis-priv-2',
+    app: 'Does It Slap',
+    category: 'Permissions & Privacy',
+    question: 'What data do you collect?',
+    answer:
+      'Game night stays on your device — no account, no tracking. See the full privacy policy at https://maverick9123.github.io/doesitslap-privacy/.',
+    keywords: ['privacy', 'data', 'collect', 'tracking', 'account', 'personal'],
+  },
+  {
+    id: 'dis-trouble-1',
+    app: 'Does It Slap',
+    category: 'Troubleshooting',
+    question: 'No sound or missing effects?',
+    answer:
+      'Check the phone\'s silent switch and turn the volume up — the app\'s cues and your song both need it.',
+    keywords: ['no sound', 'silent', 'volume', 'audio', 'mute', 'effects'],
+  },
+  {
+    id: 'dis-trouble-2',
+    app: 'Does It Slap',
+    category: 'Troubleshooting',
+    question: 'How do I get more help?',
+    answer:
+      'Head to www.dreamteamapps.com and use Contact or Submit a Ticket — it comes straight to us and we will get you sorted.',
+    keywords: ['help', 'support', 'contact', 'ticket', 'email', 'problem'],
+  },
 ]
 
 export function getFAQsByApp(app: FAQ['app']): FAQ[] {
@@ -1722,4 +1875,4 @@ export function searchFAQs(query: string, app?: FAQ['app']): FAQ[] {
   )
 }
 
-export const APP_NAMES: FAQ['app'][] = ['FishingPalPro', 'PlayListAI', 'Search Quest', 'SkinGuardAI', 'GigStand', 'General', 'AppSupportDesk']
+export const APP_NAMES: FAQ['app'][] = ['FishingPalPro', 'PlayListAI', 'Search Quest', 'SkinGuardAI', 'GigStand', 'Does It Slap', 'General', 'AppSupportDesk']

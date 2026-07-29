@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { ALL_FAQS, getCategories, type FAQ } from '@/lib/faqs-data'
-import { Fish, Music, Search, ShieldCheck, Guitar, ChevronDown, ChevronUp, ExternalLink, ArrowLeft, LifeBuoy } from 'lucide-react'
+import { Fish, Music, Search, ShieldCheck, Guitar, Flame, ChevronDown, ChevronUp, ExternalLink, ArrowLeft, LifeBuoy } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 
 const APP_CONFIG = {
@@ -36,6 +36,12 @@ const APP_CONFIG = {
     color: '#F2A83B',
     icon: Guitar,
   },
+  'Does It Slap': {
+    label: 'Does It Slap',
+    emoji: '🔥',
+    color: '#EC4899',
+    icon: Flame,
+  },
   General: {
     label: 'General',
     emoji: '💬',
@@ -50,7 +56,7 @@ const APP_CONFIG = {
   },
 } as const
 
-type AppName = 'all' | 'FishingPalPro' | 'PlayListAI' | 'Search Quest' | 'SkinGuardAI' | 'GigStand' | 'General' | 'AppSupportDesk'
+type AppName = 'all' | 'FishingPalPro' | 'PlayListAI' | 'Search Quest' | 'SkinGuardAI' | 'GigStand' | 'Does It Slap' | 'General' | 'AppSupportDesk'
 
 function FAQItem({ faq }: { faq: FAQ }) {
   const [open, setOpen] = useState(false)
@@ -182,6 +188,12 @@ export default function FAQPage() {
       emoji: '🎸',
       count: ALL_FAQS.filter(f => f.app === 'GigStand').length,
     },
+    {
+      value: 'Does It Slap',
+      label: 'Does It Slap',
+      emoji: '🔥',
+      count: ALL_FAQS.filter(f => f.app === 'Does It Slap').length,
+    },
   ]
 
   return (
@@ -207,7 +219,7 @@ export default function FAQPage() {
         </div>
         <h1 className="text-3xl font-bold text-white mb-2">Help & FAQ</h1>
         <p className="text-white/90 mb-6">
-          FishingPalPro · PlayListAI · Search Quest · SkinGuardAI · GigStand — Find answers instantly
+          FishingPalPro · PlayListAI · Search Quest · SkinGuardAI · GigStand · Does It Slap — Find answers instantly
         </p>
 
         {/* Search */}
