@@ -6,7 +6,7 @@
 
 export interface FAQ {
   id: string
-  app: 'FishingPalPro' | 'PlayListAI' | 'Search Quest' | 'SkinGuardAI' | 'GigStand' | 'Does It Slap' | 'General' | 'AppSupportDesk'
+  app: 'FishingPalPro' | 'PlayListAI' | 'Search Quest' | 'SkinGuardAI' | 'SaveNote' | 'GigStand' | 'Does It Slap' | 'General' | 'AppSupportDesk'
   category: string
   question: string
   answer: string
@@ -1850,6 +1850,105 @@ export const ALL_FAQS: FAQ[] = [
       'Head to www.dreamteamapps.com and use Contact or Submit a Ticket — it comes straight to us and we will get you sorted.',
     keywords: ['help', 'support', 'contact', 'ticket', 'email', 'problem'],
   },
+  {
+    id: 'sn-start-1',
+    app: 'SaveNote',
+    category: 'Getting Started',
+    question: 'What is SaveNote?',
+    answer:
+      'SaveNote is a hands-free voice-notes app. Speak and it transcribes your words into a note, then organizes everything into categories you choose. It also reads notes back aloud, sets reminders, and has a Home Screen widget. Built for anyone who would rather talk than type — and everything stays private on your device.',
+    keywords: ['what', 'about', 'savenote', 'overview', 'voice notes', 'dictation'],
+  },
+  {
+    id: 'sn-start-2',
+    app: 'SaveNote',
+    category: 'Getting Started',
+    question: 'How do I create a note by voice?',
+    answer:
+      'Tap the microphone / voice-input button, speak your note, and SaveNote transcribes it for you using on-device speech recognition. You can also type or edit any note by hand.',
+    keywords: ['create', 'voice', 'dictate', 'record', 'add note', 'speak', 'transcribe'],
+  },
+  {
+    id: 'sn-start-3',
+    app: 'SaveNote',
+    category: 'Getting Started',
+    question: 'Can I add a note hands-free with Siri?',
+    answer:
+      'Yes — use the SaveNote "add a note" Siri Shortcut to capture a note without even opening the app. Great for when your hands are full.',
+    keywords: ['siri', 'shortcut', 'hands-free', 'voice', 'add note', 'dictate'],
+  },
+  {
+    id: 'sn-org-1',
+    app: 'SaveNote',
+    category: 'Organizing Notes',
+    question: 'How do I organize and find my notes?',
+    answer:
+      'Notes sort into categories you choose (like groceries, appointments, or ideas), and the built-in Search finds any note in seconds by its words.',
+    keywords: ['organize', 'categories', 'search', 'find', 'sort', 'folders'],
+  },
+  {
+    id: 'sn-read-1',
+    app: 'SaveNote',
+    category: 'Organizing Notes',
+    question: 'Can the app read my notes back to me?',
+    answer:
+      'Yes — read-aloud playback speaks a note out loud, so you can catch up hands-free while driving or cooking, or use it as an accessibility aid.',
+    keywords: ['read aloud', 'playback', 'speak', 'listen', 'text to speech', 'accessibility'],
+  },
+  {
+    id: 'sn-remind-1',
+    app: 'SaveNote',
+    category: 'Reminders & Widget',
+    question: 'Can I set reminders, and is there a Home Screen widget?',
+    answer:
+      'Yes to both. Attach a reminder to a note so it nudges you at the right time, and check the Agenda view for what is coming up. You can also add the SaveNote widget to your Home Screen to see or jump to your notes at a glance.',
+    keywords: ['reminder', 'agenda', 'notification', 'widget', 'home screen', 'calendar'],
+  },
+  {
+    id: 'sn-priv-1',
+    app: 'SaveNote',
+    category: 'Permissions & Privacy',
+    question: 'Why does SaveNote need microphone and speech permissions?',
+    answer:
+      'The Microphone captures your voice and Speech Recognition turns it into text for your note; the Siri permission enables the hands-free "add a note" shortcut. They are only used for creating notes.',
+    keywords: ['permission', 'microphone', 'speech', 'siri', 'access', 'why', 'privacy'],
+  },
+  {
+    id: 'sn-priv-2',
+    app: 'SaveNote',
+    category: 'Permissions & Privacy',
+    question: 'Where are my notes stored — is anything uploaded?',
+    answer:
+      'Your notes live privately on your device. There is no account and nothing is uploaded to a server.',
+    keywords: ['privacy', 'storage', 'cloud', 'upload', 'account', 'private', 'data'],
+  },
+  {
+    id: 'sn-pro-1',
+    app: 'SaveNote',
+    category: 'Purchases',
+    question: 'What does SaveNote Pro unlock, and how do I restore it?',
+    answer:
+      'SaveNote Pro unlocks the full feature set and is managed through your Apple Account. If Pro is not showing after buying, or you switched to a new phone, tap Restore Purchases and make sure you are signed in with the same Apple Account you bought it with.',
+    keywords: ['pro', 'premium', 'purchase', 'restore', 'unlock', 'subscription', 'upgrade'],
+  },
+  {
+    id: 'sn-trouble-1',
+    app: 'SaveNote',
+    category: 'Troubleshooting',
+    question: 'Voice input is not working.',
+    answer:
+      'Open iPhone Settings > SaveNote and make sure Microphone and Speech Recognition are allowed, then try again in a quiet spot. If it still will not transcribe, fully close and reopen the app.',
+    keywords: ['not working', 'voice', 'microphone', 'broken', 'transcribe', 'permission', 'fix'],
+  },
+  {
+    id: 'sn-trouble-2',
+    app: 'SaveNote',
+    category: 'Troubleshooting',
+    question: 'How do I get more help?',
+    answer:
+      'Head to www.dreamteamapps.com and use Contact or Submit a Ticket — it comes straight to us and we will get you sorted.',
+    keywords: ['help', 'support', 'contact', 'ticket', 'email', 'problem'],
+  },
 ]
 
 export function getFAQsByApp(app: FAQ['app']): FAQ[] {
@@ -1875,4 +1974,4 @@ export function searchFAQs(query: string, app?: FAQ['app']): FAQ[] {
   )
 }
 
-export const APP_NAMES: FAQ['app'][] = ['FishingPalPro', 'PlayListAI', 'Search Quest', 'SkinGuardAI', 'GigStand', 'Does It Slap', 'General', 'AppSupportDesk']
+export const APP_NAMES: FAQ['app'][] = ['FishingPalPro', 'PlayListAI', 'Search Quest', 'SkinGuardAI', 'SaveNote', 'GigStand', 'Does It Slap', 'General', 'AppSupportDesk']

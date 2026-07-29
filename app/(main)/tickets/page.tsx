@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Plus, Search, Fish, Music, ShieldCheck, Guitar, Flame, AlertCircle, Archive } from 'lucide-react'
+import { Plus, Search, Fish, Music, ShieldCheck, Mic, Guitar, Flame, AlertCircle, Archive } from 'lucide-react'
 import { Ticket } from '@/types'
 import { formatDistanceToNow } from 'date-fns'
 
@@ -103,6 +103,7 @@ function TicketsPageContent() {
             <SelectItem value="PlayListAI">🎵 PlayListAI</SelectItem>
             <SelectItem value="Search Quest">🔍 Search Quest</SelectItem>
             <SelectItem value="SkinGuardAI">🛡️ SkinGuardAI</SelectItem>
+            <SelectItem value="SaveNote">🎙️ SaveNote</SelectItem>
             <SelectItem value="GigStand">🎸 GigStand</SelectItem>
             <SelectItem value="Does It Slap">🔥 Does It Slap</SelectItem>
           </SelectContent>
@@ -163,6 +164,7 @@ function TicketsPageContent() {
                       ticket.app === 'FishingPalPro' ? 'bg-[#00B4D8]/15 text-[#00B4D8]' :
                       ticket.app === 'Search Quest' ? 'bg-green-100 text-green-600' :
                       ticket.app === 'SkinGuardAI' ? 'bg-cyan-100 text-cyan-600' :
+                      ticket.app === 'SaveNote' ? 'bg-blue-100 text-blue-600' :
                       ticket.app === 'GigStand' ? 'bg-amber-100 text-amber-600' :
                       ticket.app === 'Does It Slap' ? 'bg-pink-100 text-pink-600' :
                       'bg-purple-100 text-purple-600'
@@ -170,12 +172,14 @@ function TicketsPageContent() {
                       {ticket.app === 'FishingPalPro' ? <Fish className="h-3 w-3" /> :
                        ticket.app === 'Search Quest' ? <Search className="h-3 w-3" /> :
                        ticket.app === 'SkinGuardAI' ? <ShieldCheck className="h-3 w-3" /> :
+                       ticket.app === 'SaveNote' ? <Mic className="h-3 w-3" /> :
                        ticket.app === 'GigStand' ? <Guitar className="h-3 w-3" /> :
                        ticket.app === 'Does It Slap' ? <Flame className="h-3 w-3" /> :
                        <Music className="h-3 w-3" />}
                       {ticket.app === 'FishingPalPro' ? 'Fishing' :
                        ticket.app === 'Search Quest' ? 'Search' :
                        ticket.app === 'SkinGuardAI' ? 'Skin' :
+                       ticket.app === 'SaveNote' ? 'Note' :
                        ticket.app === 'GigStand' ? 'Gig' :
                        ticket.app === 'Does It Slap' ? 'Slap' :
                        'Playlist'}

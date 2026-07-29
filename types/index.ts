@@ -1,6 +1,6 @@
 export type TicketStatus = 'open' | 'in_progress' | 'pending' | 'resolved' | 'closed'
 export type TicketPriority = 'low' | 'medium' | 'high' | 'urgent'
-export type AppType = 'FishingPalPro' | 'PlayListAI' | 'Search Quest' | 'SkinGuardAI' | 'GigStand' | 'Does It Slap'
+export type AppType = 'FishingPalPro' | 'PlayListAI' | 'Search Quest' | 'SkinGuardAI' | 'SaveNote' | 'GigStand' | 'Does It Slap'
 export type IssueCategory = 'bug' | 'feature_request' | 'purchase_issue' | 'crash' | 'other'
 
 export interface TicketNote {

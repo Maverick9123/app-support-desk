@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { ALL_FAQS, getCategories, type FAQ } from '@/lib/faqs-data'
-import { Fish, Music, Search, ShieldCheck, Guitar, Flame, ChevronDown, ChevronUp, ExternalLink, ArrowLeft, LifeBuoy } from 'lucide-react'
+import { Fish, Music, Search, ShieldCheck, Mic, Guitar, Flame, ChevronDown, ChevronUp, ExternalLink, ArrowLeft, LifeBuoy } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 
 const APP_CONFIG = {
@@ -30,6 +30,12 @@ const APP_CONFIG = {
     color: '#00D4C8',
     icon: ShieldCheck,
   },
+  SaveNote: {
+    label: 'SaveNote',
+    emoji: '🎙️',
+    color: '#3B82F6',
+    icon: Mic,
+  },
   GigStand: {
     label: 'GigStand',
     emoji: '🎸',
@@ -56,7 +62,7 @@ const APP_CONFIG = {
   },
 } as const
 
-type AppName = 'all' | 'FishingPalPro' | 'PlayListAI' | 'Search Quest' | 'SkinGuardAI' | 'GigStand' | 'Does It Slap' | 'General' | 'AppSupportDesk'
+type AppName = 'all' | 'FishingPalPro' | 'PlayListAI' | 'Search Quest' | 'SkinGuardAI' | 'SaveNote' | 'GigStand' | 'Does It Slap' | 'General' | 'AppSupportDesk'
 
 function FAQItem({ faq }: { faq: FAQ }) {
   const [open, setOpen] = useState(false)
@@ -183,6 +189,12 @@ export default function FAQPage() {
       count: ALL_FAQS.filter(f => f.app === 'SkinGuardAI').length,
     },
     {
+      value: 'SaveNote',
+      label: 'SaveNote',
+      emoji: '🎙️',
+      count: ALL_FAQS.filter(f => f.app === 'SaveNote').length,
+    },
+    {
       value: 'GigStand',
       label: 'GigStand',
       emoji: '🎸',
@@ -219,7 +231,7 @@ export default function FAQPage() {
         </div>
         <h1 className="text-3xl font-bold text-white mb-2">Help & FAQ</h1>
         <p className="text-white/90 mb-6">
-          FishingPalPro · PlayListAI · Search Quest · SkinGuardAI · GigStand · Does It Slap — Find answers instantly
+          FishingPalPro · PlayListAI · Search Quest · SkinGuardAI · SaveNote · GigStand · Does It Slap — Find answers instantly
         </p>
 
         {/* Search */}
